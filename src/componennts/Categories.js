@@ -38,8 +38,7 @@ const Categories = () => {
                                     <li class="list-group-item"><a
                                         href="https://play.google.com/store/apps/details?id=com.urchance&hl=en_US"
                                         style={{color:'#666666'}}>Voting Guide</a></li>
-                                    <li class="list-group-item">Voting Calculation</li>
-                                    <li class="list-group-item">Social Awareness</li>
+
                                     <li class="list-group-item">Social Campaign</li>
                                     <li class="list-group-item">Media</li>
                                 </ul>

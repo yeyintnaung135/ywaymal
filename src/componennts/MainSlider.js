@@ -12,90 +12,114 @@ import "../css/jquery.timepicker.css";
 import "../css/flaticon.css";
 import "../css/icomoon.css";
 import "../css/style.css";
+import axios from "axios"
 
-const MainSlider = () => {
-    return (
 
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner" style={{height:'300px'}}>
-                <div class="carousel-item active">
-                    <a href="https://www.mmtimes.com/news/ethnic-armed-alliance-launches-coordinated-attacks-six-places.html">
-                        <img class="d-block w-100" src={process.env.PUBLIC_URL + '/images/logo/logo.jpg'} alt="First slide"
-                             style={{height:'300px'}}/>
-                    </a>
-                    <div class="carousel-caption">
-                        <p>
-                            <a href="https://www.mmtimes.com/news/ethnic-armed-alliance-launches-coordinated-attacks-six-places.html"
-                               style={{color:'white'}}>
-                                Ethnic armed alliance launches coordinated attacks in six places</a></p>
-                    </div>
+class MainSlider extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            sliders: [],
+            runslider: true,
+        }
+
+    }
+
+    getSliders() {
+        //get data from server
+        if (this.state.runslider) {
+            axios({
+                method: 'post',
+                url: 'https://admin.ywaymal.com/api/getsliders',
+                data: {
+                    token: 'feef'
+                }, headers: {
+                    'Authorization': 'Bearer ' + 'feafea'
+                }
+            })
+                .then(res => {
+                    console.log('responses from server for videos');
+                    this.setState({sliders: res.data})
+                    this.setState({runslider: false});
+                    // console.log(this.state.sliders[0].id);
+                    // localStorage.setItem('logintoken',res.data)
+                })
+            console.log('fefae')
+        }
+        else {
+            console.log(this.state.sliders.length)
+        }
+        console.log('sliders')
+
+    }
+
+    render() {
+
+        return (
+
+            <div id="carouselExampleControls" class="carousel slide" onLoad={this.getSliders()} data-ride="carousel">
+                <div class="carousel-inner" style={{height: '300px'}}>
+                    {/*// need to creat child component for this section */}
+
+                    {this.state.sliders.map((item, key) => {
+                            if (key === 0) {
+                                return (
+                                    <div class="carousel-item active">
+                                        <a href={item.link}>
+                                            <img class="d-block w-100"
+                                                 src={'https://admin.ywaymal.com/backend/admin/news/' + item.file}
+                                                 alt="First slide"
+                                                 style={{height: '300px'}}/>
+                                        </a>
+                                        <div class="carousel-caption">
+                                            <p>
+                                                <a href="https://www.mmtimes.com/news/ethnic-armed-alliance-launches-coordinated-attacks-six-places.html"
+                                                   style={{color: 'white'}}>
+                                                    {item.title}</a></p>
+                                        </div>
+                                    </div>
+
+                                )
+                            } else {
+                                return (
+
+                                    <div class="carousel-item ">
+                                        <a href="https://www.mmtimes.com/news/ethnic-armed-alliance-launches-coordinated-attacks-six-places.html">
+                                            <img class="d-block w-100"
+                                                 src={'https://admin.ywaymal.com/backend/admin/news/' + item.file}
+                                                 alt="First slide"
+                                                 style={{height: '300px'}}/>
+                                        </a>
+                                        <div class="carousel-caption">
+                                            <p>
+                                                <a href="https://www.mmtimes.com/news/ethnic-armed-alliance-launches-coordinated-attacks-six-places.html"
+                                                   style={{color: 'white'}}>
+                                                    {item.title}</a></p>
+                                        </div>
+                                    </div>
+
+
+                                )
+
+                            }
+                        }
+                    )}
+                    {/*// need to creat child component for this section */}
+
+
                 </div>
-                <div class="carousel-item">
-                    <a href="https://www.mmtimes.com/news/ethnic-armed-alliance-launches-coordinated-attacks-six-places.html">
-                        <img class="d-block w-100" src={process.env.PUBLIC_URL + '/images/logo/logo.jpg'} alt="First slide"
-                             style={{height:'300px'}}/>
-                    </a>
-                    <div class="carousel-caption">
-                        <p>
-                            <a href="https://www.mmtimes.com/news/ethnic-armed-alliance-launches-coordinated-attacks-six-places.html"
-                               style={{color:'white'}}>
-                                Ethnic armed alliance launches coordinated attacks in six places</a></p>
-                    </div>
-                </div>
-                {/*<div class="carousel-item">*/}
-                    {/*<a href="https://www.irrawaddy.com/news/burma/one-killed-4-hurt-rescue-team-hit-rpg-sniper-myanmars-shan-state.html">*/}
-                        {/*<img class="d-block w-100" src="{{url('images/2.jpg')}}" alt="Second slide"*/}
-                             {/*style="height:300px;">*/}
-                    {/*</a>*/}
-                    {/*<div class="carousel-caption">*/}
-                        {/*<p>*/}
-                            {/*<a href="https://www.irrawaddy.com/news/burma/one-killed-4-hurt-rescue-team-hit-rpg-sniper-myanmars-shan-state.html"*/}
-                               {/*style="color:white;">*/}
-                                {/*One Killed, 4 Hurt as Rescue Team Hit by RPG, Sniper in Myanmar's Shan State</a></p>*/}
-                    {/*</div>*/}
-                {/*</div>*/}
-                {/*<div class="carousel-item">*/}
-                    {/*<a href="http://7daydaily.com/story/163960">*/}
-                        {/*<img class="d-block w-100" src="{{url('images/313.jpg')}}" alt="Second slide"*/}
-                             {/*style="height:300px;">*/}
-                    {/*</a>*/}
-                    {/*<div class="carousel-caption">*/}
-                        {/*<p><a href="http://7daydaily.com/story/163960" style="color:white;">*/}
-                            {/*ျမစ္ဆံုအနီး တရားမဝင္ေရႊတူးေဖာ္သည့္ လုပ္ငန္းကို ဝင္ေရာက္ဖမ္းဆီး</a></p>*/}
-                    {/*</div>*/}
-                {/*</div>*/}
-                {/*<div class="carousel-item">*/}
-                    {/*<a href="http://7daydaily.com/story/163933">*/}
-                        {/*<img class="d-block w-100" src="{{url('images/3555.jpg')}}" alt="Second slide"*/}
-                             {/*style="height:300px;">*/}
-                    {/*</a>*/}
-                    {/*<div class="carousel-caption">*/}
-                        {/*<p><a href="http://7daydaily.com/story/163933" style="color:white;">*/}
-                            {/*စီးပြားေရးလုပ္ငန္းသံုး ဒံုးပ်ံယာဥ္ကို တ႐ုတ္အစိုးရ ေအဂ်င္စီ ေအာင္ျမင္စြာ လႊတ္တင္</a></p>*/}
-                    {/*</div>*/}
-                {/*</div>*/}
-                {/*<div class="carousel-item">*/}
-                    {/*<a href="http://7daydaily.com/story/163671">*/}
-                        {/*<img class="d-block w-100" src="{{url('images/666.jpg')}}" alt="Second slide"*/}
-                             {/*style="height:300px;">*/}
-                    {/*</a>*/}
-                    {/*<div class="carousel-caption">*/}
-                        {/*<p><a href="http://7daydaily.com/story/163671" style="color:white;">*/}
-                            {/*ေလဆိပ္အရာရွိမ်ားက ဆႏၵျပပြဲမ်ားကို တားျမစ္ၿပီးေနာက္ ေဟာင္ေကာင္တြင္ ေလေၾကာင္းခရီးစဥ္မ်ား*/}
-                            {/*ျပန္စ</a></p>*/}
-                    {/*</div>*/}
-                {/*</div>*/}
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
 
-)
+        )
+    }
 }
+
 export default MainSlider

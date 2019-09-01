@@ -1,18 +1,24 @@
 // This File contains main css ,and route for the whole app
+// follow comment is to tell jsx use for this ide
+/*jshint esversion: 6 */
+
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
+
 import Login from './componennts/login';
-import Header_menu_cat from './componennts/Header_menu_cat'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 import Categories from "./componennts/Categories";
 import MainSlider from "./componennts/MainSlider";
 import homepage from "./componennts/homepage";
 import Footerpage from "./componennts/footerpage";
+import Aboutus from "./componennts/Aboutus";
+import Videodetail from "./componennts/videodetail";
+
 
 // function App() {
 //   return (
-//     <div className="App">
+//     <div className="App">    
 //       <header className="App-header">
 //         <img src={logo} className="App-logo" alt="logo" />
 //         <p>
@@ -21,7 +27,7 @@ import Footerpage from "./componennts/footerpage";
 //         <a
 //           className="App-link"
 //           href="https://reactjs.org"
-//           target="_blank"
+//           target="_blank"c
 //           rel="noopener noreferrer"
 //         >
 //           Learn React
@@ -35,7 +41,10 @@ import Footerpage from "./componennts/footerpage";
 class Root extends React.Component {
     // this function is for to use js external link this link are in index.html
     // when u use functions of this js file u will add window each function call
+
+
     componentDidMount() {
+
         window.AOS.init({
             duration: 800,
             easing: 'slide'
@@ -44,8 +53,8 @@ class Root extends React.Component {
         var loader = function () {
             setTimeout(function () {
                 window.$('#ftco-loader').removeClass('show');
-                console.log('fff')
-            }, 1000);
+                console.log('fff');
+            }, 3000);
         };
         loader();
         var counter = function () {
@@ -74,8 +83,6 @@ class Root extends React.Component {
 
         }
         counter();
-
-
         var contentWayPoint = function () {
             var i = 0;
             window.$('.ftco-animate').waypoint(function (direction) {
@@ -111,8 +118,6 @@ class Root extends React.Component {
             }, {offset: '95%'});
         };
         contentWayPoint();
-
-
         window.$(document).ready(function () {
 
             if ((window.screen.width < 900)) {
@@ -134,25 +139,24 @@ class Root extends React.Component {
             console.log(dyn)
         });
         console.log('start')
-
-
     }
-
     render() {
-
 
         return (
             <Router>
+                <switch>
                 <Route exact path="/" component={Login}/>
-                <Route path="/header" component={Header_menu_cat}/>
+                {/*<Route path="/header" component={Header_menu_cat}/>*/}
                 <Route path="/categories" component={Categories}/>
-                <Route path="/mainslider" component={MainSlider}/>
+                <Route path="/About_us" component={Aboutus}/>
                 <Route path="/home" component={homepage}/>
                 <Route path="/footer" component={Footerpage}/>
+                {/*<Route  path="/videodetail/:id" component={Videodetail}/>*/}
+                </switch>
 
             </Router>
-        )
-    }
+        );
+    };
 }
 
 
