@@ -10,7 +10,7 @@ import Login from './componennts/login';
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 import Categories from "./componennts/Categories";
 import MainSlider from "./componennts/MainSlider";
-import homepage from "./componennts/homepage";
+import Homepage from "./componennts/homepage";
 import Footerpage from "./componennts/footerpage";
 import Aboutus from "./componennts/Aboutus";
 import Videodetail from "./componennts/videodetail";
@@ -144,21 +144,19 @@ class Root extends React.Component {
 
         return (
             <Router>
-                <switch>
+                <Switch>
                 <Route exact path="/" component={Login}/>
                 {/*<Route path="/header" component={Header_menu_cat}/>*/}
                 <Route path="/categories" component={Categories}/>
                 <Route path="/About_us" component={Aboutus}/>
-                <Route path="/home" component={homepage}/>
+                <Route path="/home" component={Homepage}/>
                 <Route path="/footer" component={Footerpage}/>
                 {/*<Route  path="/videodetail/:id" component={Videodetail}/>*/}
-                </switch>
+                </Switch>
 
             </Router>
         );
     };
 }
-
-
 export default Root
 

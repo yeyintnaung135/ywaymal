@@ -1,56 +1,28 @@
 import React from "react";
 import "../css/login.css";
-import {useState, useEffect} from 'react';
 import FacebookLogin from "react-facebook-login";
-import {bindActionCreator} from "redux";
-import {connect} from 'react-redux';
-import {Redirect} from "react-router-dom";
-import Stringify from 'react-stringify'
+import {checkauth} from '../helpers/checkauth'
 
 import axios from 'axios';
+
 //this is login component
 
-
-const Login = ({loginError}) => {
-    //use state LoginStatus in React
-    const [loginStatus, setloginStatus] = useState({status: false, data: 'tmp'});
-    const checktoken = () => {
-        //check user is already login
-        if (localStorage.getItem('logintoken') == null) {
-
-            console.log('empty  token and login false')
-
-        }
-        else{
-             axios({
-                method: 'post',
-                url:'https://admin.ywaymal.com/api/check_token' ,
-                data: {
-                    token:localStorage.getItem('logintoken')
-                }, headers: {
-                    'Authorization':'Bearer '+localStorage.getItem('logintoken')
-                }
-            })
-                .then(res => {
-                    console.log('responses from server');
-                    console.log(res);
-                    // localStorage.setItem('logintoken',res.data)
-                    localStorage.setItem('loginstatus','yes')
-                })
-            console.log('login ok already login')
-        }
-        console.log(localStorage.getItem('logintoken'))
+class Login extends React.Component {
+    constructor(props) {
+        super(props);
 
     }
 
-    // constructor(props) {
-    //     super(props);
-    //
-    //     this.signup = this.signup.bind(this);
-    // }
+    componentWillMount() {
+        //start page this method will firstly fire
+        checkauth();
+    }
 
-    function PostData(uri, userData) {
-        let BaseURL = 'https://admin.ywaymal.com/api/';
+
+
+
+    PostData(uri, userData) {
+        let BaseURL = 'http://localhost/ywaymalbe/public/api/';
         //let BaseURL = 'http://localhost/socialapi/';
         return axios({
             method: 'post',
@@ -63,27 +35,21 @@ const Login = ({loginError}) => {
         })
             .then(res => {
                 //store token and status in client
-                console.log('responseeeeeeees from server');
-                localStorage.setItem('logintoken',res.data.token)
-                localStorage.setItem('loginstatus','yes')
-                console.log(res.data);
-                new redirect()
+                // console.log('responseeeeeeees from server');
+                // localStorage.setItem('logintoken', res.data)
+                // console.log(res.data);
+                // localStorage.setItem('loginstatus', 'yes')
             })
         console.log('send to server')
     }
-    function redirect(){
-        //redirect if logined success
-        if(localStorage.getItem('loginstatus') == 'yes')
-        {
-            return window.location.assign('home')
-            // console.log('faefaefefffffffffffffff')
 
-        }else{
-            console.log('canot redirect')
+    redirect() {
+        if (localStorage.getItem('loginstatus') == 'yes') {
+            return window.location.assign('home')
         }
     }
 
-    function Singup(res, type) {
+    Singup(res, type) {
         //this function is to store data in server
         var Datatopost;
 
@@ -100,10 +66,11 @@ const Login = ({loginError}) => {
 
             if (Datatopost) {
                 // if retrieve data is not empty
-                new PostData('viewer_register', Datatopost).then((result) => {
+                this.PostData('viewer_register', Datatopost).then((result) => {
                     // if server can response data and token
                     let serverresponsedata = result;
                     // u need to store token in reducer and use this every request
+                    // return window.location.assign('home');
 
                     console.log('store token in reducer ')
                 });
@@ -123,61 +90,52 @@ const Login = ({loginError}) => {
     // if (this.state.redirect || sessionStorage.getItem('userData')) {
     //     return (<Redirect to={'/home'}/>)
     // }
-    const responseFacebook = (response) => {
-        console.log('facebackfffafeafefea function')
+
+
+    responseFacebook = (response) => {
+        console.log('facebook function fire ')
         // this is facebook callback function
         //and then i call many function to store data to server and get token
         console.log(response);
-        new Singup(response, 'facebook');
+        this.Singup(response, 'facebook');
 
     }
 
 
-    // //
-    // // render() {
-    // //
-    // //    //responsefrom facebook
+    render() {
+        return (
+
+            <div className="flex-center position-ref full-height">
 
 
-    // useEffect(() => {
-    //     // Update the document title using the browser API
-    //
-    // });
-
-    return (
-
-        <div class="flex-center position-ref full-height">
-
-            {checktoken()}
-            {redirect()}
-            <div class="content">
-                <div>
-                    <div class="m-b-md">
-                        <img src={process.env.PUBLIC_URL + "/images/logo/faef.png"} style={{width: "50%"}}/>
+                <div className="content">
+                    <div>
+                        <div className="m-b-md">
+                            <img src={process.env.PUBLIC_URL + "/images/logo/faef.png"} style={{width: "50%"}}/>
+                        </div>
                     </div>
-                </div>
-                <br/>
-                <FacebookLogin
-                    appId="413223529303378"
+                    <br/>
+                    <FacebookLogin
+                    appId="1206951349513642"
                     autoLoad={false}
                     fields="name,email,picture"
-                    callback={responseFacebook}/>
-                {/*<button type="button" className="btn btn-info" onClick={()=>responseFacebook('fe')}>test</button>*/}
-                <br/><br/>
+                    callback={this.responseFacebook}/>
+                    {/*<button type="button" className="btn btn-info" onClick={()=>responseFacebook('fe')}>test</button>*/}
+                    <br/><br/>
 
-                {/*for facebook button*/}
-                {/*<FacebookLogin*/}
-                {/*appId="391014331559972"*/}
-                {/*autoLoad={true}*/}
-                {/*fields="name,email,picture"*/}
-                {/*callback={responseFacebook}/>*/}
+                    {/*for facebook button*/}
+                    {/*<FacebookLogin*/}
+                    {/*appId="391014331559972"*/}
+                    {/*autoLoad={true}*/}
+                    {/*fields="name,email,picture"*/}
+                    {/*callback={responseFacebook}/>*/}
+                </div>
+
             </div>
+        )
 
-        </div>
-    )
-
+    }
 }
-
 
 // function mapStateToProps(state){
 //     //mastatetoprops is buildin function from react-redux pass store to component
