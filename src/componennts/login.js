@@ -34,20 +34,21 @@ class Login extends React.Component {
             }
         })
             .then(res => {
-                //store token and status in client
-                // console.log('responseeeeeeees from server');
-                // localStorage.setItem('logintoken', res.data)
-                // console.log(res.data);
-                // localStorage.setItem('loginstatus', 'yes')
+                // store token and status in client
+                console.log('response from laravel server');
+                console.log(res.data);
+                localStorage.setItem('logintoken', res.data.token)
+
+                localStorage.setItem('loginstatus', 'yes')
+                if (localStorage.getItem('loginstatus') == 'yes') {
+                    return window.location.assign('home')
+                }
+
             })
         console.log('send to server')
     }
 
-    redirect() {
-        if (localStorage.getItem('loginstatus') == 'yes') {
-            return window.location.assign('home')
-        }
-    }
+
 
     Singup(res, type) {
         //this function is to store data in server
@@ -71,7 +72,6 @@ class Login extends React.Component {
                     let serverresponsedata = result;
                     // u need to store token in reducer and use this every request
                     // return window.location.assign('home');
-
                     console.log('store token in reducer ')
                 });
             } else {

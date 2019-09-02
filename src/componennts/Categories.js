@@ -34,7 +34,7 @@ const Categories = () => {
                                 </div>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">3 mins Video Uploaded</li>
-                                    <li class="list-group-item">Civil Education</li>
+                                    <li class="list-group-item">Civic Education</li>
                                     <li class="list-group-item"><a
                                         href="https://play.google.com/store/apps/details?id=com.urchance&hl=en_US"
                                         style={{color:'#666666'}}>Voting Guide</a></li>

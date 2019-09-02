@@ -23,16 +23,21 @@ class Topnews extends React.Component {
         }
     }
 
+//will fire before render
+    componentWillMount() {
+        this.getNews();
+    }
+//get data from server
+
     getNews() {
-        //get data from server
         if (this.state.runnews) {
             axios({
                 method: 'post',
-                url: 'https://admin.ywaymal.com/api/getnews',
+                url: 'http://localhost/ywaymalbe/public/api/getnews',
                 data: {
                     token: 'feef'
                 }, headers: {
-                    'Authorization': 'Bearer ' + 'feafea'
+                    'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
                 }
             })
                 .then(res => {
@@ -51,23 +56,20 @@ class Topnews extends React.Component {
 
     render() {
         return (
-            <div style={{border: '2px solid #c7baaf47;padding: 12px'}} onLoad={this.getNews()}>
+            <div style={{border: '2px solid #c7baaf47;padding: 12px'}}>
                 <h4>Top News</h4>
                 {this.state.news.map((item, key) =>
 
-                <a href={item.link}>
-                    <div className="media">
-                        <img src={'https://admin.ywaymal.com/backend/admin/news/' + item.file}
-                             className="align-self-start mr-3" style={{width: '81px'}}/>
-                        <div className="media-body">
-                            <p style={{fontSize: '14px'}}>{item.title}</p>
+                    <a href={item.link}>
+                        <div className="media">
+                            <img src={'http://localhost/ywaymalbe/public/backend/admin/news/' + item.file}
+                                 className="align-self-start mr-3" style={{width: '81px'}}/>
+                            <div className="media-body">
+                                <p style={{fontSize: '14px'}}>{item.title}</p>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
                 )}
-
-
-
 
 
             </div>

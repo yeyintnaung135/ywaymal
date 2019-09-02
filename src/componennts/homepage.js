@@ -20,9 +20,14 @@ import Footerpage from "./footerpage";
 import _ from 'lodash';
 import axios from "axios"
 import {Link} from "react-router-dom";
+import {redirecttologinifnotauth} from '../helpers/redirecttologinifnotauth'
 
 //this is create component with reactcomponent that is called stateful components
 class Homepage extends React.Component {
+    componentWillMount() {
+        //start page this method will firstly fire
+        // redirecttologinifnotauth();real
+    }
     constructor(props) {
         super(props);
         this.state = {
@@ -33,7 +38,6 @@ class Homepage extends React.Component {
             todosPerPage: 5,//contents per page
 
         }
-        this.chackandredirect = this.chackandredirect.bind(this);
         this.handleClick = this.handleClick.bind(this);//for pagination button
 
 
@@ -47,43 +51,17 @@ class Homepage extends React.Component {
         });
     }
 
-    checktoken = () => {
-        // check user is already login
-        if (localStorage.getItem('logintoken') == null) {
-
-            console.log('empty  token and login false')
-
-        }
-        else{
-        axios({
-            method: 'post',
-            url: 'https://admin.ywaymal.com/api/check_token',
-            data: {
-                token: 'feef'
-            }, headers: {
-                'Authorization': 'Bearer ' + 'feafea'
-            }
-        })
-            .then(res => {
-                console.log('responses from server');
-                console.log(res);
-                // localStorage.setItem('logintoken',res.data)
-                localStorage.setItem('loginstatus', 'yes')
-            })
-        }
-
-    }
 
     getVideos() {
         //get data from server
         if (this.state.runvideos) {
             axios({
                 method: 'post',
-                url: 'https://admin.ywaymal.com/api/getvideos',
+                url: 'http://localhost/ywaymalbe/public/api/getvideos',
                 data: {
                     token: 'feef'
                 }, headers: {
-                    'Authorization': 'Bearer ' + 'feafea'
+                    'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
                 }
             })
                 .then(res => {
@@ -101,22 +79,7 @@ class Homepage extends React.Component {
 
     }
 
-    componentWillMount() {
-        this.checktoken();
 
-    }
-
-    chackandredirect(e) {
-        e.preventDefault();
-
-        if (localStorage.getItem('loginstatus') === 'yes') {
-
-            this.getVideos();
-
-        } else {
-            return window.location.assign('/');
-        }
-    }
 
 
     render() {
@@ -143,12 +106,12 @@ class Homepage extends React.Component {
                         <video style={{width: '100%'}} controls
                                poster={process.env.PUBLIC_URL + '/images/test.GIF'}>
                             <source
-                                src={'https://admin.ywaymal.com/backend/admin/videos/' + todo.link}
+                                src={'http://localhost/ywaymalbe/public/backend/admin/videos/' + todo.link}
                                 type="video/mp4"/>
                             Your browser does not support the video tag.
                         </video>
                         <div className="col-sm-12">
-                            <a href="#">July 03, 2019</a>
+                            <a href="#">{todo.created_at}</a>
 
                         </div>
                     </div>
@@ -262,7 +225,7 @@ class Homepage extends React.Component {
                 {/*header section*/}
                 <Header_menu_cat/>
 
-                <div className="row">
+                <div className="row" style={{marginTop:'22px'}}>
 
 
                 </div>
@@ -341,7 +304,6 @@ class Homepage extends React.Component {
                         <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/ads.png'}
                              alt="First slide" style={{height: '300px'}}/>
                         <br></br>
-
 
                         {/*//tops news*/}
                         <Topnews/>
