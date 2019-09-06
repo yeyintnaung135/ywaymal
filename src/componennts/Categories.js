@@ -30,10 +30,11 @@ const Categories = () => {
 
                             <li class="list-group-item">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1 yk-title-text">Home Services</h5>
+                                    <h5 class="mb-1 yk-title-text">Services</h5>
                                 </div>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">3 mins Video Uploaded</li>
+                                    <li class="list-group-item">1 min Video Uploaded</li>
                                     <li class="list-group-item">Civic Education</li>
                                     <li class="list-group-item"><a
                                         href="https://play.google.com/store/apps/details?id=com.urchance&hl=en_US"

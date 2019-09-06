@@ -6,8 +6,6 @@ import "../css/owl.theme.default.min.css";
 import "../css/magnific-popup.css";
 import "../css/aos.css";
 import "../css/ionicons.min.css";
-import "../css/bootstrap-datepicker.css";
-import "../css/jquery.timepicker.css";
 import "../css/flaticon.css";
 import "../css/icomoon.css";
 import "../css/style.css";
@@ -16,18 +14,23 @@ import Categories from "./Categories";
 import Header_menu_cat from "./Header_menu_cat";
 import Footerpage from "./footerpage";
 import Topnews from "./topnews";
+import {redirecttologinifnotauth} from '../helpers/redirecttologinifnotauth'
+
 
 //this is create component with reactcomponent that is called stateful components
 class Aboutus extends React.Component {
+    componentWillMount(){
+        // redirecttologinifnotauth();
+
+    }
+
 
     render() {
         return (
-
-
             <div>
                 {/*header section*/}
-                <Header_menu_cat/>
-                <div className="row">
+                <Header_menu_cat  name={{ one : '',two : 'menu_active' ,three : ''}}/>
+                <div className="row" style={{marginTop:'22px'}}>
 
                 </div>
                 {/*end header section*/}
@@ -47,25 +50,14 @@ class Aboutus extends React.Component {
                                 <h5 class="mb-1 yk-title-text" style={{textAling: 'center'}}>About Us</h5>
                             </div>
                             <br></br>
-                            <br></br>
-
-
                             <div class="row col-sm-12 d-flex ">
-                                <div class="col-sm-12" style={{paddingTop: '33p'}}>
+                                <div class="col-sm-12" style={{paddingTop: '23p'}}>
 
                                     <div class="pb-md-5">
-                                        <p>We builds a website, Anonymous Comments & Vote for Candidates, for the 2020
-                                            candidates in Myanmar, CSOs, NGOs and communities in order to create a
-                                            better society</p>
+                                        <p>We build a website, ACVC (Anonymous Comments & Vote for Candidates), for the 2020 candidates in Myanmar, CSOs, NGOs and communities in order to create a better society. </p>
                                         <p>
-                                            Our website is designed to educate the communities to understand civic
-                                            education such as the respective roles and responsibilities of citizens,
-                                            government, political and special interests, the mass media, and the
-                                            business and non- profit sectors, as well as the significance of periodic
-                                            and competitive elections. Voter information and voter education, however,
-                                            may be part of larger civic education endeavour.On the other hands, we
-                                            designed to mitigate problems of misinformation, hate speech, and diversity
-                                            for 2020 presidential election.
+                                            Our website is designed to educate the communities to understand civic education such as the respective roles and responsibilities of citizens, government, political and special interests, the mass media, and the business and non- profit sectors, as well as the significance of periodic and competitive elections. Voter information and voter education, however, may be part of larger civic education endeavor. On the other hand, we design to mitigate problems of misinformation, hate speech, and diversity for 2020 general  election.
+
                                         </p>
                                         <br></br>
 

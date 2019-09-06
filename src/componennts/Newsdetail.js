@@ -19,33 +19,28 @@ import {redirecttologinifnotauth} from '../helpers/redirecttologinifnotauth';
 
 
 //this is create component with reactcomponent that is called stateful components
-class Videodetail extends React.Component {
-
+class Newsdetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            video: '',
-            runvideos: true,
+            news: '',
 
         }
-        this.getvideodetail = this.getvideodetail.bind(this);
     }
-
     componentWillMount() {
         //redirect if not authenciate
         redirecttologinifnotauth();
 
-        this.getvideodetail();
+        this.getnewsdetail();
 
 
     }
 
-    getvideodetail() {
-        if (this.state.runvideos) {
+    getnewsdetail() {
 
             return axios({
                 method: 'post',
-                url: 'http://localhost/ywaymalbe/public/api/getvideosbyid/' + this.props.location.state.video_id,
+                url: 'http://localhost/ywaymalbe/public/api/getnewsdetail/' + this.props.location.state.news_id,
                 data: {
                     token: 'feef'
                 }, headers: {
@@ -54,21 +49,15 @@ class Videodetail extends React.Component {
             })
                 .then(res => {
                     console.log('responses from server for videos');
-                    this.setState({video: res.data})
-                    console.log(this.state.video)
-                    localStorage.setItem('video_link', res.data.link)
-                    this.setState({runvideos: false});
-                    //this is because we need to html5 player unless this player restore from cache it is not good for new videos
-                    document.getElementById('to_reload_src').src='http://localhost/ywaymalbe/public/backend/admin/videos/'+ res.data.link;
-                    document.getElementById('to_reload').load();
-                    // localStorage.setItem('logintoken',res.data)
+                    this.setState({news: res.data})
+                    console.log(this.state.news)
+
                 })
-        }
+
     }
 
     componentDidMount() {
 
-        console.log('video_id' + this.props.location.state.video_id)
 
         window.AOS.init({
             duration: 800,
@@ -166,17 +155,12 @@ class Videodetail extends React.Component {
         console.log('start')
     }
 
-
-
     render() {
-
         return (
-
-
             <div>
                 {/*header section*/}
-                <Header_menu_cat name={{one: '', two: '', three: ''}}/>
-                <div className="row" style={{marginTop: '22px'}}>
+                <Header_menu_cat  name={{ one : '',two : 'menu_active' ,three : ''}}/>
+                <div className="row" style={{marginTop:'22px'}}>
 
                 </div>
                 {/*end header section*/}
@@ -191,52 +175,37 @@ class Videodetail extends React.Component {
 
                     {/*About Us Section*/}
                     <div className="col-12 col-md-6">
-                        <div class="col-md-12" style={{textAlign: 'center'}}>
-                            <h5 class="mb-1 yk-title-text" style={{textAling: 'center'}}>Video Detail</h5>
-                        </div>
-                        <br></br>
-                        <div class="col-12" style={{paddingTop: '23p'}}>
-
-                            <video id="to_reload" style={{width: '100%', height: 'auto'}} controls>
-                                <source id="to_reload_src"
-                                    src={'http://localhost/ywaymalbe/public/backend/admin/videos/' +localStorage.getItem('video_link')}
-                                    type='video/mp4'/>
-                                Your browser does not support the video tag.
-                            </video>
-                            <p class="yk-title-text-two">
-                                {this.state.video.title}
-                            </p>
-                            <p class="">
-                                {this.state.video.description}
-                            </p>
-                            <div class="row col-12">
-                                <div class="col-3">
-                                    <button type="button" data-id="like_three" id="like_three"
-                                            class="btn btn-default btn-circle-yk yk-btn"><i
-                                        class="fa fa-thumbs-up"></i></button>
-                                    2k
-                                </div>
-                                <div class="col-3">
-                                    <button type="button" data-id="cmt_three" id="cmt_three"
-                                            class="btn btn-default btn-circle-yk yk-btn"><i
-                                        class="fa fa-comments-o"></i></button>
-                                    3k
-                                </div>
-                                <div class="col-3">
-                                    <button type="button" data-id="share_three" id="share_three"
-                                            class="btn btn-default btn-circle-yk yk-btn"><i
-                                        class="fa fa-share"></i></button>
-                                    300
-                                </div>
-                                <div class="col-3">
-                                    <button type="button" data-id="share_three" id="share_three"
-                                            class="btn btn-default btn-circle-yk yk-btn"><i
-                                        class="fa fa-share"></i></button>
-                                    9k
-                                </div>
+                        <div class="col-sm-12">
+                            <div class="col-md-12" style={{textAlign: 'center'}}>
+                                <h5 class="mb-1 yk-title-text" style={{textAling: 'center'}}>News Detail</h5>
                             </div>
                             <br></br>
+                            <div class="row col-sm-12 d-flex ">
+                                <div class="col-sm-12" style={{paddingTop: '23p'}}>
 
+                                    <div class="pb-md-5">
+                                        <img id="to_reload" style={{width: '100%', height:'252px'}} src={"http://localhost/ywaymalbe/public/backend/admin/news/"+this.state.news.file}>
+                                          
+                                        </img>
+                                        <p style={{textAlign:'center',color:'#6c7591 !important',fontSize:'22px'}}>{this.state.news.title} </p>
+                                        <p >{this.state.news.description} </p>
+                                        <p>Date:{this.state.news.created_at} </p>
+
+                                        <br></br>
+
+
+
+
+
+
+
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
 
@@ -262,6 +231,8 @@ class Videodetail extends React.Component {
 
                         <div style={{border: '2px solid #c7baaf47;padding: 12px'}}>
                             <Topnews/>
+
+
                         </div>
                         {/*end top news section*/}
 
@@ -300,4 +271,4 @@ class Videodetail extends React.Component {
     }
 }
 
-export default Videodetail;
+export default Newsdetail;

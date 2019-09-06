@@ -12,7 +12,9 @@ import "../css/jquery.timepicker.css";
 import "../css/flaticon.css";
 import "../css/icomoon.css";
 import "../css/style.css";
-import axios from "axios"
+import axios from "axios";
+import {Link} from "react-router-dom";
+
 
 
 class MainSlider extends React.Component {
@@ -34,34 +36,30 @@ class MainSlider extends React.Component {
     //get data from server
 
     getslider() {
-        if (this.state.runslider) {
-            axios({
+           return axios({
                 method: 'post',
-                url: 'http://localhost/ywaymalbe/public/api/getsliders',
+                url: 'https://admin.ywaymal.com/api/getsliders',
                 data: {
-                    token: 'feef'
+                    token: localStorage.getItem('logintoken')
                 }, headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
                 }
             })
                 .then(res => {
-                    console.log('responses from server for videos');
+                    console.log('responses from server for sliders');
                     this.setState({sliders: res.data})
                     this.setState({runslider: false});
                     // console.log(this.state.sliders[0].id);
                     // localStorage.setItem('logintoken',res.data)
-                })
-            console.log('fefae')
-        }
-        else {
-            console.log(this.state.sliders.length)
-        }
-        console.log('sliders')
+                });
+
+
 
     }
 
 
     render() {
+
 
         return (
 
@@ -76,18 +74,23 @@ class MainSlider extends React.Component {
                                 <div class="carousel-item active">
 
                                     {(() => {
-                                        if (item.file_type.includes('video')) {
+                                        if(item.description != null) {
                                           return (
-                                              <video style={{width: '100%',height:'353px'}} controls>
-                                              <source
-                                                  src={'http://localhost/ywaymalbe/public/backend/admin/news/' + item.file}
-                                                  type={item.file_type}/>
-                                              Your browser does not support the video tag.
-                                          </video>)
+                                              <Link to={{
+                                                  pathname: '/news_detail',
+                                                  state: {
+                                                      news_id: item.id
+                                                  }
+                                              }}>
+                                                  <img class="d-block w-100"
+                                                       src={'https://admin.ywaymal.com/backend/admin/news/' + item.file}
+                                                       alt="First slide"
+                                                       style={{height: '300px'}}/>
+                                              </Link>)
                                         }else{
                                            return( <a href={item.link}>
                                                 <img class="d-block w-100"
-                                                     src={'http://localhost/ywaymalbe/public/backend/admin/news/' + item.file}
+                                                     src={'https://admin.ywaymal.com/backend/admin/news/' + item.file}
                                                      alt="First slide"
                                                      style={{height: '300px'}}/>
                                                    </a>)
@@ -111,14 +114,14 @@ class MainSlider extends React.Component {
                                                 return (
                                                     <video style={{width: '100%',height:'353px'}} controls>
                                                         <source
-                                                            src={'http://localhost/ywaymalbe/public/backend/admin/news/' + item.file}
+                                                            src={'https://admin.ywaymal.com/backend/admin/news/' + item.file}
                                                             type={item.file_type}/>
                                                         Your browser does not support the video tag.
                                                     </video>)
                                             }else{
                                                 return(  <a href={item.link}>
                                                     <img class="d-block w-100"
-                                                         src={'http://localhost/ywaymalbe/public/backend/admin/news/' + item.file}
+                                                         src={'https://admin.ywaymal.com/backend/admin/news/' + item.file}
                                                          alt="First slide"
                                                          style={{height: '300px'}}/>
                                                 </a>)

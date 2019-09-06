@@ -12,6 +12,8 @@ import "../css/jquery.timepicker.css";
 import "../css/flaticon.css";
 import "../css/icomoon.css";
 import "../css/style.css";
+import {Link} from "react-router-dom";
+
 import axios from "axios"
 
 class Topnews extends React.Component {
@@ -33,7 +35,7 @@ class Topnews extends React.Component {
         if (this.state.runnews) {
             axios({
                 method: 'post',
-                url: 'http://localhost/ywaymalbe/public/api/getnews',
+                url: 'https://admin.ywaymal.com/api/getnews',
                 data: {
                     token: 'feef'
                 }, headers: {
@@ -57,18 +59,47 @@ class Topnews extends React.Component {
     render() {
         return (
             <div style={{border: '2px solid #c7baaf47;padding: 12px'}}>
-                <h4>Top News</h4>
-                {this.state.news.map((item, key) =>
+                <h4 class="yk-title-text">Top News</h4>
+                {this.state.news.map((item, key) =>{
+                    // check our news or other news
+                    if(item.description != null) {
+                        return (
 
-                    <a href={item.link}>
-                        <div className="media">
-                            <img src={'http://localhost/ywaymalbe/public/backend/admin/news/' + item.file}
-                                 className="align-self-start mr-3" style={{width: '81px'}}/>
-                            <div className="media-body">
-                                <p style={{fontSize: '14px'}}>{item.title}</p>
-                            </div>
-                        </div>
-                    </a>
+                            <Link to={{
+                                pathname: '/news_detail',
+                                state: {
+                                    news_id: item.id
+                                }
+                            }}>
+                                <div className="media">
+                                    <img src={'https://admin.ywaymal.com/public/backend/admin/news/' + item.file}
+                                         className="align-self-start mr-3" style={{width: '81px'}}/>
+                                    <div className="media-body">
+                                        <p style={{fontSize: '14px'}}>{item.title}</p>
+                                        <p style={{fontSize: '14px'}}>Date:{item.created_at}</p>
+                                    </div>
+                                </div>
+                            </Link>
+                        )
+                    }
+                    else{
+                        return (
+
+                            <a href={item.link}>
+                                <div className="media">
+                                    <img src={'https://admin.ywaymal.com/public/backend/admin/news/' + item.file}
+                                         className="align-self-start mr-3" style={{width: '81px'}}/>
+                                    <div className="media-body">
+                                        <p style={{fontSize: '14px'}}>{item.title}</p>
+                                        <p style={{fontSize: '14px'}}>Date:{item.created_at}</p>
+
+                                    </div>
+                                </div>
+                            </a>
+                        )
+                    }
+                }
+
                 )}
 
 

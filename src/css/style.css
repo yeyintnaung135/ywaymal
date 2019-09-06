@@ -8951,7 +8951,7 @@ h1, h2, h3, h4, h5,
   color: #666666; }
 .room-wrap .text .btn-custom {
   display: inline-block;
-  color: #000000;
+  color: #dc3545;
   border: 2px solid rgba(0, 0, 0, 0.1); }
 .room-wrap:hover, .room-wrap:focus {
   background: #b69100; }

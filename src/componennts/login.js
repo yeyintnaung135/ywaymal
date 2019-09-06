@@ -22,7 +22,7 @@ class Login extends React.Component {
 
 
     PostData(uri, userData) {
-        let BaseURL = 'http://localhost/ywaymalbe/public/api/';
+        let BaseURL = 'https://admin.ywaymal.com/api/';
         //let BaseURL = 'http://localhost/socialapi/';
         return axios({
             method: 'post',

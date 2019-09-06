@@ -1,7 +1,7 @@
 {
   "name": "ywaymal",
   "version": "0.1.0",
-  "homepage" : "https://www.ywaymal.com",
+  "homepage": "https://www.ywaymal.com",
   "private": true,
   "dependencies": {
     "aos": "^2.3.4",
@@ -20,7 +20,8 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
     "react-stringify": "^1.0.0",
-    "redux": "^4.0.4"
+    "redux": "^4.0.4",
+    "video-react": "^0.14.1"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -17,19 +17,15 @@ import Categories from "./Categories";
 import Header_menu_cat from "./Header_menu_cat";
 import MainSlider from "./MainSlider";
 import Footerpage from "./footerpage";
-import _ from 'lodash';
 import axios from "axios"
 import {Link} from "react-router-dom";
 import {redirecttologinifnotauth} from '../helpers/redirecttologinifnotauth'
 
 //this is create component with reactcomponent that is called stateful components
 class Homepage extends React.Component {
-    componentWillMount() {
-        //start page this method will firstly fire
-        // redirecttologinifnotauth();real
-    }
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
+
         this.state = {
             // test: [{id: '1', title: 'ffff'}, {id: '2', title: 'pppppp'}],
             videos: [],
@@ -38,10 +34,60 @@ class Homepage extends React.Component {
             todosPerPage: 5,//contents per page
 
         }
-        this.handleClick = this.handleClick.bind(this);//for pagination button
+        this.handleVideoshow = this.handleVideoshow.bind(this);
 
 
     }
+
+    handleVideoshow(event) {
+        console.log(event.target.id);//get target id
+
+        this.state.videos.map((value, key) => {
+            //get all video id
+            if (value.id != event.target.id) {
+                //if not equal target id paused
+                //while i used this pure js code becaused it is more easy in this case
+                document.getElementById(value.id).pause();
+            }
+
+
+        });
+
+
+        console.log(document.getElementById(event.target.id).duration);
+
+    }
+
+
+    componentWillMount() {
+        //start page this method will firstly fire
+        //if not authenciate rediret to login from
+        redirecttologinifnotauth();
+        var loader = function () {
+            setTimeout(function () {
+                window.$('#ftco-loader').removeClass('show');
+                console.log('fff');
+            }, 3000);
+        };
+        loader();
+
+        if(document.referrer.includes('video_detail') || document.referrer.includes('news_detail')   ) {
+            {
+                //check if reloaded once already
+                if (!localStorage.getItem('firstLoad')) {
+                    //if not reloaded once, then set firstload to true
+                    localStorage.setItem('firstLoad', true);
+                    //reload the webpage using reload() method
+                    window.location.reload();
+                }
+                else
+                    localStorage.removeItem('firstLoad');
+            }
+        }
+
+
+    }
+
 
     handleClick(event) {
         // pagination.event
@@ -51,13 +97,12 @@ class Homepage extends React.Component {
         });
     }
 
-
     getVideos() {
         //get data from server
         if (this.state.runvideos) {
             axios({
                 method: 'post',
-                url: 'http://localhost/ywaymalbe/public/api/getvideos',
+                url: 'https://admin.ywaymal.com/api/getvideos',
                 data: {
                     token: 'feef'
                 }, headers: {
@@ -69,6 +114,8 @@ class Homepage extends React.Component {
                     this.setState({videos: res.data})
                     console.log(res.data)
                     this.setState({runvideos: false});
+
+
                     // localStorage.setItem('logintoken',res.data)
                 })
             console.log(this.state.runvideos)
@@ -80,11 +127,13 @@ class Homepage extends React.Component {
     }
 
 
-
-
     render() {
         {
-            this.getVideos()
+            this.getVideos();
+        }
+        const name = index => {
+            var joined = this.state.videostoplay.concat(index);
+            this.setState({videostoplay: joined})
         }
         const videos = this.state.videos;
         const currentPage = this.state.currentPage;
@@ -103,19 +152,20 @@ class Homepage extends React.Component {
             return (
                 <div className=" row blog-entry align-self-stretch">
                     <div className=" col-sm-12 col-md-6">
-                        <video style={{width: '100%'}} controls
-                               poster={process.env.PUBLIC_URL + '/images/test.GIF'}>
+
+                        <video id={todo.id} style={{width: '100%', height: 'auto'}} onPlaying={this.handleVideoshow}
+                               controls>
                             <source
-                                src={'http://localhost/ywaymalbe/public/backend/admin/videos/' + todo.link}
-                                type="video/mp4"/>
+                                src={'https://admin.ywaymal.com/backend/admin/videos/' + todo.link}
+                                type={todo.video_type}/>
                             Your browser does not support the video tag.
                         </video>
+
                         <div className="col-sm-12">
                             <a href="#">{todo.created_at}</a>
-
                         </div>
                     </div>
-                    <div className="text mt-3 text-center col-sm-12 col-md-6"
+                    <div className="text mt-3  text-center col-sm-12 col-md-6"
                          style={{padding: '0px'}}>
 
 
@@ -156,8 +206,13 @@ class Homepage extends React.Component {
                         </div>
 
                         <p>
-                            {/*<Link to={'videodetail/'+todo.id} class='btn-custom'>See Detail</Link>*/}
-                            <a href="#" class="btn-custom">See Detail</a>
+                            <Link to={{
+                                pathname: '/video_detail',
+                                state: {
+                                    video_id: todo.id
+                                }
+                            }} class="btn btn-sm btn-danger">See Detail... <span
+                                class="fa fa-arrow-circle-right"></span></Link>
                         </p>
                     </div>
                 </div>)
@@ -220,30 +275,18 @@ class Homepage extends React.Component {
         return (
 
 
-                <div onLoad={this.chackandredirect}>
+            <div onLoad={this.chackandredirect}>
                 {/*//test*/}
                 {/*header section*/}
-                <Header_menu_cat/>
+                <Header_menu_cat name={{one: 'menu_active', two: '', three: ''}}/>
 
-                <div className="row" style={{marginTop:'22px'}}>
+                <div className="row" style={{marginTop: '22px'}}>
 
 
                 </div>
-                {/*end header section*/}
-                {/*<div class="col-sm-12">*/}
-                {/*KKKKKKKKKKKKKKKK*/}
-                {/*<ul>*/}
-                {/*{renderTodos}*/}
-                {/*</ul>*/}
-                {/*<ul id="page-numbers">*/}
-                {/*{renderPageNumbers}*/}
-                {/*</ul>*/}
-                {/*</div>*/}
-                {/*body section*/}
-                {/*categories section*/}
 
                 <div className="row col-sm-12">
-
+                    {/*categories section*/}
                     <Categories/>
                     {/*end categories section*/}
                     <div className="col-12 col-md-6">
@@ -261,26 +304,21 @@ class Homepage extends React.Component {
                             </div>
                             <div className="col-sm-12">&nbsp;</div>
 
-                            <div className="row col-sm-12 d-flex ">
-                                {/*// need to creat child component for this section */}
+
+                            {/*// need to creat child component for this section */}
 
 
-                                <div className="row d-flex ftco-animate">
-                                    {/*// need to creat child component for this section */}
+                            {/*// need to creat child component for this section */}
 
-                                    {renderTodos}
-
-                                </div>
+                            {renderTodos}
 
 
-                            </div>
                             <div className="row col-sm-12 mt-5">
                                 <div className="col text-center">
                                     <div className="block-27">
                                         <ul>
                                             <li><a href="#">&lt;</a></li>
                                             {renderPageNumbers}
-
                                             <li><a href="#">&gt;</a></li>
                                         </ul>
                                     </div>
