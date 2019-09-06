@@ -42,7 +42,7 @@ class MainSlider extends React.Component {
                 data: {
                     token: localStorage.getItem('logintoken')
                 }, headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
+                    'Authorization':'Bearer '+localStorage.getItem('logintoken')
                 }
             })
                 .then(res => {

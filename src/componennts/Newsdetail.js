@@ -40,7 +40,7 @@ class Newsdetail extends React.Component {
 
             return axios({
                 method: 'post',
-                url: 'http://localhost/ywaymalbe/public/api/getnewsdetail/' + this.props.location.state.news_id,
+                url: 'https://admin.ywaymal.com/api/getnewsdetail/' + this.props.location.state.news_id,
                 data: {
                     token: 'feef'
                 }, headers: {
@@ -184,25 +184,13 @@ class Newsdetail extends React.Component {
                                 <div class="col-sm-12" style={{paddingTop: '23p'}}>
 
                                     <div class="pb-md-5">
-                                        <img id="to_reload" style={{width: '100%', height:'252px'}} src={"http://localhost/ywaymalbe/public/backend/admin/news/"+this.state.news.file}>
+                                        <img id="to_reload" style={{width: '100%', height:'252px'}} src={"https://admin.ywaymal.com/backend/admin/news/"+this.state.news.file}>
                                           
                                         </img>
                                         <p style={{textAlign:'center',color:'#6c7591 !important',fontSize:'22px'}}>{this.state.news.title} </p>
                                         <p >{this.state.news.description} </p>
                                         <p>Date:{this.state.news.created_at} </p>
-
                                         <br></br>
-
-
-
-
-
-
-
-
-
-
-
                                     </div>
                                 </div>
                             </div>

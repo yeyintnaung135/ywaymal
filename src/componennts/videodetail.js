@@ -45,7 +45,7 @@ class Videodetail extends React.Component {
 
             return axios({
                 method: 'post',
-                url: 'http://localhost/ywaymalbe/public/api/getvideosbyid/' + this.props.location.state.video_id,
+                url: 'https://admin.ywaymal.com/api/getvideosbyid/' + this.props.location.state.video_id,
                 data: {
                     token: 'feef'
                 }, headers: {
@@ -59,7 +59,7 @@ class Videodetail extends React.Component {
                     localStorage.setItem('video_link', res.data.link)
                     this.setState({runvideos: false});
                     //this is because we need to html5 player unless this player restore from cache it is not good for new videos
-                    document.getElementById('to_reload_src').src='http://localhost/ywaymalbe/public/backend/admin/videos/'+ res.data.link;
+                    document.getElementById('to_reload_src').src='https://admin.ywaymal.com/backend/admin/videos/'+ res.data.link;
                     document.getElementById('to_reload').load();
                     // localStorage.setItem('logintoken',res.data)
                 })
@@ -199,7 +199,7 @@ class Videodetail extends React.Component {
 
                             <video id="to_reload" style={{width: '100%', height: 'auto'}} controls>
                                 <source id="to_reload_src"
-                                    src={'http://localhost/ywaymalbe/public/backend/admin/videos/' +localStorage.getItem('video_link')}
+                                    src={'https://admin.ywaymal.com/backend/admin/videos/' +localStorage.getItem('video_link')}
                                     type='video/mp4'/>
                                 Your browser does not support the video tag.
                             </video>
