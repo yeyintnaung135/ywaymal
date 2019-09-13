@@ -29,9 +29,11 @@ class Topnews extends React.Component {
     componentWillMount() {
         this.getNews();
     }
+
 //get data from server
 
-    getNews() {
+
+        getNews() {
         if (this.state.runnews) {
             axios({
                 method: 'post',
@@ -71,12 +73,14 @@ class Topnews extends React.Component {
                                     news_id: item.id
                                 }
                             }}>
-                                <div className="media">
-                                    <img src={'https://admin.ywaymal.com/public/backend/admin/news/' + item.file}
-                                         className="align-self-start mr-3" style={{width: '81px'}}/>
-                                    <div className="media-body">
-                                        <p style={{fontSize: '14px'}}>{item.title}</p>
-                                        <p style={{fontSize: '14px'}}>Date:{item.created_at}</p>
+                                <div className="row mt-4 mt-sm-4 mt-md-0">
+                                    <div class="col-6 col-md-12 col-lg-6">
+                                        <img src={'https://admin.ywaymal.com/public/backend/admin/news/' + item.file}
+                                             className="align-self-start mr-3" style={{width: '100%'}}/>
+                                    </div>
+                                    <div class="col-6 col-md-12 col-lg-6">
+                                            <p style={{fontSize: '14px',fontWeight:"bold",color:"#666666"}}>{item.title}</p>
+                                            <p style={{fontSize: '14px',color:"#ffbc42"}}>Date:{item.created_at}</p>
                                     </div>
                                 </div>
                             </Link>
@@ -86,14 +90,18 @@ class Topnews extends React.Component {
                         return (
 
                             <a href={item.link}>
-                                <div className="media">
+                                <div className="row mt-4 mt-sm-4 mt-md-0">
+                                    <div class="col-6 col-md-12 col-lg-6">
+
                                     <img src={'https://admin.ywaymal.com/public/backend/admin/news/' + item.file}
-                                         className="align-self-start mr-3" style={{width: '81px'}}/>
-                                    <div className="media-body">
-                                        <p style={{fontSize: '14px'}}>{item.title}</p>
-                                        <p style={{fontSize: '14px'}}>Date:{item.created_at}</p>
+                                         className="align-self-start mr-3" style={{width: '100%'}}/>
+                                    </div>
+                                    <div class="col-6 col-md-12 col-lg-6">
+                                        <p style={{fontSize: '14px',fontWeight:"bold",color:"#666666"}}>{item.title}</p>
+                                        <p style={{fontSize: '14px',color:"#ffbc42"}}>Date:{item.created_at}</p>
 
                                     </div>
+
                                 </div>
                             </a>
                         )

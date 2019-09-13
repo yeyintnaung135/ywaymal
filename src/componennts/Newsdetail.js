@@ -182,10 +182,8 @@ class Newsdetail extends React.Component {
                             <br></br>
                             <div class="row col-sm-12 d-flex ">
                                 <div class="col-sm-12" style={{paddingTop: '23p'}}>
-
                                     <div class="pb-md-5">
                                         <img id="to_reload" style={{width: '100%', height:'252px'}} src={"https://admin.ywaymal.com/backend/admin/news/"+this.state.news.file}>
-                                          
                                         </img>
                                         <p style={{textAlign:'center',color:'#6c7591 !important',fontSize:'22px'}}>{this.state.news.title} </p>
                                         <p >{this.state.news.description} </p>
@@ -194,13 +192,8 @@ class Newsdetail extends React.Component {
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-
-
+                         </div>
                         <div className="col-sm-12" style={{borderBottom: '2px solid #f1e6be'}}>&nbsp;</div>
-
-
                     </div>
                     {/*End About Us Section*/}
 

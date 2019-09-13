@@ -20,7 +20,6 @@ import {redirecttologinifnotauth} from '../helpers/redirecttologinifnotauth';
 
 //this is create component with reactcomponent that is called stateful components
 class Videodetail extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -29,11 +28,16 @@ class Videodetail extends React.Component {
 
         }
         this.getvideodetail = this.getvideodetail.bind(this);
+        let search = new URLSearchParams(window.location.search);
+         this.id=search.get('id');
+
     }
 
     componentWillMount() {
         //redirect if not authenciate
         redirecttologinifnotauth();
+
+
 
         this.getvideodetail();
 
@@ -45,7 +49,7 @@ class Videodetail extends React.Component {
 
             return axios({
                 method: 'post',
-                url: 'https://admin.ywaymal.com/api/getvideosbyid/' + this.props.location.state.video_id,
+                url: 'https://admin.ywaymal.com/api/getvideosbyid/'+this.id,
                 data: {
                     token: 'feef'
                 }, headers: {
@@ -67,8 +71,6 @@ class Videodetail extends React.Component {
     }
 
     componentDidMount() {
-
-        console.log('video_id' + this.props.location.state.video_id)
 
         window.AOS.init({
             duration: 800,
@@ -170,10 +172,12 @@ class Videodetail extends React.Component {
 
     render() {
 
+
         return (
 
 
             <div>
+
                 {/*header section*/}
                 <Header_menu_cat name={{one: '', two: '', three: ''}}/>
                 <div className="row" style={{marginTop: '22px'}}>
@@ -191,10 +195,7 @@ class Videodetail extends React.Component {
 
                     {/*About Us Section*/}
                     <div className="col-12 col-md-6">
-                        <div class="col-md-12" style={{textAlign: 'center'}}>
-                            <h5 class="mb-1 yk-title-text" style={{textAling: 'center'}}>Video Detail</h5>
-                        </div>
-                        <br></br>
+
                         <div class="col-12" style={{paddingTop: '23p'}}>
 
                             <video id="to_reload" style={{width: '100%', height: 'auto'}} controls>
@@ -203,38 +204,42 @@ class Videodetail extends React.Component {
                                     type='video/mp4'/>
                                 Your browser does not support the video tag.
                             </video>
-                            <p class="yk-title-text-two">
+                            <div class="row col-12">
+
+                                <div class="col-3 col-sm-3  col-md-6 col-xl-3">
+                                    <a href="contact_us" class={"btn  btn-sm  btn-danger"} style={{color: 'white',width:'102%'}} >
+                                        <span class="fa fa-thumbs-up"></span>&nbsp;&nbsp;Like&nbsp;
+                                    </a>
+                                </div>
+                                <div class="col-3 col-sm-3  col-md-6 col-xl-3">
+                                    <a href="contact_us" class={"btn  btn-sm  btn-danger"} style={{color: 'white',width:'102%'}}>
+                                        <span class="fa fa-share-alt"></span>&nbsp;&nbsp;Share&nbsp;
+                                    </a>
+
+                                </div>
+                                <div class="col-3 col-sm-3  col-md-6 col-xl-3 mt-0 mt-md-2 mt-xl-0" >
+                                    <a href="contact_us" class={"btn  btn-sm  btn-danger"} style={{color: 'white',width:'102%'}}>
+                                        <span class="fa fa-comments-o"></span>&nbsp;&nbsp;Comment&nbsp;
+                                    </a>
+                                </div>
+                                <div class="col-3 col-sm-3  col-md-6 col-xl-3 mt-0 mt-md-2 mt-xl-0" >
+                                    <a href="contact_us" class={"btn  btn-sm  btn-danger"} style={{color: 'white',width:'102%'}} >
+                                        <span class="fa fa-comments-o"></span>&nbsp;&nbsp;Vote&nbsp;
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                            <p class="yk-title-text-two mt-4">
                                 {this.state.video.title}
                             </p>
+                            </div>
+                            <div class="col-12">
+
                             <p class="">
                                 {this.state.video.description}
                             </p>
-                            <div class="row col-12">
-                                <div class="col-3">
-                                    <button type="button" data-id="like_three" id="like_three"
-                                            class="btn btn-default btn-circle-yk yk-btn"><i
-                                        class="fa fa-thumbs-up"></i></button>
-                                    2k
-                                </div>
-                                <div class="col-3">
-                                    <button type="button" data-id="cmt_three" id="cmt_three"
-                                            class="btn btn-default btn-circle-yk yk-btn"><i
-                                        class="fa fa-comments-o"></i></button>
-                                    3k
-                                </div>
-                                <div class="col-3">
-                                    <button type="button" data-id="share_three" id="share_three"
-                                            class="btn btn-default btn-circle-yk yk-btn"><i
-                                        class="fa fa-share"></i></button>
-                                    300
-                                </div>
-                                <div class="col-3">
-                                    <button type="button" data-id="share_three" id="share_three"
-                                            class="btn btn-default btn-circle-yk yk-btn"><i
-                                        class="fa fa-share"></i></button>
-                                    9k
-                                </div>
                             </div>
+
                             <br></br>
 
 
@@ -285,10 +290,10 @@ class Videodetail extends React.Component {
 
                 <div id="ftco-loader" className="show fullscreen">
                     <svg className="circular" width="48px" height="48px">
-                        <circle className="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4"
+                        <circle className="path-bg" cx="24" cy="24" r="22" fill="none" strokeWidth="4"
                                 stroke="#eeeeee"/>
-                        <circle className="path" cx="24" cy="24" r="22" fill="none" stroke-width="4"
-                                stroke-miterlimit="10"
+                        <circle className="path" cx="24" cy="24" r="22" fill="none" strokeWidth="4"
+                                strokeMiterlimit="10"
                                 stroke="#F96D00"/>
                     </svg>
                 </div>

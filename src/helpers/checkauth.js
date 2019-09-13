@@ -11,7 +11,7 @@ export function checkauth()
     else {
         axios({
             method: 'post',
-            url: 'http://localhost/ywaymalbe/public/api/check_token',
+            url: 'https://admin.ywaymal.com/api/check_token',
             data: {
                 token: 'feef'
             }, headers: {
@@ -24,7 +24,13 @@ export function checkauth()
                 localStorage.setItem('loginstatus', res.data)
                 if (res.data == 'yes'){
                     //check token success go to home
-                   return window.location.assign('home');
+                    if(localStorage.getItem('request_link') !== null){
+                        return window.location.assign(localStorage.getItem('request_link'));
+
+                    }else {
+
+                        return window.location.assign('home');
+                    }
                 }
             })
     }

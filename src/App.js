@@ -9,12 +9,13 @@ import './App.css';
 import Login from './componennts/login';
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 import Categories from "./componennts/Categories";
-import MainSlider from "./componennts/MainSlider";
 import Homepage from "./componennts/homepage";
 import Footerpage from "./componennts/footerpage";
 import Aboutus from "./componennts/Aboutus";
 import Newsdetail from "./componennts/Newsdetail";
 import Videodetail from "./componennts/videodetail";
+import { createBrowserHistory as Bh } from 'history';
+
 
 
 // function App() {
@@ -119,6 +120,8 @@ class Root extends React.Component {
             }, {offset: '95%'});
         };
         contentWayPoint();
+
+
         window.$(document).ready(function () {
 
             if ((window.screen.width < 900)) {
@@ -141,25 +144,26 @@ class Root extends React.Component {
         });
         console.log('start')
     }
+
     render() {
 
         return (
-            <Router>
+            <Router history={Bh}>
                 <Switch>
-                <Route exact path="/" component={Login}/>
-                {/*<Route path="/header" component={Header_menu_cat}/>*/}
-                <Route path="/categories" component={Categories}/>
-                <Route path="/About_us" component={Aboutus}/>
-                <Route path="/video_detail" component={Videodetail}/>
-                <Route path="/news_detail" component={Newsdetail}/>
-                <Route path="/home" component={Homepage}/>
-                <Route path="/footer" component={Footerpage}/>
-                {/*<Route  path="/videodetail/:id" component={Videodetail}/>*/}
+                    <Route exact path="/" component={Login}/>
+                    {/*<Route path="/header" component={Header_menu_cat}/>*/}
+                    <Route exact path="/categories" component={Categories}/>
+                    <Route exact path="/About_us" component={Aboutus}/>
+                    <Route exact path="/news_detail" component={Newsdetail}/>
+                    <Route exact path="/home" component={Homepage}/>
+                    <Route exact path="/footer" component={Footerpage}/>
+                     {/*this videotail route is for a route with query parameter*/}
+                    <Route component={Videodetail}/>
                 </Switch>
-
             </Router>
         );
     };
 }
+
 export default Root
 

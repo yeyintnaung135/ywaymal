@@ -68,6 +68,21 @@ const Categories = () => {
 
                                 </ul>
                             </li>
+                            <li class="list-group-item">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1 yk-title-text">Private Videos</h5>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">3 min Video</li>
+                                    <li class="list-group-item">1 min Video</li>
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1 yk-title-text">Terms Of Use <br></br>Privacy Policy</h5>
+                                </div>
+
+                            </li>
 
                         </ul>
                     </div>

@@ -63,6 +63,7 @@ class Homepage extends React.Component {
         //start page this method will firstly fire
         //if not authenciate rediret to login from
         redirecttologinifnotauth();
+
         var loader = function () {
             setTimeout(function () {
                 window.$('#ftco-loader').removeClass('show');
@@ -130,6 +131,7 @@ class Homepage extends React.Component {
     render() {
         {
             this.getVideos();
+
         }
         const name = index => {
             var joined = this.state.videostoplay.concat(index);
@@ -150,9 +152,8 @@ class Homepage extends React.Component {
 
 
             return (
-                <div className=" row blog-entry align-self-stretch">
-                    <div className=" col-sm-12 col-md-6">
-
+                <div className="row mb-5">
+                    <div className="col-sm-12 col-md-12 col-xl-5">
                         <video id={todo.id} style={{width: '100%', height: 'auto'}} onPlaying={this.handleVideoshow}
                                controls>
                             <source
@@ -160,59 +161,47 @@ class Homepage extends React.Component {
                                 type={todo.video_type}/>
                             Your browser does not support the video tag.
                         </video>
-
                         <div className="col-sm-12">
                             <a href="#">{todo.created_at}</a>
                         </div>
                     </div>
-                    <div className="text mt-3  text-center col-sm-12 col-md-6"
-                         style={{padding: '0px'}}>
+                    <div className="text mt-3  col-sm-12 col-xl-7" style={{padding: '0px'}}>
 
 
-                        <h3 className="heading yk_text">{todo.title}</h3>
+                        <h3 className="heading yk_text text-center">{todo.title}</h3>
                         <div className="meta mb-2 sm-12">
-                            <div className="">
-                                <button type="button" data-id='like_three' id="like_three"
-                                        className="btn btn-default btn-circle-yk yk-btn"><i
-                                    className="fa fa-thumbs-up"></i></button>
+                            <div className="pr-sm-5">
+                                <a href="contact_us" class={"btn  btn-sm  btn-danger"} style={{color: 'white'}} >
+                                    <span class="fa fa-thumbs-up"></span>&nbsp;&nbsp;Like&nbsp;
+                                </a>
+                                &nbsp;
+                                <a href="contact_us" class={"btn  btn-sm  btn-danger"} style={{color: 'white'}} >
+                                    <span class="fa fa-share-alt"></span>&nbsp;&nbsp;Share&nbsp;
+                                </a>
+                                &nbsp;
+                                <a href="contact_us" class={"btn  btn-sm  btn-danger"} style={{color: 'white'}} >
+                                    <span class="fa fa-comments-o"></span>&nbsp;&nbsp;Comment&nbsp;
+                                </a>
+                                &nbsp;
+                                <a href="contact_us" class={"btn  btn-sm  btn-danger"} style={{color: 'white'}} >
+                                    <span class="fa fa-comments-o"></span>&nbsp;&nbsp;Vote&nbsp;
+                                </a>
+                                &nbsp;
+
                                 <br></br>
-                                2k
-                            </div>
-                            <div className="">
-                                <button type="button" data-id='cmt_three' id="cmt_three"
-                                        className="btn btn-default btn-circle-yk yk-btn"><i
-                                    className="fa fa-comments-o"></i></button>
-                                <br></br>
-                                3k
+
                             </div>
 
-                            <div className="">
-                                <button type="button" data-id='share_three' id="share_three"
-                                        className="btn btn-default btn-circle-yk yk-btn"><i
-                                    className="fa fa-share"></i></button>
-                                <br></br>
-                                300
-                            </div>
-
-                            <div className="">
-                                <button type="button" data-id='share_three' id="share_three"
-                                        className="btn btn-default btn-circle-yk yk-btn"><i
-                                    className="fa fa-share"></i></button>
-                                <br></br>
-                                9k
-                            </div>
 
 
                         </div>
 
                         <p>
-                            <Link to={{
-                                pathname: '/video_detail',
-                                state: {
-                                    video_id: todo.id
-                                }
-                            }} class="btn btn-sm btn-danger">See Detail... <span
-                                class="fa fa-arrow-circle-right"></span></Link>
+
+                            <Link to={{ pathname: "/video_detail", search: "?id="+todo.id }}  class="btn btn-sm btn-danger">
+                                See Detail... <span class="fa fa-arrow-circle-right"></span>
+                            </Link>
+
                         </p>
                     </div>
                 </div>)
@@ -289,7 +278,7 @@ class Homepage extends React.Component {
                     {/*categories section*/}
                     <Categories/>
                     {/*end categories section*/}
-                    <div className="col-12 col-md-6">
+                    <div className="col-sm-12 col-md-6 ">
                         {/*Selider section*/}
                         <MainSlider/>
                         {/*end slider section*/}
@@ -297,7 +286,7 @@ class Homepage extends React.Component {
 
                         <div className="col-sm-12" style={{borderBottom: '2px solid #f1e6be'}}>&nbsp;</div>
 
-                        <div className="col-sm-12" style={{margin: '22px'}}>
+                        <div className="col-sm-12">
                             <div className="col-sm-12">&nbsp;</div>
                             <div className="col-md-12" style={{textAlign: 'center'}}>
                                 <h5 className="mb-1 yk-title-text" style={{textAlign: 'center'}}>Videos </h5>
@@ -306,7 +295,6 @@ class Homepage extends React.Component {
 
 
                             {/*// need to creat child component for this section */}
-
 
                             {/*// need to creat child component for this section */}
 
@@ -335,7 +323,7 @@ class Homepage extends React.Component {
                     </div>
                     {/*top new section*/}
 
-                    <div className="col-12 col-md-3">
+                    <div className="col-12 col-sm-12 col-md-3">
                         <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/ads.png'}
                              alt="First slide" style={{height: '300px'}}/>
                         <br></br>
@@ -365,10 +353,10 @@ class Homepage extends React.Component {
 
                 <div id="ftco-loader" className="show fullscreen">
                     <svg className="circular" width="48px" height="48px">
-                        <circle className="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4"
+                        <circle className="path-bg" cx="24" cy="24" r="22" fill="none" strokeWidth="4"
                                 stroke="#eeeeee"/>
-                        <circle className="path" cx="24" cy="24" r="22" fill="none" stroke-width="4"
-                                stroke-miterlimit="10"
+                        <circle className="path" cx="24" cy="24" r="22" fill="none" strokeWidth="4"
+                                strokeMiterlimit="10"
                                 stroke="#F96D00"/>
                     </svg>
                 </div>

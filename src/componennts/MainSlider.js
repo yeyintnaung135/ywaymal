@@ -86,6 +86,12 @@ class MainSlider extends React.Component {
                                                        src={'https://admin.ywaymal.com/backend/admin/news/' + item.file}
                                                        alt="First slide"
                                                        style={{height: '300px'}}/>
+                                                  <Link class='btn btn-danger' style={{width:'100%'}} to={{
+                                                      pathname: '/news_detail',
+                                                      state: {
+                                                          news_id: item.id
+                                                      }
+                                                  }}>About </Link>
                                               </Link>)
                                         }else{
                                            return( <a href={item.link}>
@@ -93,7 +99,8 @@ class MainSlider extends React.Component {
                                                      src={'https://admin.ywaymal.com/backend/admin/news/' + item.file}
                                                      alt="First slide"
                                                      style={{height: '300px'}}/>
-                                                   </a>)
+                                               <a class='btn btn-danger' style={{width:'100%'}} href={item.link}>About </a>
+                                           </a>)
                                         }
                                     })()}
 
@@ -124,16 +131,12 @@ class MainSlider extends React.Component {
                                                          src={'https://admin.ywaymal.com/backend/admin/news/' + item.file}
                                                          alt="First slide"
                                                          style={{height: '300px'}}/>
+                                                    <a class='btn btn-danger' style={{width:'100%'}} href={item.link}>About </a>
                                                 </a>)
                                             }
                                         })()}
 
-                                        <div class="carousel-caption">
-                                            <p>
-                                                <a href="https://www.mmtimes.com/news/ethnic-armed-alliance-launches-coordinated-attacks-six-places.html"
-                                                   style={{color: 'white'}}>
-                                                    {item.title}</a></p>
-                                        </div>
+
                                     </div>
 
 

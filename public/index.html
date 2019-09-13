@@ -16,6 +16,17 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="%PUBLIC_URL%/video-react.css" />
 
+    <style>
+      @font-face {
+        font-family:'Myanmar3';
+        src:local('Myanmar3'), url('https://mmwebfonts.comquas.com/fonts/myanmar3.woff') format('woff'), url('https://mmwebfonts.comquas.com/fonts/myanmar3.ttf') format('ttf');
+      }
+      @font-face {
+        font-family:'Zawgyi-One';
+        src:local('Zawgyi-One'), url('https://mmwebfonts.comquas.com/fonts/zawgyi.woff') format('woff'), url('https://mmwebfonts.comquas.com/fonts/zawgyi.ttf') format('ttf');
+      }
+    </style>
+
 
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -35,7 +46,8 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root">
+    <div id="root"  class="ml-md-4 mr-md-4 changeMe">
+
 
     </div>
     <!--
@@ -51,7 +63,7 @@
 
 
 
-    <script src="js/jquery.min.js"></script>
+    <script src="http://localhost:3000/js/jquery.min.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -60,8 +72,19 @@
 // if screen size is 1025px wide or larger
                 $(".collapse").removeClass('show'); // you can also use $(".yourClass").hide();
             }
+            $(".uni").click(function(){
+                $('.changeMe').css("font-family","Masterpiece Uni Sans,Myanmar3");
+                console.log('font change');
+            });
+            $(".zaw").click(function(){
+                $('.changeMe').css("font-family","Zawgyi-One");
+                console.log('font change');
 
+            });
         });
+
+
+
         $(".yk-btn[data-id]").click(function () {
             var dyn = $(this).attr("data-id");
             if ($("#" + dyn).hasClass("yk-btn-active")) {
@@ -76,24 +99,24 @@
         });
         console.log('start')
     </script>
-    <script src="js/jquery-migrate-3.0.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.easing.1.3.js"></script>
-    <script src="js/jquery.waypoints.min.js"></script>
-    <script src="js/jquery.stellar.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/aos.js"></script>
-    <script src="js/jquery.animateNumber.min.js"></script>
-    <script src="js/jquery.mb.YTPlayer.min.js"></script>
-    <script src="js/bootstrap-datepicker.js"></script>
-    <!-- // <script src="js/jquery.timepicker.min.js"></script> -->
-    <script src="js/scrollax.min.js"></script>
+    <script src="http://localhost:3000/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="http://localhost:3000/js/popper.min.js"></script>
+    <script src="http://localhost:3000/js/bootstrap.min.js"></script>
+    <script src="http://localhost:3000/js/jquery.easing.1.3.js"></script>
+    <script src="http://localhost:3000/js/jquery.waypoints.min.js"></script>
+    <script src="http://localhost:3000/js/jquery.stellar.min.js"></script>
+    <script src="http://localhost:3000/js/owl.carousel.min.js"></script>
+    <script src="http://localhost:3000/js/jquery.magnific-popup.min.js"></script>
+    <script src="http://localhost:3000/js/aos.js"></script>
+    <script src="http://localhost:3000/js/jquery.animateNumber.min.js"></script>
+    <script src="http://localhost:3000/js/jquery.mb.YTPlayer.min.js"></script>
+    <script src="http://localhost:3000/js/bootstrap-datepicker.js"></script>
+    <!-- // <script src="http://localhost:3000/js/jquery.timepicker.min.js"></script> -->
+    <script src="http://localhost:3000/js/scrollax.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-    <script src="js/google-map.js"></script>
-    <script src="js/facebook-sdk.js"></script>
-    <!--<script src="js/main.js"></script>-->
+    <script src="http://localhost:3000/js/google-map.js"></script>
+    <script src="http://localhost:3000/js/facebook-sdk.js"></script>
+    <!--<script src="http://localhost:3000/js/main.js"></script>-->
 
 
   </body>

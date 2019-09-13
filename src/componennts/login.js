@@ -10,17 +10,11 @@ import axios from 'axios';
 class Login extends React.Component {
     constructor(props) {
         super(props);
-
     }
-
     componentWillMount() {
         //start page this method will firstly fire
         checkauth();
     }
-
-
-
-
     PostData(uri, userData) {
         let BaseURL = 'https://admin.ywaymal.com/api/';
         //let BaseURL = 'http://localhost/socialapi/';
@@ -41,7 +35,13 @@ class Login extends React.Component {
 
                 localStorage.setItem('loginstatus', 'yes')
                 if (localStorage.getItem('loginstatus') == 'yes') {
-                    return window.location.assign('home')
+                    if(localStorage.getItem('request_link') !== null){
+                        return window.location.assign(localStorage.getItem('request_link'))
+
+                    }else{
+                        return window.location.assign('home')
+
+                    }
                 }
 
             })
@@ -116,7 +116,7 @@ class Login extends React.Component {
                     </div>
                     <br/>
                     <FacebookLogin
-                    appId="1206951349513642"
+                    appId="413223529303378"
                     autoLoad={false}
                     fields="name,email,picture"
                     callback={this.responseFacebook}/>
