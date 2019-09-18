@@ -5,19 +5,17 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
-
 import Login from './componennts/login';
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 import Categories from "./componennts/Categories";
 import Homepage from "./componennts/homepage";
 import Footerpage from "./componennts/footerpage";
 import Aboutus from "./componennts/Aboutus";
+import Sliderdetail from "./componennts/Sliderdetail";
 import Newsdetail from "./componennts/Newsdetail";
 import Videodetail from "./componennts/videodetail";
+
 import { createBrowserHistory as Bh } from 'history';
-
-
-
 // function App() {
 //   return (
 //     <div className="App">    
@@ -148,12 +146,13 @@ class Root extends React.Component {
     render() {
 
         return (
-            <Router history={Bh}>
+            <Router history={Bh} >
                 <Switch>
                     <Route exact path="/" component={Login}/>
                     {/*<Route path="/header" component={Header_menu_cat}/>*/}
                     <Route exact path="/categories" component={Categories}/>
                     <Route exact path="/About_us" component={Aboutus}/>
+                    <Route exact path="/slider_detail" component={Sliderdetail}/>
                     <Route exact path="/news_detail" component={Newsdetail}/>
                     <Route exact path="/home" component={Homepage}/>
                     <Route exact path="/footer" component={Footerpage}/>

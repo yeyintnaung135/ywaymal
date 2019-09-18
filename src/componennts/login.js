@@ -4,6 +4,7 @@ import FacebookLogin from "react-facebook-login";
 import {checkauth} from '../helpers/checkauth'
 
 import axios from 'axios';
+import apiurl from '../helpers/apiurl'
 
 //this is login component
 
@@ -14,9 +15,10 @@ class Login extends React.Component {
     componentWillMount() {
         //start page this method will firstly fire
         checkauth();
+        console.log(apiurl)
     }
     PostData(uri, userData) {
-        let BaseURL = 'https://admin.ywaymal.com/api/';
+        let BaseURL = apiurl+'/api/';
         //let BaseURL = 'http://localhost/socialapi/';
         return axios({
             method: 'post',

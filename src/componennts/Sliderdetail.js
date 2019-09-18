@@ -21,19 +21,18 @@ import {redirecttologinifnotauth} from '../helpers/redirecttologinifnotauth';
 
 
 //this is create component with reactcomponent that is called stateful components
-class Newsdetail extends React.Component {
-    constructor(props,context) {
+class Sliderdetail extends React.Component {
+    constructor(props) {
         super(props);
         this.state = {
-            news_detail: '',
+            slider: '',
 
         }
         let search = new URLSearchParams(window.location.search);
         this.getnewsdetail = this.getnewsdetail.bind(this);
 
-        this.news_id = search.get('news_id');
+        this.slider_id=search.get('slider_id');
     }
-
     componentWillMount() {
         //redirect if not authenciate
         redirecttologinifnotauth();
@@ -45,25 +44,27 @@ class Newsdetail extends React.Component {
 
     getnewsdetail() {
 
-        return axios({
-            method: 'post',
-            url: apiurl + '/api/getnewsdetail/' + this.news_id,
-            data: {
-                token: 'feef'
-            }, headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
-            }
-        })
-            .then(res => {
-                console.log('responses from server for news');
-                this.setState({news_detail: res.data})
-                console.log(this.state.news_detail);
-                // this localstorage set is becuz we cannot bind this in ellispse react package
-                localStorage.setItem('desc',this.state.news_detail.description)
-                //end
-
-
+            return axios({
+                method: 'post',
+                url: apiurl+'/api/getsliderdetail/' + this.slider_id,
+                data: {
+                    token: 'feef'
+                }, headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
+                }
             })
+                .then(res => {
+                    console.log('responses from server for sliders');
+                    this.setState({slider: res.data})
+                    console.log(this.state.slider);
+                    localStorage.setItem('slide_video',this.state.slider.videos)
+                    console.log('slide_video');
+                    //this is because we need to html5 player unless this player restore from cache it is not good for new videos
+                    document.getElementById('to_reload_slide_src').src=apiurl+'/backend/admin/news/'+ this.state.slider.videos;
+                    document.getElementById('to_reload_slide').load();
+                    // localStorage.setItem('logintoken',res.data)
+
+                })
 
     }
 
@@ -166,15 +167,12 @@ class Newsdetail extends React.Component {
         console.log('start')
     }
 
-
     render() {
-
         return (
             <div>
-
                 {/*header section*/}
-                <Header_menu_cat name={{one: '', two: 'menu_active', three: ''}}/>
-                <div className="row" style={{marginTop: '22px'}}>
+                <Header_menu_cat  name={{ one : '',two : 'menu_active' ,three : ''}}/>
+                <div className="row" style={{marginTop:'22px'}}>
 
                 </div>
                 {/*end header section*/}
@@ -186,6 +184,7 @@ class Newsdetail extends React.Component {
                     <Categories/>
                     {/*end categories section*/}
 
+
                     {/*About Us Section*/}
                     <div className="col-12 col-md-6">
                         <div class="col-sm-12">
@@ -193,18 +192,19 @@ class Newsdetail extends React.Component {
                             <div class="row col-sm-12 d-flex ">
                                 <div class="col-sm-12" style={{paddingTop: '23p'}}>
                                     <div class="pb-md-5">
-                                        <img class="d-block w-100"
-                                             src={apiurl + '/backend/admin/news/' + this.state.news_detail.file}
-                                             alt="First slide"
-                                             style={{height: '300px'}}/>
-
-                                        <p>{this.state.news_detail.description} </p>
-                                        <p>Date:{this.state.news_detail.created_at} </p>
+                                        <video id="to_reload_slide" style={{width: '100%', height: 'auto'}} controls>
+                                            <source id="to_reload_slide_src"
+                                                    src={apiurl+'/backend/admin/news/' +localStorage.getItem('slide_video')}
+                                                    type='video/mp4'/>
+                                            Your browser does not support the video tag.
+                                        </video>
+                                        <p >{this.state.slider.description} </p>
+                                        <p>Date:{this.state.slider.created_at} </p>
                                         <br></br>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                         </div>
                         <div className="col-sm-12" style={{borderBottom: '2px solid #f1e6be'}}>&nbsp;</div>
                     </div>
                     {/*End About Us Section*/}
@@ -264,4 +264,4 @@ class Newsdetail extends React.Component {
     }
 }
 
-export default Newsdetail;
+export default Sliderdetail;

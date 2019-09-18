@@ -217,6 +217,7 @@ select {
 select {
   word-wrap: normal; }
 
+
 button,
 [type="button"],
 [type="reset"],
@@ -347,6 +348,10 @@ h6, .h6 {
   font-size: 3.5rem;
   font-weight: 300;
   line-height: 1.2; }
+
+.yk-background{
+  background-color:#a62639 !important;
+}
 
 hr {
   margin-top: 1rem;

@@ -12,7 +12,10 @@ import "../css/jquery.timepicker.css";
 import "../css/flaticon.css";
 import "../css/icomoon.css";
 import "../css/style.css";
+import EllipsisText from "react-ellipsis-text";
+
 import axios from "axios";
+import apiurl from "../helpers/apiurl"
 import {Link} from "react-router-dom";
 
 
@@ -38,7 +41,7 @@ class MainSlider extends React.Component {
     getslider() {
            return axios({
                 method: 'post',
-                url: 'https://admin.ywaymal.com/api/getsliders',
+                url: apiurl+'/api/getsliders',
                 data: {
                     token: localStorage.getItem('logintoken')
                 }, headers: {
@@ -69,8 +72,6 @@ class MainSlider extends React.Component {
                     {this.state.sliders.map((item, key) => {
                             if (key === 0) {
                                 return (
-
-
                                 <div class="carousel-item active">
 
                                     {(() => {
@@ -79,41 +80,36 @@ class MainSlider extends React.Component {
                                               <Link to={{
                                                   pathname: '/news_detail',
                                                   state: {
-                                                      news_id: item.id
+                                                      slider_id: item.id
                                                   }
                                               }}>
                                                   <img class="d-block w-100"
-                                                       src={'https://admin.ywaymal.com/backend/admin/news/' + item.file}
+                                                       src={apiurl+'/backend/admin/news/' + item.images}
                                                        alt="First slide"
                                                        style={{height: '300px'}}/>
-                                                  <Link class='btn btn-danger' style={{width:'100%'}} to={{
-                                                      pathname: '/news_detail',
-                                                      state: {
-                                                          news_id: item.id
-                                                      }
-                                                  }}>About </Link>
+                                                  <Link class='btn btn-danger' style={{width:'100%'}} to={{ pathname: "/slider_detail", search: "?slider_id="+item.id }}>
+                                                      <EllipsisText text={item.description} length={"85"} /> </Link>
                                               </Link>)
                                         }else{
                                            return( <a href={item.link}>
                                                 <img class="d-block w-100"
-                                                     src={'https://admin.ywaymal.com/backend/admin/news/' + item.file}
+                                                     src={apiurl+'/backend/admin/news/' + item.images}
                                                      alt="First slide"
                                                      style={{height: '300px'}}/>
-                                               <a class='btn btn-danger' style={{width:'100%'}} href={item.link}>About </a>
+
+                                               <a class='btn btn-danger' style={{width:'100%'}} href={item.link}>
+                                                   <EllipsisText text={item.description} length={"85"} />
+                                               </a>
                                            </a>)
                                         }
                                     })()}
 
-                                    <div class="carousel-caption">
-                                        <p>
-                                            <a href={item.link}
-                                               style={{color: 'white'}}>
-                                                {item.title}</a></p>
-                                    </div>
+
                                 </div>
 
                             )
-                            } else {
+                            }
+                            else {
                                 return (
                                     <div class="carousel-item ">
                                         {(() => {
@@ -121,17 +117,19 @@ class MainSlider extends React.Component {
                                                 return (
                                                     <video style={{width: '100%',height:'353px'}} controls>
                                                         <source
-                                                            src={'https://admin.ywaymal.com/backend/admin/news/' + item.file}
+                                                            src={apiurl+'/backend/admin/news/' + item.file}
                                                             type={item.file_type}/>
                                                         Your browser does not support the video tag.
                                                     </video>)
                                             }else{
                                                 return(  <a href={item.link}>
                                                     <img class="d-block w-100"
-                                                         src={'https://admin.ywaymal.com/backend/admin/news/' + item.file}
+                                                         src={apiurl+'/backend/admin/news/' + item.images}
                                                          alt="First slide"
                                                          style={{height: '300px'}}/>
-                                                    <a class='btn btn-danger' style={{width:'100%'}} href={item.link}>About </a>
+                                                    <a class='btn btn-danger' style={{width:'100%'}} href={item.link}>
+                                                        <EllipsisText text={item.description} length={"85"} />
+                                                    </a>
                                                 </a>)
                                             }
                                         })()}

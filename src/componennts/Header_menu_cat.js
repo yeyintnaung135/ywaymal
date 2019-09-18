@@ -50,14 +50,14 @@ const Header_menu_cat = props => {
                     </div>
                     <div class="pt-sm-2 col-md-6 d-flex justify-content-center justify-content-xs-end  justify-content-md-end">
                         <div class=" ">
-                        <a href="home" class={"btn btn-sm btn-danger float-sm-none "}
+                        <a href="home" class={"btn btn-sm btn-danger float-sm-none yk-background"}
                            style={{color: 'white'}}
                         >
                             <span class="fa fa-home"></span>&nbsp;&nbsp;
 
                             Home</a>
                         &nbsp;
-                        <a href="about_us" class={"btn  btn-sm  btn-danger"}
+                        <a href="about_us" class={"btn  btn-sm  btn-danger yk-background"}
                            style={{color: 'white'}}
                         >
                             <span class="fa fa-info-circle"></span>&nbsp;&nbsp;
@@ -65,7 +65,7 @@ const Header_menu_cat = props => {
                             About &nbsp;</a>
                         &nbsp;
 
-                        <a href="contact_us" class={"btn  btn-sm  btn-danger"}
+                        <a href="contact_us" class={"btn  btn-sm  btn-danger yk-background"}
                            style={{color: 'white'}}
                         >
                             <span class="fa fa-phone"></span>&nbsp;&nbsp;
@@ -84,7 +84,7 @@ const Header_menu_cat = props => {
                      <div class="form-row">
                          <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
 
-                     <select class="btn btn-lg btn-danger input-lg" id="sel1" style={{width:'100%',fontSize: '10px',
+                     <select class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{width:'100%',fontSize: '10px',
                          fontWeight: 'bolder'}}  required={'required'}>
                         <option>Township&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>
                         <option>2</option>
@@ -93,7 +93,7 @@ const Header_menu_cat = props => {
                     </select>
                          </div>
                          <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
-                             <select class="btn btn-lg btn-danger input-lg" id="sel1" style={{width:'100%',fontSize: '10px',
+                             <select class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{width:'100%',fontSize: '10px',
                                  fontWeight: 'bolder'}}  required={'required'}>
                                  <option >Constituency
                                      No.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </option>
@@ -104,7 +104,7 @@ const Header_menu_cat = props => {
                          </div>
                          <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
 
-                             <select class="btn btn-lg btn-danger input-lg" id="sel1" style={{width:'100%',fontSize: '10px',
+                             <select class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{width:'100%',fontSize: '10px',
                                  fontWeight: 'bolder'}}  required={'required'}>
                                  <option>Constituencies &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>
                                  <option>2</option>
@@ -113,7 +113,7 @@ const Header_menu_cat = props => {
                              </select>
                          </div>
                          <div class="col-sm-4 col-lg-2 mt-3 mt-lg-0">
-                             <select class="btn btn-lg btn-danger input-lg" id="sel1" style={{width:'100%',fontSize: '10px',
+                             <select class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{width:'100%',fontSize: '10px',
                                  fontWeight: 'bolder'}}  required={'required'}>
                                  <option>Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                  <option>2</option>
