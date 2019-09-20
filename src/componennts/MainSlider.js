@@ -74,35 +74,12 @@ class MainSlider extends React.Component {
                                 return (
                                 <div class="carousel-item active">
 
-                                    {(() => {
-                                        if(item.description != null) {
-                                          return (
-                                              <Link to={{
-                                                  pathname: '/news_detail',
-                                                  state: {
-                                                      slider_id: item.id
-                                                  }
-                                              }}>
-                                                  <img class="d-block w-100"
-                                                       src={apiurl+'/backend/admin/news/' + item.images}
-                                                       alt="First slide"
-                                                       style={{height: '300px'}}/>
-                                                  <Link class='btn btn-danger' style={{width:'100%'}} to={{ pathname: "/slider_detail", search: "?slider_id="+item.id }}>
-                                                      <EllipsisText text={item.description} length={"85"} /> </Link>
-                                              </Link>)
-                                        }else{
-                                           return( <a href={item.link}>
-                                                <img class="d-block w-100"
-                                                     src={apiurl+'/backend/admin/news/' + item.images}
-                                                     alt="First slide"
-                                                     style={{height: '300px'}}/>
-
-                                               <a class='btn btn-danger' style={{width:'100%'}} href={item.link}>
-                                                   <EllipsisText text={item.description} length={"85"} />
-                                               </a>
-                                           </a>)
-                                        }
-                                    })()}
+                                    <img class="d-block w-100"
+                                         src={apiurl+'/backend/admin/news/' + item.images}
+                                         alt="First slide"
+                                         style={{height: '300px'}}/>
+                                    <Link class='btn btn-danger' style={{width:'100%'}} to={{ pathname: "/slider_detail", search: "?slider_id="+item.id }}>
+                                        <EllipsisText text={item.description} length={"85"} /> </Link>
 
 
                                 </div>

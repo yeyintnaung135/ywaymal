@@ -1,14 +1,12 @@
 import axios from 'axios';
 import apiurl from './apiurl';
 export function checkauth() {
-//real
-//     // check user is already login
-//     if (localStorage.getItem('logintoken') == null) {
-// //if empty token
-//         console.log('empty  token and login false')
-//     }
-//     else {
-    //endreal
+    // check user is already login
+    if (localStorage.getItem('logintoken') == null) {
+//if empty token
+        console.log('empty  token and login false')
+    }
+    else {
         axios({
             method: 'post',
             url: apiurl+'/api/check_token',
@@ -33,8 +31,8 @@ export function checkauth() {
                     }
                 }
             })
-    //real
-    // }
-    //endreal
+
+    }
+
 
 }

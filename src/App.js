@@ -15,6 +15,7 @@ import Sliderdetail from "./componennts/Sliderdetail";
 import Newsdetail from "./componennts/Newsdetail";
 import Videodetail from "./componennts/videodetail";
 
+
 import { createBrowserHistory as Bh } from 'history';
 // function App() {
 //   return (

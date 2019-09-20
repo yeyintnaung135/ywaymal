@@ -2,10 +2,9 @@ export default function()
 {
     return [
         {
-            id:'',
-            button:'Like',
-            value:1,
+            video_id:'',
+            button_name:'Vote',
+            votes_count:'',
         }
     ]
-}
-;
+};

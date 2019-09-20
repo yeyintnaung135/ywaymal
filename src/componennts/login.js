@@ -88,10 +88,6 @@ class Login extends React.Component {
 
     }
 
-    //
-    // if (this.state.redirect || sessionStorage.getItem('userData')) {
-    //     return (<Redirect to={'/home'}/>)
-    // }
 
 
     responseFacebook = (response) => {

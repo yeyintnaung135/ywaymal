@@ -17,12 +17,15 @@ import Categories from "./Categories";
 import Header_menu_cat from "./Header_menu_cat";
 import MainSlider from "./MainSlider";
 import Footerpage from "./footerpage";
-import apiurl from"../helpers/apiurl";
-import axios from "axios"
+import apiurl from "../helpers/apiurl";
+import {connect} from 'react-redux';
+import axios from "axios";
 import {Link} from "react-router-dom";
 import {redirecttologinifnotauth} from '../helpers/redirecttologinifnotauth'
 
 //this is create component with reactcomponent that is called stateful components
+
+
 class Homepage extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -36,9 +39,18 @@ class Homepage extends React.Component {
 
         }
         this.handleVideoshow = this.handleVideoshow.bind(this);
+        this.testreducer = this.testreducer.bind(this);
+
+
 
 
     }
+
+
+    testreducer(){
+            console.log(this.props.votes);
+     };
+
 
     handleVideoshow(event) {
         console.log(event.target.id);//get target id
@@ -63,7 +75,7 @@ class Homepage extends React.Component {
     componentWillMount() {
         //start page this method will firstly fire
         //if not authenciate rediret to login from
-        redirecttologinifnotauth();
+        // redirecttologinifnotauth();real
 
         var loader = function () {
             setTimeout(function () {
@@ -73,7 +85,7 @@ class Homepage extends React.Component {
         };
         loader();
 
-        if(document.referrer.includes('video_detail') || document.referrer.includes('news_detail')   ) {
+        if (document.referrer.includes('video_detail') || document.referrer.includes('news_detail')) {
             {
                 //check if reloaded once already
                 if (!localStorage.getItem('firstLoad')) {
@@ -104,9 +116,9 @@ class Homepage extends React.Component {
         if (this.state.runvideos) {
             axios({
                 method: 'post',
-                url: apiurl+'/api/getvideos',
+                url: apiurl + '/api/getvideos',
                 data: {
-                    token: 'feef'
+                    token: localStorage.getItem('logintoken')
                 }, headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
                 }
@@ -132,6 +144,7 @@ class Homepage extends React.Component {
     render() {
         {
             this.getVideos();
+            this.testreducer();
 
         }
         const name = index => {
@@ -158,7 +171,7 @@ class Homepage extends React.Component {
                         <video id={todo.id} style={{width: '100%', height: 'auto'}} onPlaying={this.handleVideoshow}
                                controls>
                             <source
-                                src={apiurl+'/backend/admin/videos/' + todo.link}
+                                src={apiurl + '/backend/admin/videos/' + todo.link}
                                 type={todo.video_type}/>
                             Your browser does not support the video tag.
                         </video>
@@ -172,19 +185,23 @@ class Homepage extends React.Component {
                         <h3 className="heading yk_text text-center">{todo.title}</h3>
                         <div className="meta mb-2 sm-12">
                             <div className="pr-sm-5">
-                                <a href="contact_us" class={"btn  btn-sm  btn-danger yk-background"} style={{color: 'white'}} >
+                                <a href="contact_us" class={"btn  btn-sm  btn-danger yk-background"}
+                                   style={{color: 'white'}}>
                                     <span class="fa fa-thumbs-up"></span>&nbsp;&nbsp;Like&nbsp;
                                 </a>
                                 &nbsp;
-                                <a href="contact_us" class={"btn  btn-sm  btn-danger yk-background"} style={{color: 'white'}} >
+                                <a href="contact_us" class={"btn  btn-sm  btn-danger yk-background"}
+                                   style={{color: 'white'}}>
                                     <span class="fa fa-share-alt"></span>&nbsp;&nbsp;Share&nbsp;
                                 </a>
                                 &nbsp;
-                                <a href="contact_us" class={"btn  btn-sm  btn-danger yk-background"} style={{color: 'white'}} >
+                                <a href="contact_us" class={"btn  btn-sm  btn-danger yk-background"}
+                                   style={{color: 'white'}}>
                                     <span class="fa fa-comments-o"></span>&nbsp;&nbsp;Comment&nbsp;
                                 </a>
                                 &nbsp;
-                                <a href="contact_us" class={"btn  btn-sm  btn-danger yk-background"} style={{color: 'white'}} >
+                                <a href="contact_us" class={"btn  btn-sm  btn-danger yk-background"}
+                                   style={{color: 'white'}}>
                                     <span class="fa fa-comments-o"></span>&nbsp;&nbsp;Vote&nbsp;
                                 </a>
                                 &nbsp;
@@ -194,12 +211,12 @@ class Homepage extends React.Component {
                             </div>
 
 
-
                         </div>
 
                         <p>
 
-                            <Link to={{ pathname: "/video_detail", search: "?id="+todo.id }}  class="btn btn-sm btn-danger yk-background">
+                            <Link to={{pathname: "/video_detail", search: "?id=" + todo.id}}
+                                  class="btn btn-sm btn-danger yk-background">
                                 See Detail... <span class="fa fa-arrow-circle-right"></span>
                             </Link>
 
@@ -368,5 +385,10 @@ class Homepage extends React.Component {
             ;
     }
 }
+function mapStateToProps(state){
+    return {
+        votesdata:state.VotesReducer
+    }
+}
 
-export default Homepage;
+export default connect(mapStateToProps)(Homepage);

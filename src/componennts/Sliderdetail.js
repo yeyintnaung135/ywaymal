@@ -46,7 +46,7 @@ class Sliderdetail extends React.Component {
 
             return axios({
                 method: 'post',
-                url: apiurl+'/api/getsliderdetail/' + this.slider_id,
+                url: apiurl+'/api/getsliderdetail/'+this.slider_id,
                 data: {
                     token: 'feef'
                 }, headers: {
