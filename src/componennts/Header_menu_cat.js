@@ -20,10 +20,18 @@ const Header_menu_cat = props => {
 
             <div class="col-sm-12 col-md-3" style={{display: 'inline'}}>
                 <img src={process.env.PUBLIC_URL + '/images/logo/faef.png'}
+<<<<<<< HEAD
                      style={{width: '80%', marginLeft: '5%', marginTop: '4%'}}/>
                 {/*<h1 style={{marginTop:'33px'}}>*/}
                 {/*<span style={{color:'#7f7f7f'}}>Yway</span><span*/}
                 {/*style={{color:'#dc3545'}}> Mal</span>*/}
+=======
+                style={{width: '235px',margin:'12px',marginLeft: '37px',
+                    float:'left'}}/>
+                {/*<h1 style={{marginTop:'33px'}}>*/}
+                    {/*<span style={{color:'#7f7f7f'}}>Yway</span><span*/}
+                    {/*style={{color:'#dc3545'}}> Mal</span>*/}
+>>>>>>> ca0119ed0b045c51699fd6d2609ceabffd11f67d
                 {/*</h1>*/}
             </div>
             <br></br>
@@ -76,6 +84,7 @@ const Header_menu_cat = props => {
                     </div>
                     </div>
                 </div>
+<<<<<<< HEAD
                 {/*menu*/}
                 <div class="row">&nbsp;</div>
                 <div class="row ml-2 mr-2" >
@@ -127,6 +136,22 @@ const Header_menu_cat = props => {
 
                      </div>
                 </form>
+=======
+            </div>
+            {/*/!*end search bar*!/*/}
+            {/*/!*Menu section*!/*/}
+            <div class="col-sm-12 col-md-3">
+                <div class="yk-menu-test">
+                    <a href="home" class="btn btn-default yk-temp-menu"
+                       style={{borderBottom: '2px solid rgb(220, 53, 69)', color: '#7f7f7f'}}>
+                        <span class="fa fa-home"></span>
+                        <br></br>
+                        Home</a>
+                    <a href="about_us" class="btn btn-default yk-temp-menu" style={{color: '#7f7f7f'}}><span
+                        class="fa fa-info-circle"></span><br></br>About</a>
+                    <a href="contact_us" class="btn btn-default yk-temp-menu" style={{color: '#7f7f7f'}}><span
+                        class="fa fa-phone"></span><br></br>Contact Us</a>
+>>>>>>> ca0119ed0b045c51699fd6d2609ceabffd11f67d
                 </div>
 
 

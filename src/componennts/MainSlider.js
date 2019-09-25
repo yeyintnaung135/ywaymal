@@ -12,12 +12,16 @@ import "../css/jquery.timepicker.css";
 import "../css/flaticon.css";
 import "../css/icomoon.css";
 import "../css/style.css";
+<<<<<<< HEAD
 import EllipsisText from "react-ellipsis-text";
 
 import axios from "axios";
 import apiurl from "../helpers/apiurl"
 import {Link} from "react-router-dom";
 
+=======
+import axios from "axios"
+>>>>>>> ca0119ed0b045c51699fd6d2609ceabffd11f67d
 
 
 class MainSlider extends React.Component {
@@ -30,6 +34,7 @@ class MainSlider extends React.Component {
 
     }
 
+<<<<<<< HEAD
     //willmouth method will fire firstly before render
 
     componentWillMount(){
@@ -50,10 +55,27 @@ class MainSlider extends React.Component {
             })
                 .then(res => {
                     console.log('responses from server for sliders');
+=======
+    getSliders() {
+        //get data from server
+        if (this.state.runslider) {
+            axios({
+                method: 'post',
+                url: 'https://admin.ywaymal.com/api/getsliders',
+                data: {
+                    token: 'feef'
+                }, headers: {
+                    'Authorization': 'Bearer ' + 'feafea'
+                }
+            })
+                .then(res => {
+                    console.log('responses from server for videos');
+>>>>>>> ca0119ed0b045c51699fd6d2609ceabffd11f67d
                     this.setState({sliders: res.data})
                     this.setState({runslider: false});
                     // console.log(this.state.sliders[0].id);
                     // localStorage.setItem('logintoken',res.data)
+<<<<<<< HEAD
                 });
 
 
@@ -112,6 +134,61 @@ class MainSlider extends React.Component {
                                         })()}
 
 
+=======
+                })
+            console.log('fefae')
+        }
+        else {
+            console.log(this.state.sliders.length)
+        }
+        console.log('sliders')
+
+    }
+
+    render() {
+
+        return (
+
+            <div id="carouselExampleControls" class="carousel slide" onLoad={this.getSliders()} data-ride="carousel">
+                <div class="carousel-inner" style={{height: '300px'}}>
+                    {/*// need to creat child component for this section */}
+
+                    {this.state.sliders.map((item, key) => {
+                            if (key === 0) {
+                                return (
+                                    <div class="carousel-item active">
+                                        <a href={item.link}>
+                                            <img class="d-block w-100"
+                                                 src={'https://admin.ywaymal.com/backend/admin/news/' + item.file}
+                                                 alt="First slide"
+                                                 style={{height: '300px'}}/>
+                                        </a>
+                                        <div class="carousel-caption">
+                                            <p>
+                                                <a href="https://www.mmtimes.com/news/ethnic-armed-alliance-launches-coordinated-attacks-six-places.html"
+                                                   style={{color: 'white'}}>
+                                                    {item.title}</a></p>
+                                        </div>
+                                    </div>
+
+                                )
+                            } else {
+                                return (
+
+                                    <div class="carousel-item ">
+                                        <a href="https://www.mmtimes.com/news/ethnic-armed-alliance-launches-coordinated-attacks-six-places.html">
+                                            <img class="d-block w-100"
+                                                 src={'https://admin.ywaymal.com/backend/admin/news/' + item.file}
+                                                 alt="First slide"
+                                                 style={{height: '300px'}}/>
+                                        </a>
+                                        <div class="carousel-caption">
+                                            <p>
+                                                <a href="https://www.mmtimes.com/news/ethnic-armed-alliance-launches-coordinated-attacks-six-places.html"
+                                                   style={{color: 'white'}}>
+                                                    {item.title}</a></p>
+                                        </div>
+>>>>>>> ca0119ed0b045c51699fd6d2609ceabffd11f67d
                                     </div>
 
 
