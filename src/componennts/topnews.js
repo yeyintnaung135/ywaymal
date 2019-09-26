@@ -12,15 +12,13 @@ import "../css/jquery.timepicker.css";
 import "../css/flaticon.css";
 import "../css/icomoon.css";
 import "../css/style.css";
-<<<<<<< HEAD
+
 import {Link} from "react-router-dom";
 import apiurl from '../helpers/apiurl'
 
 import axios from "axios"
 import EllipsisText from "react-ellipsis-text";
-=======
-import axios from "axios"
->>>>>>> ca0119ed0b045c51699fd6d2609ceabffd11f67d
+
 
 class Topnews extends React.Component {
     constructor(props) {
@@ -31,7 +29,7 @@ class Topnews extends React.Component {
         }
     }
 
-<<<<<<< HEAD
+
 //will fire before render
     componentWillMount() {
         this.getNews();
@@ -49,18 +47,7 @@ class Topnews extends React.Component {
                     token: 'feef'
                 }, headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
-=======
-    getNews() {
-        //get data from server
-        if (this.state.runnews) {
-            axios({
-                method: 'post',
-                url: 'https://admin.ywaymal.com/api/getnews',
-                data: {
-                    token: 'feef'
-                }, headers: {
-                    'Authorization': 'Bearer ' + 'feafea'
->>>>>>> ca0119ed0b045c51699fd6d2609ceabffd11f67d
+
                 }
             })
                 .then(res => {
@@ -79,7 +66,7 @@ class Topnews extends React.Component {
 
     render() {
         return (
-<<<<<<< HEAD
+
             <div style={{border: '2px solid #c7baaf47;padding: 12px'}}>
                 <h4 class="yk-title-text">Top News</h4>
                 {this.state.news.map((item, key) =>{
@@ -130,27 +117,6 @@ class Topnews extends React.Component {
                 )}
 
 
-=======
-            <div style={{border: '2px solid #c7baaf47;padding: 12px'}} onLoad={this.getNews()}>
-                <h4>Top News</h4>
-                {this.state.news.map((item, key) =>
-
-                <a href={item.link}>
-                    <div className="media">
-                        <img src={'https://admin.ywaymal.com/backend/admin/news/' + item.file}
-                             className="align-self-start mr-3" style={{width: '81px'}}/>
-                        <div className="media-body">
-                            <p style={{fontSize: '14px'}}>{item.title}</p>
-                        </div>
-                    </div>
-                </a>
-                )}
-
-
-
-
-
->>>>>>> ca0119ed0b045c51699fd6d2609ceabffd11f67d
             </div>
 
         )

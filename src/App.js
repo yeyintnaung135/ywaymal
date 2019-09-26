@@ -12,11 +12,10 @@ import Categories from "./componennts/Categories";
 import Homepage from "./componennts/homepage";
 import Footerpage from "./componennts/footerpage";
 import Aboutus from "./componennts/Aboutus";
-<<<<<<< HEAD
+
 import Sliderdetail from "./componennts/Sliderdetail";
 import Newsdetail from "./componennts/Newsdetail";
-=======
->>>>>>> ca0119ed0b045c51699fd6d2609ceabffd11f67d
+
 import Videodetail from "./componennts/videodetail";
 
 
@@ -148,7 +147,7 @@ class Root extends React.Component {
     render() {
 
         return (
-<<<<<<< HEAD
+
             <Router history={Bh} >
                 <Switch>
                     <Route exact path="/" component={Login}/>
@@ -162,19 +161,7 @@ class Root extends React.Component {
                      {/*this videotail route is for a route with query parameter*/}
                     <Route component={Videodetail}/>
                 </Switch>
-=======
-            <Router>
-                <switch>
-                <Route exact path="/" component={Login}/>
-                {/*<Route path="/header" component={Header_menu_cat}/>*/}
-                <Route path="/categories" component={Categories}/>
-                <Route path="/About_us" component={Aboutus}/>
-                <Route path="/home" component={homepage}/>
-                <Route path="/footer" component={Footerpage}/>
-                {/*<Route  path="/videodetail/:id" component={Videodetail}/>*/}
-                </switch>
 
->>>>>>> ca0119ed0b045c51699fd6d2609ceabffd11f67d
             </Router>
         );
     };

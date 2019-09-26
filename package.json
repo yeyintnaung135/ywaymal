@@ -1,11 +1,7 @@
 {
   "name": "ywaymal",
   "version": "0.1.0",
-<<<<<<< HEAD
   "homepage": "https://www.ywaymal.com",
-=======
-  "homepage" : "https://www.ywaymal.com",
->>>>>>> ca0119ed0b045c51699fd6d2609ceabffd11f67d
   "private": true,
   "dependencies": {
     "aos": "^2.3.4",
@@ -14,15 +10,10 @@
     "jquery-ui": "^1.12.1",
     "jquery-waypoints": "^2.0.5",
     "lodash": "^4.17.15",
-<<<<<<< HEAD
     "query-string": "^6.8.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-ellipsis-text": "^1.2.1",
-=======
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
->>>>>>> ca0119ed0b045c51699fd6d2609ceabffd11f67d
     "react-facebook-login": "^4.1.1",
     "react-pagify": "^2.4.0",
     "react-pagination": "^1.0.0",
@@ -31,13 +22,9 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
     "react-stringify": "^1.0.0",
-<<<<<<< HEAD
     "react-truncate": "^2.4.0",
     "redux": "^4.0.4",
     "video-react": "^0.14.1"
-=======
-    "redux": "^4.0.4"
->>>>>>> ca0119ed0b045c51699fd6d2609ceabffd11f67d
   },
   "scripts": {
     "start": "react-scripts start",
