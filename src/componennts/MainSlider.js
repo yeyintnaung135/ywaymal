@@ -20,8 +20,6 @@ import apiurl from "../helpers/apiurl"
 import {Link} from "react-router-dom";
 
 
-
-
 class MainSlider extends React.Component {
     constructor(props) {
         super(props);
@@ -35,32 +33,32 @@ class MainSlider extends React.Component {
 
     //willmouth method will fire firstly before render
 
-    componentWillMount(){
-      this.getslider();
+    componentWillMount() {
+        this.getslider();
 
     }
+
     //get data from server
 
     getslider() {
-           return axios({
-                method: 'post',
-                url: apiurl+'/api/getsliders',
-                data: {
-                    token: localStorage.getItem('logintoken')
-                }, headers: {
-                    'Authorization':'Bearer '+localStorage.getItem('logintoken')
-                }
-            })
-                .then(res => {
-                    console.log('responses from server for sliders');
+        return axios({
+            method: 'post',
+            url: apiurl + '/api/getsliders',
+            data: {
+                token: localStorage.getItem('logintoken')
+            }, headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
+            }
+        })
+            .then(res => {
+                console.log('responses from server for sliders');
 
-                    this.setState({sliders: res.data})
-                    this.setState({runslider: false});
-                    // console.log(this.state.sliders[0].id);
-                    // localStorage.setItem('logintoken',res.data)
+                this.setState({sliders: res.data})
+                this.setState({runslider: false});
+                // console.log(this.state.sliders[0].id);
+                // localStorage.setItem('logintoken',res.data)
 
-                });
-
+            });
 
 
     }
@@ -72,49 +70,39 @@ class MainSlider extends React.Component {
         return (
 
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner" style={{height: '356px',borderRadius:'5px'}}>
+                <div class="carousel-inner" style={{height: '475px', borderRadius: '5px'}}>
                     {/*// need to creat child component for this section */}
                     {this.state.sliders.map((item, key) => {
                             if (key === 0) {
                                 return (
-                                <div class="carousel-item active">
+                                    <div class="carousel-item active">
 
-                                    <img class="d-block w-100"
-                                         src={apiurl+'/backend/admin/news/' + item.images}
-                                         alt="First slide"
-                                         style={{height: '300px'}}/>
-                                    <Link class='btn btn-danger' style={{width:'100%'}} to={{ pathname: "/slider_detail", search: "?slider_id="+item.id }}>
-                                        <EllipsisText text={item.description} length={"85"} /> </Link>
+                                        <img class="d-block w-100"
+                                             src={apiurl + '/backend/admin/news/' + item.images}
+                                             alt="First slide"
+                                             style={{height: '400px'}}/>
+                                        <Link class='btn btn-danger' style={{width: '100%',color:'white'}}
+                                              to={{pathname: "/slider_detail", search: "?slider_id=" + item.id}}>
+                                            <EllipsisText text={item.description} length={"85"}/> </Link>
 
 
-                                </div>
+                                    </div>
 
-                            )
+                                )
                             }
                             else {
                                 return (
                                     <div class="carousel-item ">
-                                        {(() => {
-                                            if (item.file_type.includes('video')) {
-                                                return (
-                                                    <video style={{width: '100%',height:'353px'}} controls>
-                                                        <source
-                                                            src={apiurl+'/backend/admin/news/' + item.file}
-                                                            type={item.file_type}/>
-                                                        Your browser does not support the video tag.
-                                                    </video>)
-                                            }else{
-                                                return(  <a href={item.link}>
-                                                    <img class="d-block w-100"
-                                                         src={apiurl+'/backend/admin/news/' + item.images}
-                                                         alt="First slide"
-                                                         style={{height: '300px'}}/>
-                                                    <a class='btn btn-danger' style={{width:'100%'}} href={item.link}>
-                                                        <EllipsisText text={item.description} length={"85"} />
-                                                    </a>
-                                                </a>)
-                                            }
-                                        })()}
+
+                                        <a href={item.link}>
+                                            <img class="d-block w-100"
+                                                 src={apiurl + '/backend/admin/news/' + item.images}
+                                                 alt="First slide"
+                                                 style={{height: '400px'}}/>
+                                            <a class='btn btn-danger' style={{width: '100%',color:'white'}} href={item.link}>
+                                                <EllipsisText text={item.description} length={"85"}/>
+                                            </a>
+                                        </a>
 
 
                                     </div>

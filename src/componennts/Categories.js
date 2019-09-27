@@ -14,9 +14,8 @@ import "../css/icomoon.css";
 import "../css/style.css";
 const Categories = () => {
     return (
-        <div class="col-12 col-md-3">
-            <div class="panel-group" style={{marginLeft:'12px'}}>
-                <div class="panel panel-default">
+        <div class="col-12 col-sm-12 col-md-3 col-lg-2 panel-group" >
+                <div class="panel panel-default ml-0 mr-0">
                     <div class="panel-heading">
                         <h4 class="panel-title" style={{textAlign:'center'}}>
                             <div class="to_hide" style={{border:'1px solid #e4dddd'}}>
@@ -28,66 +27,66 @@ const Categories = () => {
                     <div id="collapse1" class="panel-collapse collapse show" style={{marginBottom:'22px'}}>
                         <ul class="list-group yk-list-group">
 
-                            <li class="list-group-item">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1 yk-title-text">Services</h5>
+                            <li class="yk-list-group text-center text-md-left">
+                                <div class=" w-100 justify-content-between">
+                                    <h5 class="mb-1 text-center text-md-left  yk-title-text">Services</h5>
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">3 mins Video Uploaded</li>
-                                    <li class="list-group-item">1 min Video Uploaded</li>
-                                    <li class="list-group-item">Civic Education</li>
-                                    <li class="list-group-item"><a
+                                    <li class="yk-list-group text-center text-md-left">3 mins Video Uploaded</li>
+                                    <li class="yk-list-group text-center text-md-left">1 min Video Uploaded</li>
+                                    <li class="yk-list-group text-center text-md-left">Civic Education</li>
+                                    <li class="yk-list-group text-center text-md-left"><a
                                         href="https://play.google.com/store/apps/details?id=com.urchance&hl=en_US"
                                         style={{color:'#666666'}}>Voting Guide</a></li>
 
-                                    <li class="list-group-item">Social Campaign</li>
-                                    <li class="list-group-item">Media</li>
+                                    <li class="yk-list-group text-center text-md-left">Social Campaign</li>
+                                    <li class="yk-list-group text-center text-md-left">Media</li>
                                 </ul>
                             </li>
 
-                            <li class="list-group-item">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1 yk-title-text">News</h5>
+                            <li class="yk-list-group text-center text-md-left">
+                                <div class=" w-100 justify-content-between">
+                                   <h5 class="mb-1 text-center text-md-left  yk-title-text">News</h5>
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Local News</li>
-                                    <li class="list-group-item">International News</li>
+                                    <li class="yk-list-group text-center text-md-left">Local News</li>
+                                    <li class="yk-list-group text-center text-md-left">International News</li>
 
 
                                 </ul>
                             </li>
-                            <li class="list-group-item">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1 yk-title-text">Taxes</h5>
+                            <li class="yk-list-group text-center text-md-left">
+                                <div class=" w-100 justify-content-between">
+                                   <h5 class="mb-1 text-center text-md-left  yk-title-text">Taxes</h5>
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><a
+                                    <li class="yk-list-group text-center text-md-left"><a
                                         href="http://taxsummaries.pwc.com/ID/Myanmar-Individual-Taxes-on-personal-income"
                                         style={{color:'black'}}>Commercial Tax</a></li>
-                                    <li class="list-group-item">Income Tax</li>
+                                    <li class="yk-list-group text-center text-md-left">Income Tax</li>
 
                                 </ul>
                             </li>
-                            <li class="list-group-item">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1 yk-title-text">Private Videos</h5>
+                            <li class="yk-list-group text-center text-md-left">
+                                <div class=" w-100 justify-content-between">
+                                   <h5 class="mb-1 text-center text-md-left  yk-title-text">Private Videos</h5>
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">3 min Video</li>
-                                    <li class="list-group-item">1 min Video</li>
+                                    <li class="yk-list-group text-center text-md-left">3 min Video</li>
+                                    <li class="yk-list-group text-center text-md-left">1 min Video</li>
                                 </ul>
                             </li>
-                            <li class="list-group-item">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1 yk-title-text">Terms Of Use <br></br>Privacy Policy</h5>
+                            <li class="yk-list-group text-center text-md-left">
+                                <div class=" w-100 justify-content-between">
+                                   <h5 class="mb-1 text-center text-md-left  yk-title-text">Terms Of Use <br></br>Privacy Policy</h5>
                                 </div>
 
                             </li>
 
                         </ul>
+
                     </div>
                 </div>
-            </div>
         </div>
 
 

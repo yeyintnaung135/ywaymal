@@ -352,7 +352,11 @@ h6, .h6 {
 .yk-background{
   background-color:#a62639 !important;
 }
-
+.yk-row{
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
 hr {
   margin-top: 1rem;
   margin-bottom: 1rem;

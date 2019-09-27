@@ -79,12 +79,29 @@
 .topnav .icon {
     display: none;
 }
-
+.yk-list-group{
+    border: none !important;
+    position: relative;
+    display: block;
+    /* padding: 0.45rem 1.25rem; */
+     margin-bottom: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: #fff;
+}
 .yk-title-text {
     color: #ffbc42!important;
     letter-spacing: 3px;
     text-transform: uppercase;
     font-size: 19px;
+    font-weight: 700;
+}
+.yk-title-text-cat{
+    color: #ffbc42!important;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 17px;
+    margin-bottom:22px;
     font-weight: 700;
 }
 .menu_active{

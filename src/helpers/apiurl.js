@@ -1,7 +1,7 @@
 export function apiurl()
 {
     //local
-    return 'http://localhost/ywaymalbe/public';
+    return 'http://localhost/ywaymalbackend/public';
 
     //global
     // return 'https://admin.ywaymal.com';

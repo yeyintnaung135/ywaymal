@@ -39,6 +39,8 @@ class Homepage extends React.Component {
 
         }
         this.handleVideoshow = this.handleVideoshow.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+
         this.testreducer = this.testreducer.bind(this);
 
 
@@ -56,11 +58,16 @@ class Homepage extends React.Component {
         console.log(event.target.id);//get target id
 
         this.state.videos.map((value, key) => {
+
             //get all video id
-            if (value.id != event.target.id) {
+            if ('to_reload'+value.id != event.target.id) {
+
                 //if not equal target id paused
                 //while i used this pure js code becaused it is more easy in this case
-                document.getElementById(value.id).pause();
+
+                if(document.getElementById('to_reload_src'+value.id) != null) {
+                    document.getElementById('to_reload' + value.id).pause();
+                }
             }
 
 
@@ -107,8 +114,21 @@ class Homepage extends React.Component {
         // pagination.event
         console.log(event.target.id)
         this.setState({
-            currentPage: Number(event.target.id)
+            currentPage:event.target.id
         });
+        //for reload new src
+        this.state.videos.map((todo, index)=>{
+            if(document.getElementById('to_reload_src'+todo.id) != null){
+
+                console.log(document.getElementById('to_reload_src'+todo.id).src=apiurl+'/backend/admin/videos/'+ todo.link)
+                console.log(document.getElementById('to_reload'+todo.id).load())
+
+            }
+        })
+        //for reload new src
+
+
+
     }
 
     getVideos() {
@@ -168,9 +188,9 @@ class Homepage extends React.Component {
             return (
                 <div className="row mb-5">
                     <div className="col-sm-12 col-md-12 col-xl-5">
-                        <video id={todo.id} style={{width: '100%', height: 'auto'}} onPlaying={this.handleVideoshow}
+                        <video id={'to_reload'+todo.id} style={{width: '100%', height: 'auto'}} onPlaying={this.handleVideoshow} poster={apiurl + '/backend/admin/videos/images/' + todo.image}
                                controls>
-                            <source
+                            <source id={'to_reload_src'+todo.id}
                                 src={apiurl + '/backend/admin/videos/' + todo.link}
                                 type={todo.video_type}/>
                             Your browser does not support the video tag.
@@ -222,7 +242,8 @@ class Homepage extends React.Component {
 
                         </p>
                     </div>
-                </div>)
+                </div>
+            )
                 ;
 
 
@@ -294,11 +315,11 @@ class Homepage extends React.Component {
                 </div>
 
 
-                <div className="row col-sm-12">
+                <div className="yk-row col-sm-12">
                     {/*categories section*/}
                     <Categories/>
                     {/*end categories section*/}
-                    <div className="col-sm-12 col-md-6 ">
+                    <div className="col-sm-12 col-md-6 col-lg-8">
                         {/*Selider section*/}
                         <MainSlider/>
                         {/*end slider section*/}
@@ -349,12 +370,12 @@ class Homepage extends React.Component {
                     {/*top new section*/}
 
 
-                    <div className="col-12 col-sm-12 col-md-3">
+                    <div className="col-12 col-sm-12 col-md-3 col-lg-2">
 
-                        <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/ads.png'}
+                        <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/aad.png'}
                              alt="First slide" style={{height: '300px'}}/>
                         <br></br>
-                        <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/ads.png'}
+                        <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/aad.png'}
                              alt="First slide" style={{height: '300px'}}/>
                         <br></br>
 
