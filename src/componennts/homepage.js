@@ -370,7 +370,7 @@ class Homepage extends React.Component {
                     {/*top new section*/}
 
 
-                    <div className="col-12 col-sm-12 col-md-3 col-lg-2">
+                    <div className="col-12 col-sm-12 col-md-2 col-lg-2">
 
                         <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/aad.png'}
                              alt="First slide" style={{height: '300px'}}/>

@@ -41,7 +41,7 @@ class Videodetail extends React.Component {
 
     componentWillMount() {
         //redirect if not authenciate
-        redirecttologinifnotauth();
+        // redirecttologinifnotauth();real
         this.getvideodetail();
     }
 
@@ -199,7 +199,7 @@ class Videodetail extends React.Component {
 
 
                     {/*About Us Section*/}
-                    <div className="col-12 col-md-6">
+                    <div className="col-sm-12 col-md-6 col-lg-8">
 
 
                         <div class="col-12" style={{paddingTop: '23p'}}>
@@ -260,12 +260,12 @@ class Videodetail extends React.Component {
 
 
                     {/*top new and ads section*/}
-                    <div className="col-12 col-md-3">
+                    <div className="col-12 col-sm-12 col-md-2 col-lg-2">
                         {/*ads section*/}
-                        <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/ads.png'}
+                        <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/aad.png'}
                              alt="First slide" style={{height: '300px'}}/>
                         <br></br>
-                        <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/ads.png'}
+                        <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/aad.png'}
                              alt="First slide" style={{height: '300px'}}/>
                         <br></br>
                         {/*end ads section*/}

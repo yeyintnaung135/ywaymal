@@ -75,14 +75,14 @@ class Topnews extends React.Component {
                         return (
                             <Link to={{ pathname: "/news_detail", search: "?news_id="+item.id }}>
                                                    <div className="row mt-4 mt-sm-4 mt-md-0">
-                                    <div class="col-6 col-md-12 col-lg-6">
+                                    <div class="col-6 col-md-12 ">
                                         <img src={apiurl+'/backend/admin/news/' + item.file}
                                              className="align-self-start mr-3" style={{width: '100%'}}/>
                                     </div>
-                                    <div class="col-6 col-md-12 col-lg-6">
+                                    <div class="col-6 col-md-12 ">
                                             <p style={{fontSize: '14px',fontWeight:"bold",color:"#666666",wordWrap:"break-word"
                                             }}>
-                                                <EllipsisText text={item.description} length={"111"} />
+                                                <EllipsisText text={item.title} length={"111"} />
                                             </p>
                                             <p style={{fontSize: '14px',color:"#ffbc42"}}>Date:{item.created_at}</p>
                                     </div>
@@ -102,7 +102,7 @@ class Topnews extends React.Component {
                                     </div>
                                     <div class="col-6 col-md-12 col-lg-12">
                                         <p style={{fontSize: '14px',fontWeight:"bold",color:"#666666"}}>
-                                            <EllipsisText text={item.link} length={"21"} />
+                                            <EllipsisText text={item.title} length={"21"} />
                                         </p>
                                         <p style={{fontSize: '14px',color:"#ffbc42"}}>Date:{item.created_at}</p>
                                     </div>
