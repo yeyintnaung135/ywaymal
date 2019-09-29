@@ -1,0 +1,2 @@
+you should never use this.state.something=value  because it will not re render
+u want to render u should use this.setState({something:value})

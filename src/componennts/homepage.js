@@ -12,18 +12,18 @@ import "../css/flaticon.css";
 import "../css/icomoon.css";
 import "../css/style.css";
 import "../css/custom.css";
-import Topnews from "./topnews"
+import Topnews from "./topnews";
 import Categories from "./Categories";
 import Header_menu_cat from "./Header_menu_cat";
 import MainSlider from "./MainSlider";
 import Footerpage from "./footerpage";
-
 import apiurl from "../helpers/apiurl";
+import Addvotetoserver from "../helpers/Addvotetoserver";
 import {connect} from 'react-redux';
 import axios from "axios";
 import {Link} from "react-router-dom";
 import {redirecttologinifnotauth} from '../helpers/redirecttologinifnotauth'
-
+import Tooglevoteform from "./togglevoteform";
 
 
 class Homepage extends React.Component {
@@ -33,6 +33,9 @@ class Homepage extends React.Component {
         this.state = {
             // test: [{id: '1', title: 'ffff'}, {id: '2', title: 'pppppp'}],
             videos: [],
+            click_cover_from_rapid: [],
+            videos_id: '',
+            voteds: [],
             runvideos: true,
             currentPage: 1,//current page
             todosPerPage: 5,//contents per page
@@ -40,18 +43,19 @@ class Homepage extends React.Component {
         }
         this.handleVideoshow = this.handleVideoshow.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleAddVote = this.handleAddVote.bind(this);
+        this.handleDeleteVote = this.handleDeleteVote.bind(this);
+        this.toggelVote = this.toggelVote.bind(this);
 
         this.testreducer = this.testreducer.bind(this);
-
-
 
 
     }
 
 
-    testreducer(){
-            console.log(this.props.votes);
-     };
+    testreducer() {
+        console.log(this.props.votes);
+    };
 
 
     handleVideoshow(event) {
@@ -60,12 +64,12 @@ class Homepage extends React.Component {
         this.state.videos.map((value, key) => {
 
             //get all video id
-            if ('to_reload'+value.id != event.target.id) {
+            if ('to_reload' + value.id != event.target.id) {
 
                 //if not equal target id paused
                 //while i used this pure js code becaused it is more easy in this case
 
-                if(document.getElementById('to_reload_src'+value.id) != null) {
+                if (document.getElementById('to_reload_src' + value.id) != null) {
                     document.getElementById('to_reload' + value.id).pause();
                 }
             }
@@ -76,6 +80,17 @@ class Homepage extends React.Component {
 
         console.log(document.getElementById(event.target.id).duration);
 
+    }
+
+    //add vote to database
+
+
+    toggelVote(yesorno, id, votes) {
+        if (yesorno == 'yes') {
+
+        } else {
+
+        }
     }
 
 
@@ -105,28 +120,117 @@ class Homepage extends React.Component {
                     localStorage.removeItem('firstLoad');
             }
         }
-
-
     }
 
+    handleAddVote(curarrayid, videoid) {
+
+
+        return axios({
+            method: 'post',
+            url: apiurl + '/api/addvote',
+            data: {
+                videos_id: videoid
+            }, headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
+            }
+        })
+            .then(res => {
+                if (res.data != 'already voted') {
+                    console.log('%cResponses from server for addvote', "color:blue;font-size:15px");
+                    console.log(res.data)
+                    console.log('%c//Add vote state updated and send to server yeeeehaaaa', "color:#dc3545;font-size:15px");
+                    console.log(this.state.videos.length)
+                    var getcurarrayobjbyid = this.state.videos[curarrayid];
+                    getcurarrayobjbyid.voted = 'yes';
+                    getcurarrayobjbyid.total_vote_count = res.data.total_vote_count;
+
+                    console.log('%c//after change voted value from current object', "color:#dc3545;font-size:10px")
+                    console.log(getcurarrayobjbyid)
+                    console.log('%c//end after deleted voted from current object', "color:#dc3545;font-size:10px")
+                    console.log('%c//get all video objects', "color:#dc3545;font-size:10px")
+
+                    var getallvideosobjects = this.state.videos;
+                    console.log('%c//end get all video objects', "color:#dc3545;font-size:10px")
+                    console.log('%c//updated new objects', "color:#dc3545;font-size:10px")
+                    getallvideosobjects[curarrayid] = getcurarrayobjbyid;
+
+                    console.log(getallvideosobjects);
+                    console.log('%c//end updated new objects', "color:#dc3545;font-size:10px")
+                    this.setState({videos: getallvideosobjects});
+
+                    console.log('%c//end updated new objects', "color:#dc3545;font-size:10px")
+                } else {
+                    console.log("%cResponses from server for addvote '/already voted/'", "color:blue;font-size:15px")
+                }
+
+
+                // localStorage.setItem('logintoken',res.data)
+            })
+    }
+
+
+    handleDeleteVote(curarrayid, videoid) {
+
+
+        return axios({
+            method: 'post',
+            url: apiurl + '/api/deletevote',
+            data: {
+                videos_id: videoid
+            }, headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
+            }
+        })
+            .then(res => {
+                if (res.data != 'deleted') {
+                    console.log('%c//Delete vote state updated and send to server yeeeehaaaa', "color:blue;font-size:15px");
+
+
+                    var getcurarrayobjbyid = this.state.videos[curarrayid];
+                    getcurarrayobjbyid.voted = 'no';
+                    getcurarrayobjbyid.total_vote_count = res.data.total_vote_count;
+                    console.log('%c//after change voted value from current object', "color:blue;font-size:10px")
+                    console.log(getcurarrayobjbyid)
+                    console.log('%c//end after deleted voted from current object', "color:blue;font-size:10px")
+                    console.log('%c//get all video objects', "color:#dc3545;font-size:10px")
+
+                    var getallvideosobjects = this.state.videos;
+                    console.log('%c//end get all video objects', "color:blue;font-size:10px")
+                    console.log('%c//updated new objects', "color:blue;font-size:10px")
+                    getallvideosobjects[curarrayid] = getcurarrayobjbyid;
+
+                    console.log(getallvideosobjects);
+                    console.log('%c//end updated new objects', "color:#dc3545;font-size:10px")
+                    this.setState({videos: getallvideosobjects});
+                    console.log('%c//end updated new objects', "color:#dc3545;font-size:10px")
+
+
+                } else {
+                    console.log("%cResponses from server for addvote '/already voted/'", "color:blue;font-size:15px")
+                }
+
+
+                // localStorage.setItem('logintoken',res.data)
+            })
+
+    }
 
     handleClick(event) {
         // pagination.event
         console.log(event.target.id)
         this.setState({
-            currentPage:event.target.id
+            currentPage: event.target.id
         });
         //for reload new src
-        this.state.videos.map((todo, index)=>{
-            if(document.getElementById('to_reload_src'+todo.id) != null){
+        this.state.videos.map((todo, index) => {
+            if (document.getElementById('to_reload_src' + todo.id) != null) {
 
-                console.log(document.getElementById('to_reload_src'+todo.id).src=apiurl+'/backend/admin/videos/'+ todo.link)
-                console.log(document.getElementById('to_reload'+todo.id).load())
+                console.log(document.getElementById('to_reload_src' + todo.id).src = apiurl + '/backend/admin/videos/' + todo.link)
+                console.log(document.getElementById('to_reload' + todo.id).load())
 
             }
         })
         //for reload new src
-
 
 
     }
@@ -148,8 +252,8 @@ class Homepage extends React.Component {
                     this.setState({videos: res.data})
                     console.log(res.data)
                     this.setState({runvideos: false});
-
-
+                    console.log('fef');
+                    console.log(this.state.videos[0].id);
                     // localStorage.setItem('logintoken',res.data)
                 })
             console.log(this.state.runvideos)
@@ -167,6 +271,8 @@ class Homepage extends React.Component {
             this.testreducer();
 
         }
+
+
         const name = index => {
             var joined = this.state.videostoplay.concat(index);
             this.setState({videostoplay: joined})
@@ -183,16 +289,16 @@ class Homepage extends React.Component {
         const currentTodos = videos.slice(indexOfFirstTodo, indexOfLastTodo)
 
         const renderTodos = currentTodos.map((todo, index) => {
-
-
             return (
                 <div className="row mb-5">
                     <div className="col-sm-12 col-md-12 col-xl-5">
-                        <video id={'to_reload'+todo.id} style={{width: '100%', height: 'auto'}} onPlaying={this.handleVideoshow} poster={apiurl + '/backend/admin/videos/images/' + todo.image}
+                        <video id={'to_reload' + todo.id} style={{width: '100%', height: 'auto'}}
+                               onPlaying={this.handleVideoshow}
+                               poster={apiurl + '/backend/admin/videos/images/' + todo.image}
                                controls>
-                            <source id={'to_reload_src'+todo.id}
-                                src={apiurl + '/backend/admin/videos/' + todo.link}
-                                type={todo.video_type}/>
+                            <source id={'to_reload_src' + todo.id}
+                                    src={apiurl + '/backend/admin/videos/' + todo.link}
+                                    type={todo.video_type}/>
                             Your browser does not support the video tag.
                         </video>
                         <div className="col-sm-12">
@@ -202,29 +308,55 @@ class Homepage extends React.Component {
                     <div className="text mt-3  col-sm-12 col-xl-7" style={{padding: '0px'}}>
 
 
-                        <h3 className="heading yk_text text-center">{todo.title}</h3>
+                        <div style={{height: "50%"}}><h3
+                            className="heading yk_text text-center">{todo.title}</h3></div>
                         <div className="meta mb-2 sm-12">
+
                             <div className="pr-sm-5">
-                                <a href="contact_us" class={"btn  btn-sm  btn-danger yk-background"}
-                                   style={{color: 'white'}}>
-                                    <span class="fa fa-thumbs-up"></span>&nbsp;&nbsp;Like&nbsp;
-                                </a>
+
+                                {(() => {
+                                    if (todo.voted == 'yes') {
+                                        return (
+                                            <a onClick={() => this.handleDeleteVote(index, todo.id)}
+                                               class={"btn  btn-sm  btn-danger yk-background"}
+                                               style={{color: 'white'}}>
+                                                <span class="fa fa-thumbs-down"></span>&nbsp;&nbsp;
+                                                Unvote&nbsp;{todo.total_vote_count}
+                                            </a>
+                                        )
+                                    }
+                                    else {
+                                        return (
+                                            <a onClick={() => this.handleAddVote(index, todo.id)}
+                                               class={"btn  btn-sm  btn-danger yk-background"}
+                                               style={{color: 'white'}}>
+                                                <span class="fa fa-thumbs-up"></span>&nbsp;&nbsp;
+                                                Vote&nbsp;{todo.total_vote_count}
+                                            </a>
+                                        )
+                                    }
+                                })()}
+                                &nbsp;
+                                &nbsp;
                                 &nbsp;
                                 <a href="contact_us" class={"btn  btn-sm  btn-danger yk-background"}
                                    style={{color: 'white'}}>
                                     <span class="fa fa-share-alt"></span>&nbsp;&nbsp;Share&nbsp;
                                 </a>
                                 &nbsp;
-                                <a href="contact_us" class={"btn  btn-sm  btn-danger yk-background"}
-                                   style={{color: 'white'}}>
-                                    <span class="fa fa-comments-o"></span>&nbsp;&nbsp;Comment&nbsp;
-                                </a>
                                 &nbsp;
-                                <a href="contact_us" class={"btn  btn-sm  btn-danger yk-background"}
-                                   style={{color: 'white'}}>
-                                    <span class="fa fa-comments-o"></span>&nbsp;&nbsp;Vote&nbsp;
-                                </a>
                                 &nbsp;
+                                <Link to={{pathname: "/video_detail", search: "?id=" + todo.id}}
+                                      class={"btn  btn-sm  btn-danger yk-background"}>
+                                    <span class="fa fa-comments-o"></span> Comment
+                                </Link>
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                <Link to={{pathname: "/video_detail", search: "?id=" + todo.id}}
+                                      class="btn btn-sm btn-danger yk-background">
+                                    See Detail... <span class="fa fa-arrow-circle-right"></span>
+                                </Link>
 
                                 <br></br>
 
@@ -233,14 +365,7 @@ class Homepage extends React.Component {
 
                         </div>
 
-                        <p>
 
-                            <Link to={{pathname: "/video_detail", search: "?id=" + todo.id}}
-                                  class="btn btn-sm btn-danger yk-background">
-                                See Detail... <span class="fa fa-arrow-circle-right"></span>
-                            </Link>
-
-                        </p>
                     </div>
                 </div>
             )
@@ -300,7 +425,6 @@ class Homepage extends React.Component {
         });
 
 
-
         return (
 
 
@@ -332,10 +456,10 @@ class Homepage extends React.Component {
 
                             <div className="col-sm-12">&nbsp;</div>
                             <div className="col-md-12" style={{textAlign: 'center'}}>
-                                <h5 className="mb-1 yk-title-text" style={{textAlign: 'center'}}>Videos </h5>
+                                <h5 className="mb-1 yk-title-text" style={{textAlign: 'center'}}>
+                                    Videos </h5>
                             </div>
                             <div className="col-sm-12">&nbsp;</div>
-
 
 
                             {/*// need to creat child component for this section */}
@@ -345,10 +469,10 @@ class Homepage extends React.Component {
                             {renderTodos}
 
 
-
                             <div className="row col-sm-12 mt-5">
                                 <div className="col text-center">
                                     <div className="block-27">
+
                                         <ul>
                                             <li><a href="#">&lt;</a></li>
                                             {renderPageNumbers}
@@ -419,10 +543,31 @@ class Homepage extends React.Component {
             ;
     }
 }
-function mapStateToProps(state){
+
+function
+
+mapStateToProps(state) {
     return {
-        votesdata:state.VotesReducer
+        votesdata: state.VotesReducer
     }
 }
 
-export default connect(mapStateToProps)(Homepage);
+
+var
+    unvotediv = props => ({
+        render: function () {
+            return (
+                <a onClick={this.handleDeleteVote}
+                   class={"btn  btn-sm  btn-danger yk-background"}
+                   style={{color: 'white'}}>
+                    <span class="fa fa-thumbs-down"></span>&nbsp;&nbsp;Unvote&nbsp;{111}
+                </a>
+            );
+        }
+    });
+export default connect(mapStateToProps)
+
+(
+    Homepage
+)
+;
