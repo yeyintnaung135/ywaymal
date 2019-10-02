@@ -382,7 +382,7 @@ class Homepage extends React.Component {
 
                                 {/*<!-- Modal Header -->*/}
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Modal Heading</h4>
+                                    <h4 class="modal-title">Share this video to facebook</h4>
 
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
@@ -396,7 +396,7 @@ class Homepage extends React.Component {
                                         color: 'white',
                                         background: '#3b5998'
                                     }}
-                                                                                         href={"https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"}
+                                                                                         href={"https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent('https://www.ywaymal.com')+"&amp;src=sdkpreparse"}
                                                                                          class="fb-xfbml-parse-ignore"><span
                                         class="fa fa-facebook"></span> Share on facebook <span
                                         class="fa fa-share"></span> </a></div>
