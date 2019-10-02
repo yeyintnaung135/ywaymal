@@ -36,10 +36,14 @@ class Sliderdetail extends React.Component {
     componentWillMount() {
         //redirect if not authenciate
         redirecttologinifnotauth();
+        window.scrollTo(0, 0)
 
         this.getnewsdetail();
 
 
+    }
+    componentDidMount() {
+        window.scrollTo(0, 0);
     }
 
     getnewsdetail() {

@@ -24,12 +24,13 @@ import axios from "axios";
 import {Link} from "react-router-dom";
 import {redirecttologinifnotauth} from '../helpers/redirecttologinifnotauth'
 import Tooglevoteform from "./togglevoteform";
+import {FacebookShareButton} from 'react-share';
 
 
 class Homepage extends React.Component {
+
     constructor(props, context) {
         super(props, context);
-
         this.state = {
             // test: [{id: '1', title: 'ffff'}, {id: '2', title: 'pppppp'}],
             videos: [],
@@ -46,34 +47,27 @@ class Homepage extends React.Component {
         this.handleAddVote = this.handleAddVote.bind(this);
         this.handleDeleteVote = this.handleDeleteVote.bind(this);
         this.toggelVote = this.toggelVote.bind(this);
-
+        this.modeltohide = this.modeltohide.bind(this);
         this.testreducer = this.testreducer.bind(this);
 
-
     }
-
 
     testreducer() {
         console.log(this.props.votes);
     };
 
-
     handleVideoshow(event) {
         console.log(event.target.id);//get target id
 
         this.state.videos.map((value, key) => {
-
             //get all video id
             if ('to_reload' + value.id != event.target.id) {
-
                 //if not equal target id paused
                 //while i used this pure js code becaused it is more easy in this case
-
                 if (document.getElementById('to_reload_src' + value.id) != null) {
                     document.getElementById('to_reload' + value.id).pause();
                 }
             }
-
 
         });
 
@@ -158,7 +152,7 @@ class Homepage extends React.Component {
                     console.log('%c//end updated new objects', "color:#dc3545;font-size:10px")
                     this.setState({videos: getallvideosobjects});
 
-                    console.log('%c//end updated new objects', "color:#dc3545;font-size:10px")
+                    console.log('%c//end updated new objects', "color:#dc3545;font-size:10px");
                 } else {
                     console.log("%cResponses from server for addvote '/already voted/'", "color:blue;font-size:15px")
                 }
@@ -208,10 +202,21 @@ class Homepage extends React.Component {
                 } else {
                     console.log("%cResponses from server for addvote '/already voted/'", "color:blue;font-size:15px")
                 }
-
-
                 // localStorage.setItem('logintoken',res.data)
             })
+
+    }
+
+    modeltohide(id) {
+        console.log('to model hide');
+        document.getElementById('myModal'+id).classList.remove("show");
+        console.log('remove show');
+
+        document.getElementById('myModal'+id).classList.remove("fade");
+        console.log('remove fade');
+
+        document.getElementById('myModal'+id).style.display = "none";
+        document.getElementById('myModal'+id).setAttribute("aria-modal", "false");
 
     }
 
@@ -290,7 +295,8 @@ class Homepage extends React.Component {
 
         const renderTodos = currentTodos.map((todo, index) => {
             return (
-                <div className="row mb-5">
+                <div className="row mb-5" id="toscroll">
+
                     <div className="col-sm-12 col-md-12 col-xl-5">
                         <video id={'to_reload' + todo.id} style={{width: '100%', height: 'auto'}}
                                onPlaying={this.handleVideoshow}
@@ -339,7 +345,8 @@ class Homepage extends React.Component {
                                 &nbsp;
                                 &nbsp;
                                 &nbsp;
-                                <a href="contact_us" class={"btn  btn-sm  btn-danger yk-background"}
+                                <a href="contact_us" data-toggle="modal" data-target={"#myModal"+todo.id}
+                                   class={"btn  btn-sm  btn-danger yk-background"}
                                    style={{color: 'white'}}>
                                     <span class="fa fa-share-alt"></span>&nbsp;&nbsp;Share&nbsp;
                                 </a>
@@ -366,6 +373,42 @@ class Homepage extends React.Component {
                         </div>
 
 
+                    </div>
+
+
+                    <div class="modal fade" id={"myModal" + todo.id}>
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                {/*<!-- Modal Header -->*/}
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Modal Heading</h4>
+
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                {/*<!-- Modal body -->*/}
+                                <div class="modal-body">
+                                    <div class="fb-share-button" onClick={()=>this.modeltohide(todo.id)} class="btn btn-info"
+                                         style={{color: 'white !important', background: '#3b5998'}}
+                                         data-href="https://developers.facebook.com/docs/plugins/"
+                                         data-layout="button_count" data-size="large"><a target="_blank" style={{
+                                        color: 'white',
+                                        background: '#3b5998'
+                                    }}
+                                                                                         href={"https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"}
+                                                                                         class="fb-xfbml-parse-ignore"><span
+                                        class="fa fa-facebook"></span> Share on facebook <span
+                                        class="fa fa-share"></span> </a></div>
+                                </div>
+
+                                {/*<!-- Modal footer -->*/}
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             )

@@ -13,12 +13,13 @@ import "../css/icomoon.css";
 import "../css/style.css";
 import "../css/custom.css";
 
-import apiurl from '../helpers/apiurl'
+import apiurl from '../helpers/apiurl';
 
 import Categories from "./Categories";
 import Header_menu_cat from "./Header_menu_cat";
 import Footerpage from "./footerpage";
 import Topnews from "./topnews";
+import MetaTags from "react-meta-tags";
 
 import axios from 'axios';
 
@@ -116,7 +117,7 @@ class Videodetail extends React.Component {
                     allvideodata.comments=this.state.video.comments +1;
                     this.setState({video:allvideodata});
 
-                    document.getElementById('to_scroll_top').scrollTo(0, 0)
+                    document.getElementById('to_scroll_top').scrollTo(0,0)
 
 
                 })
@@ -357,12 +358,23 @@ class Videodetail extends React.Component {
 
     render() {
 
-
+        function Metatagsforshare(props) {
+            return (
+                <div className="wrapper">
+                    <MetaTags>
+                        <title>YwayMal</title>
+                        <meta name="description" content={props.description} />
+                        <meta property="og:title" content={props.title} />
+                        <meta property="og:image" content="path/to/image.jpg" />
+                    </MetaTags>
+                </div>
+            );
+        }
         return (
 
 
             <div>
-
+                 <Metatagsforshare title={this.state.video.title} description={this.state.video.description}/>
 
                 {/*header section*/}
                 <Header_menu_cat name={{one: '', two: '', three: ''}}/>
@@ -640,6 +652,7 @@ class Videodetail extends React.Component {
         )
             ;
     }
+
 }
 
 export default Videodetail;

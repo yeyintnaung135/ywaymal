@@ -17,6 +17,7 @@ import Sliderdetail from "./componennts/Sliderdetail";
 import Newsdetail from "./componennts/Newsdetail";
 
 import Videodetail from "./componennts/videodetail";
+import ScrollToTop from 'react-router-scroll-top';
 
 
 import { createBrowserHistory as Bh } from 'history';
@@ -148,7 +149,9 @@ class Root extends React.Component {
 
         return (
 
-            <Router history={Bh} >
+            <Router  history={Bh} >
+                <ScrollToTop>
+
                 <Switch>
                     <Route exact path="/" component={Login}/>
                     {/*<Route path="/header" component={Header_menu_cat}/>*/}
@@ -161,6 +164,7 @@ class Root extends React.Component {
                      {/*this videotail route is for a route with query parameter*/}
                     <Route component={Videodetail}/>
                 </Switch>
+                </ScrollToTop>
 
             </Router>
         );

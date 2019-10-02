@@ -11,165 +11,296 @@ import "../css/jquery.timepicker.css";
 import "../css/flaticon.css";
 import "../css/icomoon.css";
 import "../css/style.css";
+import axios from "axios";
+import apiurl from "../helpers/apiurl";
 
-const Header_menu_cat = props => {
-    return (
+class Header_menu_cat extends React.Component {
+    constructor(props, context) {
+        super(props, context);
 
-        <div class="row pb-4 pb-sm-4 pb-md-4 pb-lg-4" style={{borderBottom: '3px solid #a6263912'}}>
+        this.state = {
+            cities: [],
+            connumbers:[],
+            cons:[],
+        };
 
 
-            <div class="col-sm-12 col-md-3" style={{display: 'inline'}}>
-                <img src={process.env.PUBLIC_URL + '/images/logo/faef.png'}
+    }
 
-                     style={{width: '80%', marginLeft: '5%', marginTop: '4%'}}/>
-                {/*<h1 style={{marginTop:'33px'}}>*/}
-                {/*<span style={{color:'#7f7f7f'}}>Yway</span><span*/}
-                {/*style={{color:'#dc3545'}}> Mal</span>*/}
+    componentWillMount() {
+        var id='';
+        this.getcities(id);
+        this.getconnumbers(id);
+        this.getcons(id);
 
-                {/*</h1>*/}
-            </div>
-            <br></br>
-            <div class="col-sm-12 col-md-9">
-                {/*menu*/}
+    }
+    //tem hidden
+    handletownships(){
+        console.log('handle ts fire');
+        console.log(this.refs.ts.value);
+        return axios({
+            method: 'post',
+            url: apiurl + '/api/getwhilecityselected',
+            data: {
+                cid:this.refs.ts.value,
+                token: localStorage.getItem('logintoken')
+            }, headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
+            }
+        })
+            .then(res => {
+             console.log(res.data);
+                // localStorage.setItem('logintoken',res.data)
+            });
+    }
+    //temp hidden this
 
-                <div class="col-sm-12 ">
-                    <div class="row">
-                    <div class="pb-2 pt-2 col-md-6 d-flex justify-content-center justify-content-xs-end  justify-content-md-end">
-                        <button class={"btn uni btn-sm btn-danger float-sm-none "}
-                        style={{color: 'rgb(220, 168, 63)', background: 'white'}}
-                        >
-                            <span class="fa fa-info-circle"></span>&nbsp;&nbsp;
+    //get cities
+    getcities(id) {
+        return axios({
+            method: 'post',
+            url: apiurl + '/api/getcities'+id,
+            data: {
+                token: localStorage.getItem('logintoken')
+            }, headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
+            }
+        })
+            .then(res => {
+                console.log('responses from server for cities');
+                this.setState({cities: res.data});
+                console.log(res.data);
+                // localStorage.setItem('logintoken',res.data)
+            })
+        console.log(this.state.runvideos);
+    }
+    //get cities
+    //get cities
+    getconnumbers(id) {
+        console.log('get connumberr fire');
+        return axios({
+            method: 'post',
+            url: apiurl + '/api/getconnumbers'+id,
+            data: {
+                token: localStorage.getItem('logintoken')
+            }, headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
+            }
+        })
+            .then(res => {
+                console.log('responses from server for cities');
+                this.setState({connumbers: res.data});
+                console.log(res.data);
+                // localStorage.setItem('logintoken',res.data)
+            })
+        console.log(this.state.runvideos);
+    }
+    getcons(id) {
+        console.log('get cons fire');
+        return axios({
+            method: 'post',
+            url: apiurl + '/api/getcons'+id,
+            data: {
+                token: localStorage.getItem('logintoken')
+            }, headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
+            }
+        })
+            .then(res => {
+                console.log('responses from server for cities');
+                this.setState({cons: res.data});
+                console.log(res.data);
+                // localStorage.setItem('logintoken',res.data)
+            })
+        console.log(this.state.runvideos);
+    }
 
-                            Unicode</button>
-                        &nbsp;
-                        <button class={"btn zaw btn-sm btn-danger float-sm-none "}
-                           style={{color: 'rgb(220, 168, 63)', background: 'white'}}
-                        >
-                            <span class="fa fa-info-circle"></span>&nbsp;&nbsp;
+    //get cities
 
-                            Zawgyi &nbsp;</button>
-                        &nbsp;
-                    </div>
-                    <div class="pt-sm-2 col-md-6 d-flex justify-content-center justify-content-xs-end  justify-content-md-end">
-                        <div class=" ">
-                        <a href="home" class={"btn btn-sm btn-danger float-sm-none yk-background"}
-                           style={{color: 'white'}}
-                        >
-                            <span class="fa fa-home"></span>&nbsp;&nbsp;
+    render() {
+        return (
 
-                            Home</a>
-                        &nbsp;
-                        <a href="about_us" class={"btn  btn-sm  btn-danger yk-background"}
-                           style={{color: 'white'}}
-                        >
-                            <span class="fa fa-info-circle"></span>&nbsp;&nbsp;
+            <div class="row pb-4 pb-sm-4 pb-md-4 pb-lg-4" style={{borderBottom: '3px solid #a6263912'}}>
 
-                            About &nbsp;</a>
-                        &nbsp;
 
-                        <a href="contact_us" class={"btn  btn-sm  btn-danger yk-background"}
-                           style={{color: 'white'}}
-                        >
-                            <span class="fa fa-phone"></span>&nbsp;&nbsp;
+                <div class="col-sm-12 col-md-3" style={{display: 'inline'}}>
+                    <img src={process.env.PUBLIC_URL + '/images/logo/faef.png'}
 
-                            Contact&nbsp;</a>
+                         style={{width: '80%', marginLeft: '5%', marginTop: '4%'}}/>
+                    {/*<h1 style={{marginTop:'33px'}}>*/}
+                    {/*<span style={{color:'#7f7f7f'}}>Yway</span><span*/}
+                    {/*style={{color:'#dc3545'}}> Mal</span>*/}
+
+                    {/*</h1>*/}
+                </div>
+                <br></br>
+                <div class="col-sm-12 col-md-9">
+                    {/*menu*/}
+
+                    <div class="col-sm-12 ">
+                        <div class="row">
+                            <div
+                                class="pb-2 pt-2 col-md-6 d-flex justify-content-center justify-content-xs-end  justify-content-md-end">
+                                <button class={"btn uni btn-sm btn-danger float-sm-none "}
+                                        style={{color: 'rgb(220, 168, 63)', background: 'white'}}
+                                >
+                                    <span class="fa fa-info-circle"></span>&nbsp;&nbsp;
+
+                                    Unicode
+                                </button>
+                                &nbsp;
+                                <button class={"btn zaw btn-sm btn-danger float-sm-none "}
+                                        style={{color: 'rgb(220, 168, 63)', background: 'white'}}
+                                >
+                                    <span class="fa fa-info-circle"></span>&nbsp;&nbsp;
+
+                                    Zawgyi &nbsp;</button>
+                                &nbsp;
+                            </div>
+                            <div
+                                class="pt-sm-2 col-md-6 d-flex justify-content-center justify-content-xs-end  justify-content-md-end">
+                                <div class=" ">
+                                    <a href="home" class={"btn btn-sm btn-danger float-sm-none yk-background"}
+                                       style={{color: 'white'}}
+                                    >
+                                        <span class="fa fa-home"></span>&nbsp;&nbsp;
+
+                                        Home</a>
+                                    &nbsp;
+                                    <a href="about_us" class={"btn  btn-sm  btn-danger yk-background"}
+                                       style={{color: 'white'}}
+                                    >
+                                        <span class="fa fa-info-circle"></span>&nbsp;&nbsp;
+
+                                        About &nbsp;</a>
+                                    &nbsp;
+
+                                    <a href="contact_us" class={"btn  btn-sm  btn-danger yk-background"}
+                                       style={{color: 'white'}}
+                                    >
+                                        <span class="fa fa-phone"></span>&nbsp;&nbsp;
+
+                                        Contact&nbsp;</a>
+                                </div>
+
+                            </div>
                         </div>
+                    </div>
+
+                    {/*menu*/}
+                    <div class="row">&nbsp;</div>
+                    <div class="row ml-2 mr-2">
+
+                        <form style={{width: '100%'}}>
+                            <div class="form-row">
+                                <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
+                                    <select onChange={()=>this.handletownships()} ref='ts' class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
+                                        width: '100%', fontSize: '10px',
+                                        fontWeight: 'bolder'
+                                    }} required={'required'}>
+                                        <option>Townships&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>
+                                        {this.state.cities.map((value) => {
+                                            return (
+                                                <option value={value.id}>{value.name}</option>
+                                            )
+
+                                        })}
+                                    </select>
+                                </div>
+                                <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
+
+                                    <select class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
+                                        width: '100%', fontSize: '10px',
+                                        fontWeight: 'bolder'
+                                    }} required={'required'}>
+                                        <option>Constituencies no. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>
+
+                                        {this.state.connumbers.map((value) => {
+                                            return (
+                                                <option value={value.id}>{value.number}</option>
+                                            )
+
+                                        })}
+                                    </select>
+                                </div>
+                                <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
+
+                                    <select class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
+                                        width: '100%', fontSize: '10px',
+                                        fontWeight: 'bolder'
+                                    }} required={'required'}>
+                                        <option>Constituencies  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                                        {this.state.cons.map((value) => {
+                                            return (
+                                                <option value={value.id}>{value.name}</option>
+                                            )
+
+                                        })}
+                                    </select>
+                                </div>
+                                <div class="col-sm-4 col-lg-2 mt-3 mt-lg-0">
+                                    <select class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
+                                        width: '100%', fontSize: '10px',
+                                        fontWeight: 'bolder'
+                                    }} required={'required'}>
+                                        <option>Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4 col-lg-4 mt-3 mt-lg-0">
+                                    <button type="submit" class="btn btn-danger "
+                                            style={{color: '#dca83f', background: 'white', width: '100%'}}><span
+                                        class="fa fa-search"></span> Search
+                                    </button>
+                                </div>
+
+                            </div>
+                        </form>
 
                     </div>
-                    </div>
+
+
                 </div>
-
                 {/*menu*/}
-                <div class="row">&nbsp;</div>
-                <div class="row ml-2 mr-2" >
 
-                 <form style={{width:'100%'}}>
-                     <div class="form-row">
-                         <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
+                {/*search*/}
+                {/*<div class="col-sm-12 col-md-8" style={{paddingTop: '32px'}}>*/}
+                {/*<form style={{width: '100%', paddingLeft: '12px', paddingRight: '12px'}}>*/}
+                {/*<div class="input-group">*/}
+                {/*<input type="search" placeholder="What're you searching for?" aria-describedby="button-addon5"*/}
+                {/*class="form-control"/>*/}
+                {/*<div class="input-group-append">*/}
+                {/*<button id="button-addon5" type="submit" class="btn btn-danger"><i class="fa fa-search"></i>Search*/}
+                {/*</button>*/}
+                {/*</div>*/}
+                {/*</div>*/}
+                {/*</form>*/}
+                {/*</div>*/}
 
-                     <select class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{width:'100%',fontSize: '10px',
-                         fontWeight: 'bolder'}}  required={'required'}>
-                        <option>Township&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
-                         </div>
-                         <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
-                             <select class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{width:'100%',fontSize: '10px',
-                                 fontWeight: 'bolder'}}  required={'required'}>
-                                 <option >Constituency
-                                     No.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </option>
-                                 <option>2</option>
-                                 <option>3</option>
-                                 <option>4</option>
-                             </select>
-                         </div>
-                         <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
-
-                             <select class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{width:'100%',fontSize: '10px',
-                                 fontWeight: 'bolder'}}  required={'required'}>
-                                 <option>Constituencies &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>
-                                 <option>2</option>
-                                 <option>3</option>
-                                 <option>4</option>
-                             </select>
-                         </div>
-                         <div class="col-sm-4 col-lg-2 mt-3 mt-lg-0">
-                             <select class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{width:'100%',fontSize: '10px',
-                                 fontWeight: 'bolder'}}  required={'required'}>
-                                 <option>Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                                 <option>2</option>
-                                 <option>3</option>
-                                 <option>4</option>
-                             </select>
-                         </div>
-                         <div class="col-sm-4 col-lg-4 mt-3 mt-lg-0">
-                             <button type="submit" class="btn btn-danger " style={{color:'#dca83f',background:'white',width:'100%'}}> <span class="fa fa-search"></span> Search </button>
-                         </div>
-
-                     </div>
-                </form>
-
-                </div>
-
+                {/*<div class="col-sm-12 col-md-3 yk-menu-test mt-sm-4 mt-md-0">*/}
+                {/*<div class="pt-md-4">*/}
+                {/*<a href="home" class={"btn btn-default yk-temp-menu " + props.name.one} style={{color: '#7f7f7f'}}*/}
+                {/*>*/}
+                {/*<span class="fa fa-home"></span>*/}
+                {/*<br></br>*/}
+                {/*Home</a>*/}
+                {/*<a href="about_us" className={"btn btn-default yk-temp-menu " + props.name.two}*/}
+                {/*style={{color: '#7f7f7f'}}><span*/}
+                {/*class="fa fa-info-circle"></span><br></br>About</a>*/}
+                {/*<a href="contact_us" class={"btn btn-default yk-temp-menu " + props.name.three}*/}
+                {/*style={{color: '#7f7f7f'}}><span*/}
+                {/*class="fa fa-phone"></span><br></br>Contact</a>*/}
+                {/*</div>*/}
+                {/*</div>*/}
+                {/*search*/}
 
             </div>
-            {/*menu*/}
+        )
+    }
 
-            {/*search*/}
-            {/*<div class="col-sm-12 col-md-8" style={{paddingTop: '32px'}}>*/}
-                {/*<form style={{width: '100%', paddingLeft: '12px', paddingRight: '12px'}}>*/}
-                    {/*<div class="input-group">*/}
-                        {/*<input type="search" placeholder="What're you searching for?" aria-describedby="button-addon5"*/}
-                               {/*class="form-control"/>*/}
-                        {/*<div class="input-group-append">*/}
-                            {/*<button id="button-addon5" type="submit" class="btn btn-danger"><i class="fa fa-search"></i>Search*/}
-                            {/*</button>*/}
-                        {/*</div>*/}
-                    {/*</div>*/}
-                {/*</form>*/}
-            {/*</div>*/}
 
-            {/*<div class="col-sm-12 col-md-3 yk-menu-test mt-sm-4 mt-md-0">*/}
-                {/*<div class="pt-md-4">*/}
-                    {/*<a href="home" class={"btn btn-default yk-temp-menu " + props.name.one} style={{color: '#7f7f7f'}}*/}
-                    {/*>*/}
-                        {/*<span class="fa fa-home"></span>*/}
-                        {/*<br></br>*/}
-                        {/*Home</a>*/}
-                    {/*<a href="about_us" className={"btn btn-default yk-temp-menu " + props.name.two}*/}
-                       {/*style={{color: '#7f7f7f'}}><span*/}
-                        {/*class="fa fa-info-circle"></span><br></br>About</a>*/}
-                    {/*<a href="contact_us" class={"btn btn-default yk-temp-menu " + props.name.three}*/}
-                       {/*style={{color: '#7f7f7f'}}><span*/}
-                        {/*class="fa fa-phone"></span><br></br>Contact</a>*/}
-                {/*</div>*/}
-            {/*</div>*/}
-            {/*search*/}
-
-        </div>
-    )
 }
 
 export default Header_menu_cat

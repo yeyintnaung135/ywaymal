@@ -11,7 +11,14 @@
 .to_hide {
     display: none;
 }
-
+.modal-backdrop.show {
+    opacity: 0 !important;
+    display:none !important;
+}
+.opa{
+    background:black;
+    opacity:0.6;
+}
 .show_yk {
     display: block;
 
