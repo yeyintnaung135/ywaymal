@@ -396,7 +396,7 @@ class Homepage extends React.Component {
                                         color: 'white',
                                         background: '#3b5998'
                                     }}
-                                                                                         href={"https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent('https://www.ywaymal.com')+"&amp;src=sdkpreparse"}
+                                                                                         href={"https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent("https://"+window.location.host+'/video_detail?id='+todo.id)+"&amp;src=sdkpreparse"}
                                                                                          class="fb-xfbml-parse-ignore"><span
                                         class="fa fa-facebook"></span> Share on facebook <span
                                         class="fa fa-share"></span> </a></div>

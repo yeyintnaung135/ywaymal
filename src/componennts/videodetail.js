@@ -40,6 +40,8 @@ class Videodetail extends React.Component {
         this.handleAddVote = this.handleAddVote.bind(this);
         this.handleDeleteVote = this.handleDeleteVote.bind(this);
         this.handleAddComment = this.handleAddComment.bind(this);
+        this.modeltohide = this.modeltohide.bind(this);
+
         this.getvideocomments = this.getvideocomments.bind(this);
         this.id = search.get('id');
     }
@@ -59,26 +61,26 @@ class Videodetail extends React.Component {
             url: apiurl + '/api/deletevideocomments',
             data: {
                 cmt_id: cmt_id,
-                videos_id:video_id
+                videos_id: video_id
             }, headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
             }
         })
             .then(res => {
-                if(res.data != 'deleted'){
+                if (res.data != 'deleted') {
                     console.log(res);
                     //re set comments updated data
-                    this.setState({comments:res.data});
+                    this.setState({comments: res.data});
 
 
                     //set comments count decrease one
-                    var allvideodata=this.state.video;
-                    allvideodata.comments=this.state.video.comments -1;
-                    this.setState({video:allvideodata});
+                    var allvideodata = this.state.video;
+                    allvideodata.comments = this.state.video.comments - 1;
+                    this.setState({video: allvideodata});
                     //set comments count decrease one
 
 
-                }else{
+                } else {
                     console.log('Deleted');
 
                 }
@@ -88,7 +90,7 @@ class Videodetail extends React.Component {
 
     handleAddComment(video_id) {
         console.log('//fire handle add comment to server')
-        if(this.refs.comment_textarea.value != ''){
+        if (this.refs.comment_textarea.value != '') {
             return axios({
                 method: 'post',
                 url: apiurl + '/api/addvideocomments',
@@ -113,15 +115,15 @@ class Videodetail extends React.Component {
                     this.refs.comment_textarea.value = '';
 
                     //set comments count increase one
-                    var allvideodata=this.state.video;
-                    allvideodata.comments=this.state.video.comments +1;
-                    this.setState({video:allvideodata});
+                    var allvideodata = this.state.video;
+                    allvideodata.comments = this.state.video.comments + 1;
+                    this.setState({video: allvideodata});
 
-                    document.getElementById('to_scroll_top').scrollTo(0,0)
+                    document.getElementById('to_scroll_top').scrollTo(0, 0)
 
 
                 })
-        }else{
+        } else {
             console.log('textarea is empty');
         }
 
@@ -259,6 +261,19 @@ class Videodetail extends React.Component {
         }
     }
 
+    modeltohide(id) {
+        console.log('to model hide');
+        document.getElementById('myModal' + id).classList.remove("show");
+        console.log('remove show');
+
+        document.getElementById('myModal' + id).classList.remove("fade");
+        console.log('remove fade');
+
+        document.getElementById('myModal' + id).style.display = "none";
+        document.getElementById('myModal' + id).setAttribute("aria-modal", "false");
+
+    }
+
     componentDidMount() {
 
         window.AOS.init({
@@ -362,19 +377,21 @@ class Videodetail extends React.Component {
             return (
                 <div className="wrapper">
                     <MetaTags>
-                        <title>YwayMal</title>
-                        <meta name="description" content={props.description} />
-                        <meta property="og:title" content={props.title} />
-                        <meta property="og:image" content="path/to/image.jpg" />
+                        {/*<meta property="fb:app_id" content="464944640995151" />*/}
+
+                        {/*<meta name="og:description" content={props.description} />*/}
+                        {/*<meta property="og:title" content={props.title} />*/}
+                        {/*<meta property="og:image" content="path/to/image.jpg" />*/}
                     </MetaTags>
                 </div>
             );
         }
+
         return (
 
 
             <div>
-                 <Metatagsforshare title={this.state.video.title} description={this.state.video.description}/>
+                <Metatagsforshare title={this.state.video.title} description={this.state.video.description}/>
 
                 {/*header section*/}
                 <Header_menu_cat name={{one: '', two: '', three: ''}}/>
@@ -432,7 +449,8 @@ class Videodetail extends React.Component {
                                 &nbsp;
                                 &nbsp;
 
-                                <a href="contact_us" class={"btn  btn-sm  btn-danger"}
+                                <a href="contact_us" data-toggle="modal" data-target={"#myModal" + this.state.video.id}
+                                   class={"btn  btn-sm  btn-danger yk-background"}
                                    style={{color: 'white'}}>
                                     <span class="fa fa-share-alt"></span>&nbsp;&nbsp;Share&nbsp;
                                 </a>
@@ -457,7 +475,44 @@ class Videodetail extends React.Component {
                             </div>
 
                             <br></br>
+                            <div class="modal fade" id={"myModal" + this.state.video.id}>
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
 
+                                        {/*<!-- Modal Header -->*/}
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Share this video to facebook</h4>
+
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        {/*<!-- Modal body -->*/}
+                                        <div class="modal-body">
+                                            <div class="fb-share-button"
+                                                 onClick={() => this.modeltohide(this.state.video.id)}
+                                                 class="btn btn-info"
+                                                 style={{color: 'white !important', background: '#3b5998'}}
+                                                 data-href="https://f050656c.ngrok.io/video_detail?id=32"
+                                                 data-layout="button_count" data-size="large">
+                                                <a target="_blank" style={{
+                                                    color: 'white',
+                                                    background: '#3b5998'
+                                                }}
+                                                   href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ff050656c.ngrok.io%2Fvideo_detail%3Fid%3D32&amp;src=sdkpreparse"
+                                                   class="fb-xfbml-parse-ignore"><span
+                                                    class="fa fa-facebook"></span> Share on facebook <span
+                                                    class="fa fa-share"></span> </a></div>
+                                        </div>
+
+                                        {/*<!-- Modal footer -->*/}
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
 
@@ -502,10 +557,11 @@ class Videodetail extends React.Component {
                                 <div class="panel-body" id='to_scroll_top'
                                      style={{maxHeight: '642px', height: 'auto', overflow: 'auto'}}>
                                     <ul class="list-group">
-                                        {this.state.comments.map((value,key) => {
+                                        {this.state.comments.map((value, key) => {
                                                 return (
 
-                                                    <li class="list-group-item" style={{borderBottom: '1px solid black',marginBottom:'22px'}}>
+                                                    <li class="list-group-item"
+                                                        style={{borderBottom: '1px solid black', marginBottom: '22px'}}>
                                                         <div class="row">
                                                             <div class="col-sm-12 col-md-12 col-lg-2">
                                                                 <img src="http://placehold.it/80"
@@ -552,7 +608,8 @@ class Videodetail extends React.Component {
                                                                             <button type="button"
                                                                                     class="btn btn-danger btn-xs float-right"
                                                                                     title="Delete"
-                                                                                    style={{borderRadius: '22px'}} onClick={()=>this.handleDeleteComment(this.state.video.id,value.id)}>
+                                                                                    style={{borderRadius: '22px'}}
+                                                                                    onClick={() => this.handleDeleteComment(this.state.video.id, value.id)}>
                                                                                 <span class="fa fa-trash"></span>
                                                                             </button>
                                                                         </div>
