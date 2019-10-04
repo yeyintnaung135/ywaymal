@@ -27,7 +27,7 @@ import Tooglevoteform from "./togglevoteform";
 import {FacebookShareButton} from 'react-share';
 
 
-class Homepage extends React.Component {
+class Searchresult extends React.Component {
 
     constructor(props, context) {
         super(props, context);
@@ -92,7 +92,10 @@ class Homepage extends React.Component {
         //start page this method will firstly fire
         //if not authenciate rediret to login from
         // redirecttologinifnotauth();real
-
+        console.log(this.props.match.params.cities_id);
+        console.log(this.props.match.params.cons_id);
+        console.log(this.props.match.params.con_numbers_id);
+        console.log('ppppppppppppp');
         var loader = function () {
             setTimeout(function () {
                 window.$('#ftco-loader').removeClass('show');
@@ -209,15 +212,17 @@ class Homepage extends React.Component {
 
     modeltohide(id) {
         console.log('to model hide');
-        document.getElementById('myModal'+id).classList.remove("show");
+        document.getElementById('myModal' + id).classList.remove("show");
         console.log('remove show');
 
-        document.getElementById('myModal'+id).classList.remove("fade");
+        document.getElementById('myModal' + id).classList.remove("fade");
         console.log('remove fade');
 
-        document.getElementById('myModal'+id).style.display = "none";
-        document.getElementById('myModal'+id).setAttribute("aria-modal", "false");
+        document.getElementById('myModal' + id).style.display = "none";
+        document.getElementById('myModal' + id).setAttribute("aria-modal", "false");
+
     }
+
     handleClick(event) {
         // pagination.event
         console.log(event.target.id)
@@ -238,25 +243,26 @@ class Homepage extends React.Component {
 
     }
 
-    getVideos() {
-        //get data from server
+    searchResult() {
+        //get data from server for search result
         if (this.state.runvideos) {
             axios({
                 method: 'post',
-                url: apiurl + '/api/getvideos',
+                url: apiurl + '/api/searchresult',
                 data: {
-                    token: localStorage.getItem('logintoken')
+                    cities_id: this.props.match.params.cities_id,
+                    cons_id: this.props.match.params.cons_id,
+                    con_numbers_id: this.props.match.params.con_numbers_id,
                 }, headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
                 }
             })
-                .then(res => {
-                    console.log('responses from server for videos');
+            .then(res => {
+                    console.log('responses from server for search result');
                     this.setState({videos: res.data})
                     console.log(res.data)
                     this.setState({runvideos: false});
                     console.log('fef');
-                    console.log(this.state.videos[0].id);
                     // localStorage.setItem('logintoken',res.data)
                 })
             console.log(this.state.runvideos)
@@ -270,7 +276,7 @@ class Homepage extends React.Component {
 
     render() {
         {
-            this.getVideos();
+            this.searchResult();
             this.testreducer();
 
         }
@@ -292,8 +298,10 @@ class Homepage extends React.Component {
         const currentTodos = videos.slice(indexOfFirstTodo, indexOfLastTodo)
 
         const renderTodos = currentTodos.map((todo, index) => {
+
             return (
                 <div className="row mb-5" id="toscroll">
+
 
                     <div className="col-sm-12 col-md-12 col-xl-5">
                         <video id={'to_reload' + todo.id} style={{width: '100%', height: 'auto'}}
@@ -343,7 +351,7 @@ class Homepage extends React.Component {
                                 &nbsp;
                                 &nbsp;
                                 &nbsp;
-                                <a href="contact_us" data-toggle="modal" data-target={"#myModal"+todo.id}
+                                <a href="contact_us" data-toggle="modal" data-target={"#myModal" + todo.id}
                                    class={"btn  btn-sm  btn-danger yk-background"}
                                    style={{color: 'white'}}>
                                     <span class="fa fa-share-alt"></span>&nbsp;&nbsp;Share&nbsp;
@@ -387,14 +395,15 @@ class Homepage extends React.Component {
 
                                 {/*<!-- Modal body -->*/}
                                 <div class="modal-body">
-                                    <div class="fb-share-button" onClick={()=>this.modeltohide(todo.id)} class="btn btn-info"
+                                    <div class="fb-share-button" onClick={() => this.modeltohide(todo.id)}
+                                         class="btn btn-info"
                                          style={{color: 'white !important', background: '#3b5998'}}
                                          data-href="https://developers.facebook.com/docs/plugins/"
                                          data-layout="button_count" data-size="large"><a target="_blank" style={{
                                         color: 'white',
                                         background: '#3b5998'
                                     }}
-                                                                                         href={"https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent("https://"+window.location.host+'/video_detail?id='+todo.id)+"&amp;src=sdkpreparse"}
+                                                                                         href={"https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent("https://" + window.location.host + '/video_detail?id=' + todo.id) + "&amp;src=sdkpreparse"}
                                                                                          class="fb-xfbml-parse-ignore"><span
                                         class="fa fa-facebook"></span> Share on facebook <span
                                         class="fa fa-share"></span> </a></div>
@@ -486,38 +495,31 @@ class Homepage extends React.Component {
                     {/*end categories section*/}
                     <div className="col-sm-12 col-md-6 col-lg-8">
                         {/*Selider section*/}
-                        <MainSlider/>
                         {/*end slider section*/}
-
-
-                        <div className="col-sm-12" style={{borderBottom: '2px solid #f1e6be'}}>&nbsp;</div>
-
-
                         <div className="col-sm-12">
-
                             <div className="col-sm-12">&nbsp;</div>
                             <div className="col-md-12" style={{textAlign: 'center'}}>
                                 <h5 className="mb-1 yk-title-text" style={{textAlign: 'center'}}>
-                                    Videos </h5>
+                                    Search result </h5>
                             </div>
                             <div className="col-sm-12">&nbsp;</div>
-
-
                             {/*// need to creat child component for this section */}
-
                             {/*// need to creat child component for this section */}
-
+                            {(()=>{
+                                if(this.state.videos==''){
+                                       return (
+                                           <div class="alert alert-primary" role="alert">
+                                              Empty Search Result
+                                           </div>                                       )
+                                }
+                            })()}
                             {renderTodos}
-
-
                             <div className="row col-sm-12 mt-5">
                                 <div className="col text-center">
                                     <div className="block-27">
-
                                         <ul>
                                             <li><a href="#">&lt;</a></li>
                                             {renderPageNumbers}
-
                                             <li><a href="#">&gt;</a></li>
                                         </ul>
                                     </div>
@@ -606,9 +608,4 @@ var
             );
         }
     });
-export default connect(mapStateToProps)
-
-(
-    Homepage
-)
-;
+export default connect(mapStateToProps)(Searchresult);

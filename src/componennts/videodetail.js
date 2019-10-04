@@ -234,7 +234,7 @@ class Videodetail extends React.Component {
 
     //for voting
 
-
+    //to get video detail
     getvideodetail() {
         if (this.state.runvideos) {
 
@@ -260,6 +260,10 @@ class Videodetail extends React.Component {
                 })
         }
     }
+    //to get video detail
+
+
+    //to hide facebook share model popup
 
     modeltohide(id) {
         console.log('to model hide');
@@ -273,6 +277,8 @@ class Videodetail extends React.Component {
         document.getElementById('myModal' + id).setAttribute("aria-modal", "false");
 
     }
+    //to hide facebook share model popup
+
 
     componentDidMount() {
 
@@ -372,39 +378,32 @@ class Videodetail extends React.Component {
 
 
     render() {
-
+       //for facebook meta data
         function Metatagsforshare(props) {
             return (
                 <div className="wrapper">
                     <MetaTags>
-                        {/*<meta property="fb:app_id" content="464944640995151" />*/}
-
-                        {/*<meta name="og:description" content={props.description} />*/}
-                        {/*<meta property="og:title" content={props.title} />*/}
-                        {/*<meta property="og:image" content="path/to/image.jpg" />*/}
+                        <meta name="og:description" content={props.description} />
+                        <meta property="og:title" content={props.title} />
+                        <meta property="og:image" content="path/to/image.jpg" />
                     </MetaTags>
                 </div>
             );
         }
+        //for facebook meta data
 
         return (
 
-
             <div>
                 <Metatagsforshare title={this.state.video.title} description={this.state.video.description}/>
-
                 {/*header section*/}
                 <Header_menu_cat name={{one: '', two: '', three: ''}}/>
                 <div className="row" style={{marginTop: '22px'}}>
-
-
                 </div>
                 {/*end header section*/}
-
                 {/*body section*/}
                 <div className="row col-sm-12">
                     {/*categories section*/}
-
                     <Categories/>
                     {/*end categories section*/}
 
@@ -492,13 +491,13 @@ class Videodetail extends React.Component {
                                                  onClick={() => this.modeltohide(this.state.video.id)}
                                                  class="btn btn-info"
                                                  style={{color: 'white !important', background: '#3b5998'}}
-                                                 data-href="https://f050656c.ngrok.io/video_detail?id=32"
+                                                 data-href="http://localhost:3000/video_detail?id=32"
                                                  data-layout="button_count" data-size="large">
                                                 <a target="_blank" style={{
                                                     color: 'white',
                                                     background: '#3b5998'
                                                 }}
-                                                   href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ff050656c.ngrok.io%2Fvideo_detail%3Fid%3D32&amp;src=sdkpreparse"
+                                                   href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A3000%2Fvideo_detail%3Fid%3D32&amp;src=sdkpreparse"
                                                    class="fb-xfbml-parse-ignore"><span
                                                     class="fa fa-facebook"></span> Share on facebook <span
                                                     class="fa fa-share"></span> </a></div>

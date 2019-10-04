@@ -23,6 +23,7 @@ class Header_menu_cat extends React.Component {
             connumbers:[],
             cons:[],
         };
+        this.handlesearch=this.handlesearch.bind(this);
 
 
     }
@@ -114,6 +115,12 @@ class Header_menu_cat extends React.Component {
             })
         console.log(this.state.runvideos);
     }
+    handlesearch(){
+    console.log(this.refs.cities.value)
+    console.log(this.refs.cons.value)
+    console.log(this.refs.connumbers.value)
+        return window.location.assign('http://localhost:3000/search_result/'+this.refs.cities.value+'/'+this.refs.cons.value+'/'+this.refs.connumbers.value)
+    }
 
     //get cities
 
@@ -191,14 +198,14 @@ class Header_menu_cat extends React.Component {
                     <div class="row">&nbsp;</div>
                     <div class="row ml-2 mr-2">
 
-                        <form style={{width: '100%'}}>
+                        <div style={{width: '100%'}}>
                             <div class="form-row">
                                 <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
-                                    <select onChange={()=>this.handletownships()} ref='ts' class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
+                                    <select ref='cities' class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
                                         width: '100%', fontSize: '10px',
                                         fontWeight: 'bolder'
                                     }} required={'required'}>
-                                        <option>Townships&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>
+                                        <option value="none">Townships&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>
                                         {this.state.cities.map((value) => {
                                             return (
                                                 <option value={value.id}>{value.name}</option>
@@ -209,11 +216,11 @@ class Header_menu_cat extends React.Component {
                                 </div>
                                 <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
 
-                                    <select class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
+                                    <select class="btn btn-lg btn-danger input-lg yk-background" id="sel1" ref="cons" style={{
                                         width: '100%', fontSize: '10px',
                                         fontWeight: 'bolder'
                                     }} required={'required'}>
-                                        <option>Constituencies no. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>
+                                        <option value="none">Constituencies no. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>
 
                                         {this.state.connumbers.map((value) => {
                                             return (
@@ -225,11 +232,11 @@ class Header_menu_cat extends React.Component {
                                 </div>
                                 <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
 
-                                    <select class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
+                                    <select class="btn btn-lg btn-danger input-lg yk-background"  ref="connumbers" id="sel1" style={{
                                         width: '100%', fontSize: '10px',
                                         fontWeight: 'bolder'
                                     }} required={'required'}>
-                                        <option>Constituencies  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                                        <option value="none">Constituencies  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                         {this.state.cons.map((value) => {
                                             return (
                                                 <option value={value.id}>{value.name}</option>
@@ -239,7 +246,7 @@ class Header_menu_cat extends React.Component {
                                     </select>
                                 </div>
                                 <div class="col-sm-4 col-lg-2 mt-3 mt-lg-0">
-                                    <select class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
+                                    <select class="btn btn-lg btn-danger input-lg yk-background" ref="name" id="sel1" style={{
                                         width: '100%', fontSize: '10px',
                                         fontWeight: 'bolder'
                                     }} required={'required'}>
@@ -250,14 +257,14 @@ class Header_menu_cat extends React.Component {
                                     </select>
                                 </div>
                                 <div class="col-sm-4 col-lg-4 mt-3 mt-lg-0">
-                                    <button type="submit" class="btn btn-danger "
+                                    <button class="btn btn-danger " onClick={this.handlesearch}
                                             style={{color: '#dca83f', background: 'white', width: '100%'}}><span
                                         class="fa fa-search"></span> Search
                                     </button>
                                 </div>
 
                             </div>
-                        </form>
+                        </div>
 
                     </div>
 

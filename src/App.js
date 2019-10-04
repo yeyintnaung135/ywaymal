@@ -21,6 +21,7 @@ import ScrollToTop from 'react-router-scroll-top';
 
 
 import { createBrowserHistory as Bh } from 'history';
+import Searchresult from "./componennts/Searchresult";
 // function App() {
 //   return (
 //     <div className="App">    
@@ -65,9 +66,7 @@ class Root extends React.Component {
         var counter = function () {
             console.log('way point')
             window.$('#section-counter').waypoint(function (direction) {
-
                 if (direction === 'down' && !window.$(this.element).hasClass('ftco-animated')) {
-
                     var comma_separator_number_step = window.$.animateNumber.numberStepFactories.separator(',')
                     window.$('.number').each(function () {
                         console.log('way point')
@@ -161,8 +160,10 @@ class Root extends React.Component {
                     <Route exact path="/news_detail" component={Newsdetail}/>
                     <Route exact path="/home" component={Homepage}/>
                     <Route exact path="/footer" component={Footerpage}/>
-                     {/*this videotail route is for a route with query parameter*/}
-                    <Route component={Videodetail}/>
+                    <Route exact path="/search_result/:cities_id/:cons_id/:con_numbers_id" component={Searchresult} />
+
+                    {/*this videotail route is for a route with query parameter*/}
+                    <Route exact component={Videodetail}/>
                 </Switch>
                 </ScrollToTop>
 
