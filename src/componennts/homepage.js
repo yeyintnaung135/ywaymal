@@ -91,7 +91,7 @@ class Homepage extends React.Component {
     componentWillMount() {
         //start page this method will firstly fire
         //if not authenciate rediret to login from
-        // redirecttologinifnotauth();real
+        // redirecttologinifnotauth();
 
         var loader = function () {
             setTimeout(function () {
@@ -389,7 +389,7 @@ class Homepage extends React.Component {
                                 <div class="modal-body">
                                     <div class="fb-share-button" onClick={()=>this.modeltohide(todo.id)} class="btn btn-info"
                                          style={{color: 'white !important', background: '#3b5998'}}
-                                         data-href="https://developers.facebook.com/docs/plugins/"
+                                         data-href={"https://"+window.location.host+'/video_detail?id='+todo.id}
                                          data-layout="button_count" data-size="large"><a target="_blank" style={{
                                         color: 'white',
                                         background: '#3b5998'

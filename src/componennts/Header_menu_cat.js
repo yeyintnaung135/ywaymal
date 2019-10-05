@@ -119,7 +119,7 @@ class Header_menu_cat extends React.Component {
     console.log(this.refs.cities.value)
     console.log(this.refs.cons.value)
     console.log(this.refs.connumbers.value)
-        return window.location.assign('http://localhost:3000/search_result/'+this.refs.cities.value+'/'+this.refs.cons.value+'/'+this.refs.connumbers.value)
+        return window.location.assign('https://www.ywaymal.com/search_result/'+this.refs.cities.value+'/'+this.refs.cons.value+'/'+this.refs.connumbers.value)
     }
 
     //get cities

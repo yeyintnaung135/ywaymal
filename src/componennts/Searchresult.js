@@ -91,11 +91,10 @@ class Searchresult extends React.Component {
     componentWillMount() {
         //start page this method will firstly fire
         //if not authenciate rediret to login from
-        // redirecttologinifnotauth();real
+        redirecttologinifnotauth();
         console.log(this.props.match.params.cities_id);
         console.log(this.props.match.params.cons_id);
         console.log(this.props.match.params.con_numbers_id);
-        console.log('ppppppppppppp');
         var loader = function () {
             setTimeout(function () {
                 window.$('#ftco-loader').removeClass('show');
@@ -103,7 +102,6 @@ class Searchresult extends React.Component {
             }, 3000);
         };
         loader();
-
         if (document.referrer.includes('video_detail') || document.referrer.includes('news_detail')) {
             {
                 //check if reloaded once already

@@ -48,7 +48,7 @@ class Videodetail extends React.Component {
 
     componentWillMount() {
         //redirect if not authenciate
-        // redirecttologinifnotauth();real
+        redirecttologinifnotauth();
         this.getvideodetail();
 
         this.getvideocomments();
@@ -383,9 +383,11 @@ class Videodetail extends React.Component {
             return (
                 <div className="wrapper">
                     <MetaTags>
-                        <meta name="og:description" content={props.description} />
-                        <meta property="og:title" content={props.title} />
-                        <meta property="og:image" content="path/to/image.jpg" />
+                        <meta property="og:url" content="https://www.ywaymal.com/"/>
+                        <meta property="og:type" content="article"/>
+                        <meta property="og:title" content="YwayMal"/>
+                        <meta property="og:description" content={props.description}/>
+                        <meta property="og:image" content={props.image}/>
                     </MetaTags>
                 </div>
             );
@@ -395,7 +397,7 @@ class Videodetail extends React.Component {
         return (
 
             <div>
-                <Metatagsforshare title={this.state.video.title} description={this.state.video.description}/>
+                <Metatagsforshare title={this.state.video.title} description={this.state.video.description} image={apiurl+'/backend/admin/videos/images/'+this.state.video.image}/>
                 {/*header section*/}
                 <Header_menu_cat name={{one: '', two: '', three: ''}}/>
                 <div className="row" style={{marginTop: '22px'}}>
@@ -491,13 +493,13 @@ class Videodetail extends React.Component {
                                                  onClick={() => this.modeltohide(this.state.video.id)}
                                                  class="btn btn-info"
                                                  style={{color: 'white !important', background: '#3b5998'}}
-                                                 data-href="http://localhost:3000/video_detail?id=32"
-                                                 data-layout="button_count" data-size="large">
+                                                 data-href={"https://"+window.location.host+'/video_detail?id='+this.state.video.id}
+                                                 data-layout="button_count" data-size="large">s
                                                 <a target="_blank" style={{
                                                     color: 'white',
                                                     background: '#3b5998'
                                                 }}
-                                                   href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A3000%2Fvideo_detail%3Fid%3D32&amp;src=sdkpreparse"
+                                                   href={"https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent("https://"+window.location.host+'/video_detail?id='+this.state.video.id)+"&amp;src=sdkpreparse"}
                                                    class="fb-xfbml-parse-ignore"><span
                                                     class="fa fa-facebook"></span> Share on facebook <span
                                                     class="fa fa-share"></span> </a></div>
