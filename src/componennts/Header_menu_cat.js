@@ -24,6 +24,8 @@ class Header_menu_cat extends React.Component {
             cons:[],
         };
         this.handlesearch=this.handlesearch.bind(this);
+        this.getwhencitychange=this.getwhencitychange.bind(this);
+        this.getwhenconnumberschange=this.getwhenconnumberschange.bind(this);
 
 
     }
@@ -115,6 +117,58 @@ class Header_menu_cat extends React.Component {
             })
         console.log(this.state.runvideos);
     }
+    getwhencitychange(){
+        console.log("while cities is selected");
+        if(this.refs.cities.value !== 'none'){
+            return axios({
+                method: 'post',
+                url: apiurl + '/api/getwhilecityselected',
+                data: {
+                    cid: this.refs.cities.value
+                }, headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
+                }
+            })
+                .then(res => {
+                    console.log(res.data);
+                    this.setState({'cons':res.data.cons});
+                    this.setState({'connumbers':res.data.con_numbers});
+                    // localStorage.setItem('logintoken',res.data)
+                })
+        }else{
+            let id='';
+            this.getcities(id);
+            this.getconnumbers(id);
+            this.getcons(id);
+        }
+
+    }
+    getwhenconnumberschange(){
+        console.log("while cities is selected");
+        if(this.refs.connumbers.value !== 'none'){
+            return axios({
+                method: 'post',
+                url: apiurl + '/api/getwhenconnumberschange',
+                data: {
+                    cnid: this.refs.connumbers.value
+                }, headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
+                }
+            })
+                .then(res => {
+                    console.log(res.data);
+                    this.setState({'cons':res.data.cons});
+
+                    // localStorage.setItem('logintoken',res.data)
+                })
+        }else{
+            let id='';
+            this.getcities(id);
+            this.getconnumbers(id);
+            this.getcons(id);
+        }
+
+    }
     handlesearch(){
     console.log(this.refs.cities.value)
     console.log(this.refs.cons.value)
@@ -201,7 +255,7 @@ class Header_menu_cat extends React.Component {
                         <div style={{width: '100%'}}>
                             <div class="form-row">
                                 <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
-                                    <select ref='cities' class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
+                                    <select ref='cities' onChange={this.getwhencitychange} class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
                                         width: '100%', fontSize: '10px',
                                         fontWeight: 'bolder'
                                     }} required={'required'}>
@@ -216,7 +270,7 @@ class Header_menu_cat extends React.Component {
                                 </div>
                                 <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
 
-                                    <select class="btn btn-lg btn-danger input-lg yk-background" id="sel1" ref="cons" style={{
+                                    <select ref="connumbers" onChange={this.getwhenconnumberschange} class="btn btn-lg btn-danger input-lg yk-background" id="sel1"  style={{
                                         width: '100%', fontSize: '10px',
                                         fontWeight: 'bolder'
                                     }} required={'required'}>
@@ -232,7 +286,7 @@ class Header_menu_cat extends React.Component {
                                 </div>
                                 <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
 
-                                    <select class="btn btn-lg btn-danger input-lg yk-background"  ref="connumbers" id="sel1" style={{
+                                    <select class="btn btn-lg btn-danger input-lg yk-background"  ref="cons" id="sel1" style={{
                                         width: '100%', fontSize: '10px',
                                         fontWeight: 'bolder'
                                     }} required={'required'}>

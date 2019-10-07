@@ -6,8 +6,6 @@ import "../css/owl.theme.default.min.css";
 import "../css/magnific-popup.css";
 import "../css/aos.css";
 import "../css/ionicons.min.css";
-
-
 import "../css/flaticon.css";
 import "../css/icomoon.css";
 import "../css/style.css";
@@ -48,7 +46,7 @@ class Videodetail extends React.Component {
 
     componentWillMount() {
         //redirect if not authenciate
-        redirecttologinifnotauth();
+        // redirecttologinifnotauth();
         this.getvideodetail();
 
         this.getvideocomments();
@@ -265,7 +263,16 @@ class Videodetail extends React.Component {
 
     //to hide facebook share model popup
 
-    modeltohide(id) {
+    modeltohide(id,link,image,name,desc) {
+        window.FB.ui({
+            method: 'feed',
+            link: link,
+            name:name,
+            caption:name,
+            description:desc,
+            picture:image
+        }, function(response){
+        });
         console.log('to model hide');
         document.getElementById('myModal' + id).classList.remove("show");
         console.log('remove show');
@@ -383,9 +390,10 @@ class Videodetail extends React.Component {
             return (
                 <div className="wrapper">
                     <MetaTags>
-                        <meta property="og:url" content="https://www.ywaymal.com/"/>
+                        <meta property="fb:app_id" content="413223529303378"/>
+                        <meta property="og:url" content={window.location.href}/>
                         <meta property="og:type" content="article"/>
-                        <meta property="og:title" content="YwayMal"/>
+                        <meta property="og:title" content={props.title}/>
                         <meta property="og:description" content={props.description}/>
                         <meta property="og:image" content={props.image}/>
                     </MetaTags>
@@ -408,14 +416,9 @@ class Videodetail extends React.Component {
                     {/*categories section*/}
                     <Categories/>
                     {/*end categories section*/}
-
-
                     {/*About Us Section*/}
                     <div className="col-sm-12 col-md-6 col-lg-8">
-
-
                         <div class="col-12" style={{paddingTop: '23p'}}>
-
                             <video id="to_reload" style={{width: '100%', height: 'auto'}} controls>
                                 <source id="to_reload_src"
                                         src={apiurl + '/backend/admin/videos/' + localStorage.getItem('video_link')}
@@ -490,19 +493,17 @@ class Videodetail extends React.Component {
                                         {/*<!-- Modal body -->*/}
                                         <div class="modal-body">
                                             <div class="fb-share-button"
-                                                 onClick={() => this.modeltohide(this.state.video.id)}
+                                                 onClick={() => this.modeltohide(this.state.video.id,window.location.href,apiurl+'/backend/admin/videos/images/'+this.state.video.image,this.state.video.title,this.state.video.description)}
                                                  class="btn btn-info"
                                                  style={{color: 'white !important', background: '#3b5998'}}
                                                  data-href={"https://"+window.location.host+'/video_detail?id='+this.state.video.id}
-                                                 data-layout="button_count" data-size="large">s
+                                                 data-layout="button_count" data-size="large">
                                                 <a target="_blank" style={{
                                                     color: 'white',
                                                     background: '#3b5998'
                                                 }}
                                                    href={"https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent("https://"+window.location.host+'/video_detail?id='+this.state.video.id)+"&amp;src=sdkpreparse"}
-                                                   class="fb-xfbml-parse-ignore"><span
-                                                    class="fa fa-facebook"></span> Share on facebook <span
-                                                    class="fa fa-share"></span> </a></div>
+                                                   class="fb-xfbml-parse-ignore"><span class="fa fa-facebook"></span> Share on facebook <span class="fa fa-share"></span> </a></div>
                                         </div>
 
                                         {/*<!-- Modal footer -->*/}
