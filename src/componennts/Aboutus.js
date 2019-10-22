@@ -6,8 +6,6 @@ import "../css/owl.theme.default.min.css";
 import "../css/magnific-popup.css";
 import "../css/aos.css";
 import "../css/ionicons.min.css";
-
-
 import "../css/flaticon.css";
 import "../css/icomoon.css";
 import "../css/style.css";
@@ -16,9 +14,9 @@ import Categories from "./Categories";
 import Header_menu_cat from "./Header_menu_cat";
 import Footerpage from "./footerpage";
 import Topnews from "./topnews";
-
 import apiurl from "../helpers/apiurl"
 import {redirecttologinifnotauth} from '../helpers/redirecttologinifnotauth'
+import Ads from "./Ads";
 
 
 //this is create component with reactcomponent that is called stateful components
@@ -35,7 +33,6 @@ class Aboutus extends React.Component {
                 {/*header section*/}
                 <Header_menu_cat name={{one: '', two: 'menu_active', three: ''}}/>
                 <div className="row" style={{marginTop: '22px'}}>
-
 
                 </div>
                 {/*end header section*/}
@@ -129,24 +126,9 @@ class Aboutus extends React.Component {
 
                     </div>
 
-                    <div className="col-12 col-md-3">
-                        {/*ads section*/}
-                        <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/ads.png'}
-                             alt="First slide" style={{height: '300px'}}/>
-                        <br></br>
-                        <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/ads.png'}
-                             alt="First slide" style={{height: '300px'}}/>
-                        <br></br>
-                        {/*end ads section*/}
-                        {/*top news section*/}
-
-                        <div style={{border: '2px solid #c7baaf47;padding: 12px'}}>
-                            <Topnews/>
-
-
-                        </div>
-                        {/*end top news section*/}
-
+                    <div className="col-12 col-sm-12 col-md-2 col-lg-2">
+                        <Ads/>
+                        <Topnews/>
 
                     </div>
 

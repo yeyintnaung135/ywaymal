@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!--<meta charset="utf-8" />-->
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
 
     <link rel="apple-touch-icon" href="logo192.png" />
@@ -41,7 +44,7 @@
   </head>
   <body>
 
-  <div id="root"  class="ml-md-4 mr-md-4 changeMe">
+  <div id="root"  class="ml-md-4 mr-md-4 changeMe" >
 
 
     </div>
@@ -61,8 +64,10 @@
     <script src="/js/jquery.min.js"></script>
 
     <script>
-        $(document).ready(function () {
 
+        $(document).ready(function () {
+            $('#ads1').carousel();
+            $('#ads2').carousel();
             if ((screen.width < 900)) {
 // if screen size is 1025px wide or larger
                 $(".collapse").removeClass('show'); // you can also use $(".yourClass").hide();
@@ -93,6 +98,7 @@
             console.log(dyn)
         });
         console.log('start')
+
     </script>
     <script src="/js/jquery-migrate-3.0.1.min.js"></script>
     <script src="/js/popper.min.js"></script>
@@ -100,19 +106,20 @@
     <script src="/js/jquery.easing.1.3.js"></script>
     <script src="/js/jquery.waypoints.min.js"></script>
     <script src="/js/jquery.stellar.min.js"></script>
-    <script src="/js/owl.carousel.min.js"></script>
     <script src="/js/jquery.magnific-popup.min.js"></script>
     <script src="/js/aos.js"></script>
     <script src="/js/jquery.animateNumber.min.js"></script>
     <script src="/js/jquery.mb.YTPlayer.min.js"></script>
     <script src="/js/bootstrap-datepicker.js"></script>
-    <!-- // <script src="/js/jquery.timepicker.min.js"></script> -->
+
+  <!-- // <script src="/js/jquery.timepicker.min.js"></script> -->
     <script src="/js/scrollax.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 
     <script src="/js/google-map.js"></script>
     <script src="/js/facebook-sdk.js"></script>
     <!--<script src="/js/main.js"></script>-->
+
 
 
 

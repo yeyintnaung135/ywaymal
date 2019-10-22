@@ -25,6 +25,7 @@ import {Link} from "react-router-dom";
 import {redirecttologinifnotauth} from '../helpers/redirecttologinifnotauth'
 import Tooglevoteform from "./togglevoteform";
 import {FacebookShareButton} from 'react-share';
+import Ads from "./Ads";
 
 
 class Searchresult extends React.Component {
@@ -536,20 +537,8 @@ class Searchresult extends React.Component {
 
 
                     <div className="col-12 col-sm-12 col-md-2 col-lg-2">
-
-                        <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/aad.png'}
-                             alt="First slide" style={{height: '300px'}}/>
-                        <br></br>
-                        <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/aad.png'}
-                             alt="First slide" style={{height: '300px'}}/>
-                        <br></br>
-
-
-                        {/*//tops news*/}
+                        <Ads/>
                         <Topnews/>
-
-
-                        {/*//tops news*/}
 
                     </div>
 

@@ -18,6 +18,7 @@ import apiurl from '../helpers/apiurl'
 
 import axios from 'axios';
 import {redirecttologinifnotauth} from '../helpers/redirecttologinifnotauth';
+import Ads from "./Ads";
 
 
 //this is create component with reactcomponent that is called stateful components
@@ -210,28 +211,11 @@ class Newsdetail extends React.Component {
                     {/*End About Us Section*/}
 
 
-                    {/*top new and ads section*/}
-                    <div className="col-12 col-md-3">
-                        {/*ads section*/}
-                        <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/ads.png'}
-                             alt="First slide" style={{height: '300px'}}/>
-                        <br></br>
-                        <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/ads.png'}
-                             alt="First slide" style={{height: '300px'}}/>
-                        <br></br>
-                        {/*end ads section*/}
-                        {/*top news section*/}
-
-                        <div style={{border: '2px solid #c7baaf47;padding: 12px'}}>
-                            <Topnews/>
-
-
-                        </div>
-                        {/*end top news section*/}
-
+                    <div className="col-12 col-sm-12 col-md-2 col-lg-2">
+                        <Ads/>
+                        <Topnews/>
 
                     </div>
-                    {/*top new and ads section*/}
                 </div>
                 {/*body section*/}
 

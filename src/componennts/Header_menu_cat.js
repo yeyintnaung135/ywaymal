@@ -22,9 +22,12 @@ class Header_menu_cat extends React.Component {
             cities: [],
             connumbers:[],
             cons:[],
+            names:[],
         };
         this.handlesearch=this.handlesearch.bind(this);
         this.getwhencitychange=this.getwhencitychange.bind(this);
+        this.getwhenconchange=this.getwhenconchange.bind(this);
+        this.getnames=this.getnames.bind(this);
         this.getwhenconnumberschange=this.getwhenconnumberschange.bind(this);
 
 
@@ -33,6 +36,7 @@ class Header_menu_cat extends React.Component {
     componentWillMount() {
         var id='';
         this.getcities(id);
+        this.getnames(id);
         this.getconnumbers(id);
         this.getcons(id);
 
@@ -46,6 +50,7 @@ class Header_menu_cat extends React.Component {
             url: apiurl + '/api/getwhilecityselected',
             data: {
                 cid:this.refs.ts.value,
+                sid:'empty',
                 token: localStorage.getItem('logintoken')
             }, headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
@@ -72,6 +77,27 @@ class Header_menu_cat extends React.Component {
             .then(res => {
                 console.log('responses from server for cities');
                 this.setState({cities: res.data});
+                console.log(res.data);
+                // localStorage.setItem('logintoken',res.data)
+            })
+        console.log(this.state.runvideos);
+    }
+    //get cities
+
+    //get names
+    getnames(id) {
+        return axios({
+            method: 'post',
+            url: apiurl + '/api/getnames'+id,
+            data: {
+                token: localStorage.getItem('logintoken')
+            }, headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
+            }
+        })
+            .then(res => {
+                console.log('responses from server for names');
+                this.setState({names: res.data});
                 console.log(res.data);
                 // localStorage.setItem('logintoken',res.data)
             })
@@ -110,7 +136,7 @@ class Header_menu_cat extends React.Component {
             }
         })
             .then(res => {
-                console.log('responses from server for cities');
+                console.log('responses from server for cons');
                 this.setState({cons: res.data});
                 console.log(res.data);
                 // localStorage.setItem('logintoken',res.data)
@@ -124,7 +150,8 @@ class Header_menu_cat extends React.Component {
                 method: 'post',
                 url: apiurl + '/api/getwhilecityselected',
                 data: {
-                    cid: this.refs.cities.value
+                    cid: this.refs.cities.value,
+                    sid:'empty',
                 }, headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
                 }
@@ -133,6 +160,7 @@ class Header_menu_cat extends React.Component {
                     console.log(res.data);
                     this.setState({'cons':res.data.cons});
                     this.setState({'connumbers':res.data.con_numbers});
+                    this.setState({'names':res.data.nn});
                     // localStorage.setItem('logintoken',res.data)
                 })
         }else{
@@ -140,11 +168,12 @@ class Header_menu_cat extends React.Component {
             this.getcities(id);
             this.getconnumbers(id);
             this.getcons(id);
+            this.getnames(id);
         }
 
     }
     getwhenconnumberschange(){
-        console.log("while cities is selected");
+        console.log("while connumber is selected");
         if(this.refs.connumbers.value !== 'none'){
             return axios({
                 method: 'post',
@@ -158,16 +187,45 @@ class Header_menu_cat extends React.Component {
                 .then(res => {
                     console.log(res.data);
                     this.setState({'cons':res.data.cons});
+                    this.setState({'names':res.data.nn});
 
                     // localStorage.setItem('logintoken',res.data)
                 })
         }else{
             let id='';
             this.getcities(id);
-            this.getconnumbers(id);
             this.getcons(id);
+            this.getnames(id);
+
         }
 
+    }
+    getwhenconchange(){
+        console.log("while con is selected");
+        if(this.refs.cons.value !== 'none'){
+            return axios({
+                method: 'post',
+                url: apiurl + '/api/getwhenconchange',
+                data: {
+                    conid: this.refs.cons.value
+                }, headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
+                }
+            })
+                .then(res => {
+                    console.log(res.data);
+                    this.setState({'names':res.data.nn});
+
+                    // localStorage.setItem('logintoken',res.data)
+                })
+        }else{
+            let id='';
+            this.getcities(id);
+            this.getcons(id);
+            this.getnames(id);
+
+        }
+      console.log(this.refs.cons.value)
     }
     handlesearch(){
     console.log(this.refs.cities.value)
@@ -261,9 +319,15 @@ class Header_menu_cat extends React.Component {
                                     }} required={'required'}>
                                         <option value="none">Townships&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>
                                         {this.state.cities.map((value) => {
-                                            return (
-                                                <option value={value.id}>{value.name}</option>
-                                            )
+                                            // zawgyi error
+
+                                                return (
+                                                    <option className="changeMe" value={value.id} >{value.name}</option>
+                                                )
+
+
+
+
 
                                         })}
                                     </select>
@@ -286,7 +350,7 @@ class Header_menu_cat extends React.Component {
                                 </div>
                                 <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
 
-                                    <select class="btn btn-lg btn-danger input-lg yk-background"  ref="cons" id="sel1" style={{
+                                    <select class="btn btn-lg btn-danger input-lg yk-background"  ref="cons" id="sel1" onChange={this.getwhenconchange} style={{
                                         width: '100%', fontSize: '10px',
                                         fontWeight: 'bolder'
                                     }} required={'required'}>
@@ -300,14 +364,17 @@ class Header_menu_cat extends React.Component {
                                     </select>
                                 </div>
                                 <div class="col-sm-4 col-lg-2 mt-3 mt-lg-0">
-                                    <select class="btn btn-lg btn-danger input-lg yk-background" ref="name" id="sel1" style={{
+                                    <select class="btn btn-lg btn-danger input-lg yk-background"  ref="names" id="sel1" style={{
                                         width: '100%', fontSize: '10px',
                                         fontWeight: 'bolder'
                                     }} required={'required'}>
-                                        <option>Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                        <option value="none">Names  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                                        {this.state.names.map((value) => {
+                                            return (
+                                                <option value={value.id}>{value.name}</option>
+                                            )
+
+                                        })}
                                     </select>
                                 </div>
                                 <div class="col-sm-4 col-lg-4 mt-3 mt-lg-0">

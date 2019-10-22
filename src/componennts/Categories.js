@@ -1,7 +1,6 @@
 import React from 'react';
 import "../css/open-iconic-bootstrap.min.css";
 import "../css/animate.css";
-
 import "../css/owl.carousel.min.css";
 import "../css/owl.theme.default.min.css";
 import "../css/magnific-popup.css";

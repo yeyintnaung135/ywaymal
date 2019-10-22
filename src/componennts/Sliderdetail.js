@@ -18,6 +18,7 @@ import apiurl from '../helpers/apiurl'
 
 import axios from 'axios';
 import {redirecttologinifnotauth} from '../helpers/redirecttologinifnotauth';
+import Ads from "./Ads";
 
 
 //this is create component with reactcomponent that is called stateful components
@@ -190,14 +191,14 @@ class Sliderdetail extends React.Component {
 
 
                     {/*About Us Section*/}
-                    <div className="col-12 col-md-6">
+                    <div className="col-sm-12 col-md-6 col-lg-8">
                         <div class="col-sm-12">
 
                             <div class="row col-sm-12 d-flex ">
                                 <div class="col-sm-12" style={{paddingTop: '23p'}}>
                                     <div class="pb-md-5">
-                                        <video id="to_reload_slide" style={{width: '100%', height: 'auto'}} controls>
-                                            <source id="to_reload_slide_src"
+                                        <video id="to_reload_slide" style={{width: '100%', height: '481px'}} controls>
+                                             <source id="to_reload_slide_src"
                                                     src={apiurl+'/backend/admin/news/' +localStorage.getItem('slide_video')}
                                                     type='video/mp4'/>
                                             Your browser does not support the video tag.
@@ -215,24 +216,9 @@ class Sliderdetail extends React.Component {
 
 
                     {/*top new and ads section*/}
-                    <div className="col-12 col-md-3">
-                        {/*ads section*/}
-                        <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/ads.png'}
-                             alt="First slide" style={{height: '300px'}}/>
-                        <br></br>
-                        <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/ads.png'}
-                             alt="First slide" style={{height: '300px'}}/>
-                        <br></br>
-                        {/*end ads section*/}
-                        {/*top news section*/}
-
-                        <div style={{border: '2px solid #c7baaf47;padding: 12px'}}>
-                            <Topnews/>
-
-
-                        </div>
-                        {/*end top news section*/}
-
+                    <div className="col-12 col-sm-12 col-md-2 col-lg-2">
+                        <Ads/>
+                        <Topnews/>
 
                     </div>
                     {/*top new and ads section*/}

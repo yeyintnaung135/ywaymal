@@ -18,6 +18,7 @@ import Newsdetail from "./componennts/Newsdetail";
 
 import Videodetail from "./componennts/videodetail";
 import ScrollToTop from 'react-router-scroll-top';
+import MainSlider from './componennts/MainSlider';
 
 
 import { createBrowserHistory as Bh } from 'history';
@@ -160,6 +161,7 @@ class Root extends React.Component {
                     <Route exact path="/news_detail" component={Newsdetail}/>
                     <Route exact path="/home" component={Homepage}/>
                     <Route exact path="/footer" component={Footerpage}/>
+                    {/*<Route exact path="/ms" component={MainSlider}/>*/}
                     <Route exact path="/search_result/:cities_id/:cons_id/:con_numbers_id" component={Searchresult} />
 
                     {/*this videotail route is for a route with query parameter*/}

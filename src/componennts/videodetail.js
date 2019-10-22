@@ -22,6 +22,7 @@ import MetaTags from "react-meta-tags";
 import axios from 'axios';
 
 import {redirecttologinifnotauth} from '../helpers/redirecttologinifnotauth';
+import Ads from "./Ads";
 
 
 //this is create component with reactcomponent that is called stateful components
@@ -46,7 +47,7 @@ class Videodetail extends React.Component {
 
     componentWillMount() {
         //redirect if not authenciate
-        // redirecttologinifnotauth();
+        redirecttologinifnotauth();
         this.getvideodetail();
 
         this.getvideocomments();
@@ -419,7 +420,7 @@ class Videodetail extends React.Component {
                     {/*About Us Section*/}
                     <div className="col-sm-12 col-md-6 col-lg-8">
                         <div class="col-12" style={{paddingTop: '23p'}}>
-                            <video id="to_reload" style={{width: '100%', height: 'auto'}} controls>
+                            <video id="to_reload" style={{width: '100%', height: '481px'}} controls>
                                 <source id="to_reload_src"
                                         src={apiurl + '/backend/admin/videos/' + localStorage.getItem('video_link')}
                                         type='video/mp4'/>
@@ -651,24 +652,8 @@ class Videodetail extends React.Component {
                     {/*top new and ads section*/
                     }
                     <div className="col-12 col-sm-12 col-md-2 col-lg-2">
-                        {/*ads section*/}
-                        <img className="d-block w-100"
-                             src={process.env.PUBLIC_URL + '/images/aad.png'}
-                             alt="First slide" style={{height: '300px'}}/>
-                        <br></br>
-                        <img className="d-block w-100"
-                             src={process.env.PUBLIC_URL + '/images/aad.png'}
-                             alt="First slide" style={{height: '300px'}}/>
-                        <br></br>
-                        {/*end ads section*/}
-                        {/*top news section*/}
-
-                        <div style={{border: '2px solid #c7baaf47;padding: 12px'}}>
-                            <Topnews/>
-
-                        </div>
-                        {/*end top news section*/}
-
+                        <Ads/>
+                        <Topnews/>
 
                     </div>
                     {/*top new and ads section*/

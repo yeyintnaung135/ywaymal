@@ -14,6 +14,7 @@ import "../css/style.css";
 import "../css/custom.css";
 import Topnews from "./topnews";
 import Categories from "./Categories";
+import Ads from "./Ads";
 import Header_menu_cat from "./Header_menu_cat";
 import MainSlider from "./MainSlider";
 import Footerpage from "./footerpage";
@@ -25,6 +26,7 @@ import {Link} from "react-router-dom";
 import {redirecttologinifnotauth} from '../helpers/redirecttologinifnotauth'
 import Tooglevoteform from "./togglevoteform";
 import {FacebookShareButton} from 'react-share';
+import EllipsisText from "react-ellipsis-text";
 
 
 class Homepage extends React.Component {
@@ -49,6 +51,7 @@ class Homepage extends React.Component {
         this.toggelVote = this.toggelVote.bind(this);
         this.modeltohide = this.modeltohide.bind(this);
         this.testreducer = this.testreducer.bind(this);
+        this.onclickplay = this.onclickplay.bind(this);
 
     }
 
@@ -209,15 +212,16 @@ class Homepage extends React.Component {
 
     modeltohide(id) {
         console.log('to model hide');
-        document.getElementById('myModal'+id).classList.remove("show");
+        document.getElementById('myModal' + id).classList.remove("show");
         console.log('remove show');
 
-        document.getElementById('myModal'+id).classList.remove("fade");
+        document.getElementById('myModal' + id).classList.remove("fade");
         console.log('remove fade');
 
-        document.getElementById('myModal'+id).style.display = "none";
-        document.getElementById('myModal'+id).setAttribute("aria-modal", "false");
+        document.getElementById('myModal' + id).style.display = "none";
+        document.getElementById('myModal' + id).setAttribute("aria-modal", "false");
     }
+
     handleClick(event) {
         // pagination.event
         console.log(event.target.id)
@@ -236,6 +240,11 @@ class Homepage extends React.Component {
         //for reload new src
 
 
+    }
+
+    onclickplay(id) {
+        console.log(id)
+        return window.location.assign('https://www.ywaymal.com/video_detail?id=' + id);
     }
 
     getVideos() {
@@ -272,10 +281,7 @@ class Homepage extends React.Component {
         {
             this.getVideos();
             this.testreducer();
-
         }
-
-
         const name = index => {
             var joined = this.state.videostoplay.concat(index);
             this.setState({videostoplay: joined})
@@ -283,90 +289,61 @@ class Homepage extends React.Component {
         const videos = this.state.videos;
         const currentPage = this.state.currentPage;
         const todosPerPage = this.state.todosPerPage;
-
         // Logic for displaying current contents
         const indexOfLastTodo = currentPage * todosPerPage;
         const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
-
         // const currentTodosc = _.chunk(this.state.test,1)
         const currentTodos = videos.slice(indexOfFirstTodo, indexOfLastTodo)
-
         const renderTodos = currentTodos.map((todo, index) => {
             return (
                 <div className="row mb-5" id="toscroll">
-
-                    <div className="col-sm-12 col-md-12 col-xl-5">
-                        <video id={'to_reload' + todo.id} style={{width: '100%', height: 'auto'}}
-                               onPlaying={this.handleVideoshow}
-                               poster={apiurl + '/backend/admin/videos/images/' + todo.image}
-                               controls>
-                            <source id={'to_reload_src' + todo.id}
-                                    src={apiurl + '/backend/admin/videos/' + todo.link}
-                                    type={todo.video_type}/>
-                            Your browser does not support the video tag.
-                        </video>
+                    <div className="col-sm-12 col-md-12 col-xl-5 video-thumbnail"
+                         onClick={() => this.onclickplay(todo.id)}>
+                        <img className="" src={apiurl + '/backend/admin/videos/images/' + todo.image}
+                             style={{width: '100%', height: 'auto'}}/>
                         <div className="col-sm-12">
                             <a href="#">{todo.created_at}</a>
                         </div>
                     </div>
                     <div className="text mt-3  col-sm-12 col-xl-7" style={{padding: '0px'}}>
-
-
-                        <div style={{height: "50%"}}><h3
-                            className="heading yk_text text-center">{todo.title}</h3></div>
+                        <div className="text-center" style={{
+                            fontSize: '18px',
+                            color: 'rgb(102, 102, 102)',
+                            fontWeight: 'bold'
+                        }}> {todo.title}</div>
+                        <br></br>
                         <div className="meta mb-2 sm-12">
-
                             <div className="pr-sm-5">
 
-                                {(() => {
-                                    if (todo.voted == 'yes') {
-                                        return (
-                                            <a onClick={() => this.handleDeleteVote(index, todo.id)}
-                                               class={"btn  btn-sm  btn-danger yk-background"}
-                                               style={{color: 'white'}}>
-                                                <span class="fa fa-thumbs-down"></span>&nbsp;&nbsp;
-                                                Unvote&nbsp;{todo.total_vote_count}
-                                            </a>
-                                        )
-                                    }
-                                    else {
-                                        return (
-                                            <a onClick={() => this.handleAddVote(index, todo.id)}
-                                               class={"btn  btn-sm  btn-danger yk-background"}
-                                               style={{color: 'white'}}>
-                                                <span class="fa fa-thumbs-up"></span>&nbsp;&nbsp;
-                                                Vote&nbsp;{todo.total_vote_count}
-                                            </a>
-                                        )
-                                    }
-                                })()}
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                <a href="contact_us" data-toggle="modal" data-target={"#myModal"+todo.id}
-                                   class={"btn  btn-sm  btn-danger yk-background"}
-                                   style={{color: 'white'}}>
-                                    <span class="fa fa-share-alt"></span>&nbsp;&nbsp;Share&nbsp;
-                                </a>
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                <Link to={{pathname: "/video_detail", search: "?id=" + todo.id}}
-                                      class={"btn  btn-sm  btn-danger yk-background"}>
-                                    <span class="fa fa-comments-o"></span> Comment
-                                </Link>
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                <Link to={{pathname: "/video_detail", search: "?id=" + todo.id}}
-                                      class="btn btn-sm btn-danger yk-background">
-                                    See Detail... <span class="fa fa-arrow-circle-right"></span>
-                                </Link>
+                                <p>
+                                    {(() => {
+                                        if (todo.description !== '') {
+                                            return (
+                                                <EllipsisText text={todo.description} length={"85"}/>
+
+                                            )
+                                        } else {
+                                            return (
+                                                <div>{todo.description}</div>
+                                            )
+                                        }
+                                    })()}
+                                </p>
 
                                 <br></br>
 
+
                             </div>
 
+
+                        </div>
+
+                        <div className="meta mb-2 sm-12 d-flex justify-content-center ">
+
+                            <Link to={{pathname: "/video_detail", search: "?id=" + todo.id}}
+                                  class="btn btn-sm btn-danger yk-background">
+                                See Detail... <span class="fa fa-arrow-circle-right"></span>
+                            </Link>
 
                         </div>
 
@@ -384,17 +361,17 @@ class Homepage extends React.Component {
 
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-
-                                {/*<!-- Modal body -->*/}
+                                 {/*<!-- Modal body -->*/}
                                 <div class="modal-body">
-                                    <div class="fb-share-button" onClick={()=>this.modeltohide(todo.id)} class="btn btn-info"
+                                    <div class="fb-share-button" onClick={() => this.modeltohide(todo.id)}
+                                         class="btn btn-info"
                                          style={{color: 'white !important', background: '#3b5998'}}
-                                         data-href={"https://"+window.location.host+'/video_detail?id='+todo.id}
+                                         data-href={"https://" + window.location.host + '/video_detail?id=' + todo.id}
                                          data-layout="button_count" data-size="large"><a target="_blank" style={{
                                         color: 'white',
                                         background: '#3b5998'
                                     }}
-                                                                                         href={"https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent("https://"+window.location.host+'/video_detail?id='+todo.id)+"&amp;src=sdkpreparse"}
+                                                                                         href={"https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent("https://" + window.location.host + '/video_detail?id=' + todo.id) + "&amp;src=sdkpreparse"}
                                                                                          class="fb-xfbml-parse-ignore"><span
                                         class="fa fa-facebook"></span> Share on facebook <span
                                         class="fa fa-share"></span> </a></div>
@@ -411,14 +388,11 @@ class Homepage extends React.Component {
                 </div>
             )
                 ;
-
-
         });
 
         // Logic for displaying page numbers
         const pageNumbers = [];
         for (let i = 1; i <= Math.ceil(videos.length / todosPerPage); i++) {
-
             pageNumbers.push(i);
         }
 
@@ -484,17 +458,12 @@ class Homepage extends React.Component {
                     {/*categories section*/}
                     <Categories/>
                     {/*end categories section*/}
-                    <div className="col-sm-12 col-md-6 col-lg-8">
+                    <div className="col-sm-12 col-md-6 col-lg-8 pl-md-n2 pr-md-n2" >
                         {/*Selider section*/}
                         <MainSlider/>
                         {/*end slider section*/}
-
-
                         <div className="col-sm-12" style={{borderBottom: '2px solid #f1e6be'}}>&nbsp;</div>
-
-
                         <div className="col-sm-12">
-
                             <div className="col-sm-12">&nbsp;</div>
                             <div className="col-md-12" style={{textAlign: 'center'}}>
                                 <h5 className="mb-1 yk-title-text" style={{textAlign: 'center'}}>
@@ -534,25 +503,13 @@ class Homepage extends React.Component {
                     </div>
                     {/*top new section*/}
 
-
+                    {/*//ads*/}
                     <div className="col-12 col-sm-12 col-md-2 col-lg-2">
-
-                        <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/aad.png'}
-                             alt="First slide" style={{height: '300px'}}/>
-                        <br></br>
-                        <img className="d-block w-100" src={process.env.PUBLIC_URL + '/images/aad.png'}
-                             alt="First slide" style={{height: '300px'}}/>
-                        <br></br>
-
-
-                        {/*//tops news*/}
+                        <Ads/>
                         <Topnews/>
 
-
-                        {/*//tops news*/}
-
                     </div>
-
+                    {/*//ads*/}
                     {/*end ads section*/}
                 </div>
                 {/*body section*/}
