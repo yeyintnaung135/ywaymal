@@ -14,7 +14,6 @@ import "../css/style.css";
 const Categories = () => {
     return (
         <div class="col-12 col-sm-12 col-md-3 col-lg-2 panel-group" >
-                <div class="panel panel-default ml-0 mr-0">
                     <div class="panel-heading">
                         <h4 class="panel-title" style={{textAlign:'center'}}>
                             <div class="to_hide" style={{border:'1px solid #e4dddd'}}>
@@ -86,7 +85,6 @@ const Categories = () => {
 
                     </div>
                 </div>
-        </div>
 
 
     );

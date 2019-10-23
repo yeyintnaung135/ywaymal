@@ -342,7 +342,7 @@ class Header_menu_cat extends React.Component {
 
                                         {this.state.connumbers.map((value) => {
                                             return (
-                                                <option value={value.id}>{value.number}</option>
+                                                <option value={value.id}>{value.id}.{value.number}</option>
                                             )
 
                                         })}
@@ -357,7 +357,7 @@ class Header_menu_cat extends React.Component {
                                         <option value="none">Constituencies  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                         {this.state.cons.map((value) => {
                                             return (
-                                                <option value={value.id}>{value.name}</option>
+                                                <option value={value.id}>{value.id}.{value.name}</option>
                                             )
 
                                         })}
