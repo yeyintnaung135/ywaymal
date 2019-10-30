@@ -7,7 +7,9 @@ import * as serviceWorker from './serviceWorker';
 import {createStore} from 'redux';
 import allreducers from './reducers'
 import {Provider} from 'react-redux'
+
 const mystore=createStore(allreducers);
+
 ReactDOM.render(<Provider store={mystore}><Root /></Provider>, document.getElementById('root'));
 //this is all app data store
 

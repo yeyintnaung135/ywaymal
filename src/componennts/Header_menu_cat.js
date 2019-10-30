@@ -20,6 +20,7 @@ class Header_menu_cat extends React.Component {
 
         this.state = {
             cities: [],
+            ssts:[],
             connumbers:[],
             cons:[],
             names:[],
@@ -28,6 +29,7 @@ class Header_menu_cat extends React.Component {
         this.getwhencitychange=this.getwhencitychange.bind(this);
         this.getwhenconchange=this.getwhenconchange.bind(this);
         this.getnames=this.getnames.bind(this);
+        this.getwhenstatechange=this.getwhenstatechange.bind(this);
         this.getwhenconnumberschange=this.getwhenconnumberschange.bind(this);
 
 
@@ -39,6 +41,7 @@ class Header_menu_cat extends React.Component {
         this.getnames(id);
         this.getconnumbers(id);
         this.getcons(id);
+        this.getstates(id);
 
     }
     //tem hidden
@@ -83,6 +86,26 @@ class Header_menu_cat extends React.Component {
         console.log(this.state.runvideos);
     }
     //get cities
+    //get staes
+    getstates(id) {
+        return axios({
+            method: 'post',
+            url: apiurl + '/api/getstates'+id,
+            data: {
+                token: localStorage.getItem('logintoken')
+            }, headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
+            }
+        })
+            .then(res => {
+                console.log('responses from server for cities');
+                this.setState({ssts: res.data});
+                console.log(res.data);
+                // localStorage.setItem('logintoken',res.data)
+            })
+        console.log(this.state.runvideos);
+    }
+    //get cities
 
     //get names
     getnames(id) {
@@ -117,7 +140,7 @@ class Header_menu_cat extends React.Component {
             }
         })
             .then(res => {
-                console.log('responses from server for cities');
+                console.log('responses from server for con no ');
                 this.setState({connumbers: res.data});
                 console.log(res.data);
                 // localStorage.setItem('logintoken',res.data)
@@ -159,6 +182,43 @@ class Header_menu_cat extends React.Component {
                 .then(res => {
                     console.log(res.data);
                     this.setState({'cons':res.data.cons});
+                    this.refs.states.value='none';
+                    this.setState({'connumbers':res.data.con_numbers});
+                    this.setState({'names':res.data.nn});
+                    // localStorage.setItem('logintoken',res.data)
+                })
+        }else{
+            var id='';
+            this.getcities(id);
+            this.getconnumbers(id);
+            this.getcons(id);
+            this.getnames(id);
+            this.getstates(id);
+
+        }
+
+    }
+    getwhenstatechange(){
+        console.log("while State is selected");
+        if(this.refs.states.value !== 'none'){
+            return axios({
+                method: 'post',
+                url: apiurl + '/api/getwhilecityselected',
+                data: {
+                    cid: 'empty',
+                    sid:this.refs.states.value,
+                }, headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
+                }
+            })
+                .then(res => {
+                    console.log(res.data);
+                    console.log('responses from server for states');
+                    this.refs.cities.value='none';
+
+                    this.setState({'cons':res.data.cons});
+                    var id='';
+                    this.getcities(id);
                     this.setState({'connumbers':res.data.con_numbers});
                     this.setState({'names':res.data.nn});
                     // localStorage.setItem('logintoken',res.data)
@@ -169,6 +229,8 @@ class Header_menu_cat extends React.Component {
             this.getconnumbers(id);
             this.getcons(id);
             this.getnames(id);
+            this.getstates(id);
+
         }
 
     }
@@ -196,6 +258,8 @@ class Header_menu_cat extends React.Component {
             this.getcities(id);
             this.getcons(id);
             this.getnames(id);
+            this.getstates(id);
+
 
         }
 
@@ -223,6 +287,8 @@ class Header_menu_cat extends React.Component {
             this.getcities(id);
             this.getcons(id);
             this.getnames(id);
+            this.getstates(id);
+
 
         }
       console.log(this.refs.cons.value)
@@ -231,7 +297,7 @@ class Header_menu_cat extends React.Component {
     console.log(this.refs.cities.value)
     console.log(this.refs.cons.value)
     console.log(this.refs.connumbers.value)
-        return window.location.assign('https://www.ywaymal.com/search_result/'+this.refs.cities.value+'/'+this.refs.cons.value+'/'+this.refs.connumbers.value)
+        return window.location.assign('https://www.ywaymal.com/search_result/'+this.refs.cities.value+'/'+this.refs.states.value+'/'+this.refs.cons.value+'/'+this.refs.connumbers.value+'/'+this.refs.names.value+'/')
     }
 
     //get cities
@@ -279,14 +345,14 @@ class Header_menu_cat extends React.Component {
                             <div
                                 class="pt-sm-2 col-md-6 d-flex justify-content-center justify-content-xs-end  justify-content-md-end">
                                 <div class=" ">
-                                    <a href="home" class={"btn btn-sm btn-danger float-sm-none yk-background"}
+                                    <a href="https://www.ywaymal.com/home" class={"btn btn-sm btn-danger float-sm-none yk-background"}
                                        style={{color: 'white'}}
                                     >
                                         <span class="fa fa-home"></span>&nbsp;&nbsp;
 
                                         Home</a>
                                     &nbsp;
-                                    <a href="about_us" class={"btn  btn-sm  btn-danger yk-background"}
+                                    <a href="https://www.ywaymal.com/about_us" class={"btn  btn-sm  btn-danger yk-background"}
                                        style={{color: 'white'}}
                                     >
                                         <span class="fa fa-info-circle"></span>&nbsp;&nbsp;
@@ -294,7 +360,7 @@ class Header_menu_cat extends React.Component {
                                         About &nbsp;</a>
                                     &nbsp;
 
-                                    <a href="contact_us" class={"btn  btn-sm  btn-danger yk-background"}
+                                    <a href="https://www.ywaymal.com/contact_us" class={"btn  btn-sm  btn-danger yk-background"}
                                        style={{color: 'white'}}
                                     >
                                         <span class="fa fa-phone"></span>&nbsp;&nbsp;
@@ -313,8 +379,28 @@ class Header_menu_cat extends React.Component {
                         <div style={{width: '100%'}}>
                             <div class="form-row">
                                 <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
+                                    <select ref='states' onChange={this.getwhenstatechange} class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
+                                        width: '100%', fontSize: '13px',
+                                        fontWeight: 'bolder'
+                                    }} required={'required'}>
+                                        <option value="none">States&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>
+                                        {this.state.ssts.map((value) => {
+                                            // zawgyi error
+
+                                            return (
+                                                <option className="changeMe" value={value.id} >{value.name}</option>
+                                            )
+
+
+
+
+
+                                        })}
+                                    </select>
+                                </div>
+                                <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
                                     <select ref='cities' onChange={this.getwhencitychange} class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
-                                        width: '100%', fontSize: '10px',
+                                        width: '100%', fontSize: '13px',
                                         fontWeight: 'bolder'
                                     }} required={'required'}>
                                         <option value="none">Townships&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>
@@ -335,14 +421,14 @@ class Header_menu_cat extends React.Component {
                                 <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
 
                                     <select ref="connumbers" onChange={this.getwhenconnumberschange} class="btn btn-lg btn-danger input-lg yk-background" id="sel1"  style={{
-                                        width: '100%', fontSize: '10px',
+                                        width: '100%', fontSize: '13px',
                                         fontWeight: 'bolder'
                                     }} required={'required'}>
                                         <option value="none">Constituencies no. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>
 
                                         {this.state.connumbers.map((value) => {
                                             return (
-                                                <option value={value.id}>{value.id}.{value.number}</option>
+                                                <option value={value.id}>{value.number}   {value.cities}</option>
                                             )
 
                                         })}
@@ -351,13 +437,13 @@ class Header_menu_cat extends React.Component {
                                 <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
 
                                     <select class="btn btn-lg btn-danger input-lg yk-background"  ref="cons" id="sel1" onChange={this.getwhenconchange} style={{
-                                        width: '100%', fontSize: '10px',
+                                        width: '100%', fontSize: '13px',
                                         fontWeight: 'bolder'
                                     }} required={'required'}>
                                         <option value="none">Constituencies  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                         {this.state.cons.map((value) => {
                                             return (
-                                                <option value={value.id}>{value.id}.{value.name}</option>
+                                                <option value={value.id}>{value.name} {value.number}   {value.cities} </option>
                                             )
 
                                         })}
@@ -365,10 +451,10 @@ class Header_menu_cat extends React.Component {
                                 </div>
                                 <div class="col-sm-4 col-lg-2 mt-3 mt-lg-0">
                                     <select class="btn btn-lg btn-danger input-lg yk-background"  ref="names" id="sel1" style={{
-                                        width: '100%', fontSize: '10px',
+                                        width: '100%', fontSize: '13px',
                                         fontWeight: 'bolder'
                                     }} required={'required'}>
-                                        <option value="none">Names  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                                        <option value="none">Names/Parties &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                         {this.state.names.map((value) => {
                                             return (
                                                 <option value={value.id}>{value.name}</option>
@@ -377,9 +463,9 @@ class Header_menu_cat extends React.Component {
                                         })}
                                     </select>
                                 </div>
-                                <div class="col-sm-4 col-lg-4 mt-3 mt-lg-0">
+                                <div class="col-sm-2 col-lg-2 mt-3 mt-lg-0">
                                     <button class="btn btn-danger " onClick={this.handlesearch}
-                                            style={{color: '#dca83f', background: 'white', width: '100%'}}><span
+                                            style={{color: '#dca83f', background: 'white', width: '100%',height: '87%'}}><span
                                         class="fa fa-search"></span> Search
                                     </button>
                                 </div>

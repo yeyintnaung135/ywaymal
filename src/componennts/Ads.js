@@ -55,26 +55,24 @@ class Ads extends React.Component {
                 // localStorage.setItem('logintoken',res.data)
             })
         console.log('getads')
-
-
     }
-
     render() {
         return (
             <div>
                 <div>
                     <div id="ads1" class="carousel slide" data-ride="carousel" style={{height: '300px'}}>
-
                         <div class="carousel-inner">
                             {this.state.ads.map(
                                 (item, key) => {
                                     if (key === 0) {
                                         return (
                                             <div class="carousel-item active">
+                                              <a href={item.link}>
                                                 <img class="d-block w-100"
                                                      src={apiurl + '/backend/admin/ads/' + item.image}
                                                      alt="First slide"
                                                      style={{height: '300px'}}/>
+                                              </a>
                                             </div>
                                         )
                                     }
@@ -82,10 +80,14 @@ class Ads extends React.Component {
                                         {
                                             return (
                                                 <div class="carousel-item">
+                                                    <a href={item.link}>
+
                                                     <img class="d-block w-100"
                                                          src={apiurl + '/backend/admin/ads/' + item.image}
                                                          alt="First slide"
                                                          style={{height: '300px'}}/>
+                                                    </a>
+
                                                 </div>
                                             )
                                         }
@@ -108,15 +110,18 @@ class Ads extends React.Component {
                     <div id="ads2" class="carousel slide" data-ride="carousel" style={{height: '300px'}}>
 
                         <div class="carousel-inner">
-                            {this.state.ads.map(
-                                (item, key) => {
-                                    if (key === 0) {
+                            {this.state.secads.map(
+                                (i, k) => {
+                                    if (k === 0) {
                                         return (
                                             <div class="carousel-item active">
+                                                <a href={i.link}>
+
                                                 <img class="d-block w-100"
-                                                     src={apiurl + '/backend/admin/ads/' + item.image}
+                                                     src={apiurl + '/backend/admin/ads/' + i.image}
                                                      alt="First slide"
                                                      style={{height: '300px'}}/>
+                                                </a>
                                             </div>
                                         )
                                     }
@@ -124,10 +129,14 @@ class Ads extends React.Component {
                                     {
                                         return (
                                             <div class="carousel-item">
+                                                <a href={i.link}>
+
                                                 <img class="d-block w-100"
-                                                     src={apiurl + '/backend/admin/ads/' + item.image}
+                                                     src={apiurl + '/backend/admin/ads/' + i.image}
                                                      alt="First slide"
                                                      style={{height: '300px'}}/>
+                                                </a>
+
                                             </div>
                                         )
                                     }
@@ -148,8 +157,6 @@ class Ads extends React.Component {
                 </div>
             </div>
         )
-
-
     }
 
 

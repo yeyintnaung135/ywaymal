@@ -88,15 +88,8 @@ class Login extends React.Component {
 
             }
         }
-
-
         console.log('Sign up function')
-
     }
-
-
-
-
     responseFacebook = (response) => {
         console.log('facebook function fire ')
         // this is facebook callback function

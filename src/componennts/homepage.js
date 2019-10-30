@@ -89,12 +89,10 @@ class Homepage extends React.Component {
 
         }
     }
-
-
     componentWillMount() {
         //start page this method will firstly fire
         //if not authenciate rediret to login from
-        // redirecttologinifnotauth();
+        redirecttologinifnotauth();
 
         var loader = function () {
             setTimeout(function () {
@@ -120,8 +118,6 @@ class Homepage extends React.Component {
     }
 
     handleAddVote(curarrayid, videoid) {
-
-
         return axios({
             method: 'post',
             url: apiurl + '/api/addvote',
@@ -340,10 +336,10 @@ class Homepage extends React.Component {
 
                         <div className="meta mb-2 sm-12 d-flex justify-content-center ">
 
-                            <Link to={{pathname: "/video_detail", search: "?id=" + todo.id}}
-                                  class="btn btn-sm btn-danger yk-background">
-                                See Detail... <span class="fa fa-arrow-circle-right"></span>
-                            </Link>
+                            {/*<Link to={{pathname: "/video_detail", search: "?id=" + todo.id}}*/}
+                                  {/*class="btn btn-sm btn-danger yk-background">*/}
+                                {/*See Detail... <span class="fa fa-arrow-circle-right"></span>*/}
+                            {/*</Link>*/}
 
                         </div>
 

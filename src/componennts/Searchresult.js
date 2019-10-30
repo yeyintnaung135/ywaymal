@@ -50,13 +50,18 @@ class Searchresult extends React.Component {
         this.toggelVote = this.toggelVote.bind(this);
         this.modeltohide = this.modeltohide.bind(this);
         this.testreducer = this.testreducer.bind(this);
+        this.onclickplay = this.onclickplay.bind(this);
+
 
     }
 
     testreducer() {
         console.log(this.props.votes);
     };
-
+    onclickplay(id) {
+        console.log(id)
+        return window.location.assign('https://www.ywaymal.com/video_detail?id='+ id);
+    }
     handleVideoshow(event) {
         console.log(event.target.id);//get target id
 
@@ -93,9 +98,21 @@ class Searchresult extends React.Component {
         //start page this method will firstly fire
         //if not authenciate rediret to login from
         redirecttologinifnotauth();
+        console.log('data from link');
+        console.log('cities');
         console.log(this.props.match.params.cities_id);
+        console.log('state');
+
+        console.log(this.props.match.params.state_id);
+        console.log('con');
+
         console.log(this.props.match.params.cons_id);
+        console.log('con no');
+
         console.log(this.props.match.params.con_numbers_id);
+        console.log('cities');
+
+        console.log(this.props.match.params.name);
         var loader = function () {
             setTimeout(function () {
                 window.$('#ftco-loader').removeClass('show');
@@ -251,6 +268,8 @@ class Searchresult extends React.Component {
                 data: {
                     cities_id: this.props.match.params.cities_id,
                     cons_id: this.props.match.params.cons_id,
+                    state_id:this.props.match.params.state_id,
+                    name:this.props.match.params.name,
                     con_numbers_id: this.props.match.params.con_numbers_id,
                 }, headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
@@ -302,78 +321,53 @@ class Searchresult extends React.Component {
                 <div className="row mb-5" id="toscroll">
 
 
-                    <div className="col-sm-12 col-md-12 col-xl-5">
-                        <video id={'to_reload' + todo.id} style={{width: '100%', height: 'auto'}}
-                               onPlaying={this.handleVideoshow}
-                               poster={apiurl + '/backend/admin/videos/images/' + todo.image}
-                               controls>
-                            <source id={'to_reload_src' + todo.id}
-                                    src={apiurl + '/backend/admin/videos/' + todo.link}
-                                    type={todo.video_type}/>
-                            Your browser does not support the video tag.
-                        </video>
+                    <div className="col-sm-12 col-md-12 col-xl-5 video-thumbnail"
+                         onClick={() => this.onclickplay(todo.id)}>
+                        <img className="" src={apiurl + '/backend/admin/videos/images/' + todo.image}
+                             style={{width: '100%', height: 'auto'}}/>
                         <div className="col-sm-12">
                             <a href="#">{todo.created_at}</a>
                         </div>
                     </div>
                     <div className="text mt-3  col-sm-12 col-xl-7" style={{padding: '0px'}}>
-
-
-                        <div style={{height: "50%"}}><h3
-                            className="heading yk_text text-center">{todo.title}</h3></div>
+                        <div className="text-center" style={{
+                            fontSize: '18px',
+                            color: 'rgb(102, 102, 102)',
+                            fontWeight: 'bold'
+                        }}> {todo.title}</div>
+                        <br></br>
                         <div className="meta mb-2 sm-12">
-
                             <div className="pr-sm-5">
 
-                                {(() => {
-                                    if (todo.voted == 'yes') {
-                                        return (
-                                            <a onClick={() => this.handleDeleteVote(index, todo.id)}
-                                               class={"btn  btn-sm  btn-danger yk-background"}
-                                               style={{color: 'white'}}>
-                                                <span class="fa fa-thumbs-down"></span>&nbsp;&nbsp;
-                                                Unvote&nbsp;{todo.total_vote_count}
-                                            </a>
-                                        )
-                                    }
-                                    else {
-                                        return (
-                                            <a onClick={() => this.handleAddVote(index, todo.id)}
-                                               class={"btn  btn-sm  btn-danger yk-background"}
-                                               style={{color: 'white'}}>
-                                                <span class="fa fa-thumbs-up"></span>&nbsp;&nbsp;
-                                                Vote&nbsp;{todo.total_vote_count}
-                                            </a>
-                                        )
-                                    }
-                                })()}
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                <a href="contact_us" data-toggle="modal" data-target={"#myModal" + todo.id}
-                                   class={"btn  btn-sm  btn-danger yk-background"}
-                                   style={{color: 'white'}}>
-                                    <span class="fa fa-share-alt"></span>&nbsp;&nbsp;Share&nbsp;
-                                </a>
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                <Link to={{pathname: "/video_detail", search: "?id=" + todo.id}}
-                                      class={"btn  btn-sm  btn-danger yk-background"}>
-                                    <span class="fa fa-comments-o"></span> Comment
-                                </Link>
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                <Link to={{pathname: "/video_detail", search: "?id=" + todo.id}}
-                                      class="btn btn-sm btn-danger yk-background">
-                                    See Detail... <span class="fa fa-arrow-circle-right"></span>
-                                </Link>
+                                <p>
+                                    {(() => {
+                                        if (todo.description !== '') {
+                                            return (
+                                                <div>{todo.description}</div>
+
+                                            )
+                                        } else {
+                                            return (
+                                                <div>{todo.description}</div>
+                                            )
+                                        }
+                                    })()}
+                                </p>
 
                                 <br></br>
 
+
                             </div>
 
+
+                        </div>
+
+                        <div className="meta mb-2 sm-12 d-flex justify-content-center ">
+
+                            {/*<Link to={{pathname: "/video_detail", search: "?id=" + todo.id}}*/}
+                            {/*class="btn btn-sm btn-danger yk-background">*/}
+                            {/*See Detail... <span class="fa fa-arrow-circle-right"></span>*/}
+                            {/*</Link>*/}
 
                         </div>
 
