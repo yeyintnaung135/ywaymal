@@ -173,17 +173,58 @@ class Header_menu_cat extends React.Component {
         console.log(this.state.runvideos);
     }
 
-    getwhencitychange() {
-        console.log("while cities is selectaaed");
+    getwhencitychange(){
+        console.log("while cities is selected");
+        if(this.refs.cities.value !== 'none'){
+            if(this.refs.cities.value.includes('c')){
+                return axios({
+                    method: 'post',
+                    url: apiurl + '/api/getwhilecityselected',
+                    data: {
+                        cid: this.refs.cities.value.substring(1),
+                        sid:'empty',
+                    }, headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
+                    }
+                })
+                    .then(res => {
+                        console.log(res.data);
+                        this.setState({'cons':res.data.cons});
+                        this.setState({'connumbers':res.data.con_numbers});
+                        this.setState({'names':res.data.nn});
+                        // localStorage.setItem('logintoken',res.data)
+                    })
+            }else{
+                return axios({
+                    method: 'post',
+                    url: apiurl + '/api/getwhilecityselected',
+                    data: {
+                        cid: 'empty',
+                        sid:this.refs.cities.value.substring(1),
+                    }, headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
+                    }
+                })
+                    .then(res => {
+                        console.log(res.data);
+                        this.setState({'cons':res.data.cons});
+                        this.setState({'connumbers':res.data.con_numbers});
+                        this.setState({'names':res.data.nn});
+                        // localStorage.setItem('logintoken',res.data)
+                    })            }
+            }
+           else{
+            var id='';
+            this.getcities(id);
+            this.getconnumbers(id);
+            this.getcons(id);
+            this.getnames(id);
+            this.getstates(id);
 
-      console.dir(this.refs.cities.dt)
-
-
-
-
-
+        }
 
     }
+
 
     getwhenstatechange() {
         console.log("while State is selected");
@@ -393,12 +434,12 @@ class Header_menu_cat extends React.Component {
                                         fontWeight: 'bolder'
                                     }} required={'required'}>
                                         <option value="none">
-                                            Regions/States/Townships&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>
+                                            Regions/States/Townships&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                         {this.state.cities.map((value) => {
 
                                             // zawgyi error
                                             return (
-                                                <option className="changeMe" value={value.id} data-id={value.cors}>{value.name}</option>
+                                                <option className="changeMe" value={value.cors+value.id}>{value.name}</option>
                                             )
                                         })}
                                     </select>
