@@ -60,7 +60,7 @@ class Ads extends React.Component {
         return (
             <div>
                 <div>
-                    <div id="ads1" class="carousel slide" data-ride="carousel" style={{height: '300px'}}>
+                    <div id="ads1" class="carousel slide " data-ride="carousel" style={{height: '300px'}}>
                         <div class="carousel-inner">
                             {this.state.ads.map(
                                 (item, key) => {
@@ -71,7 +71,7 @@ class Ads extends React.Component {
                                                 <img class="d-block w-100"
                                                      src={apiurl + '/backend/admin/ads/' + item.image}
                                                      alt="First slide"
-                                                     style={{height: '300px'}}/>
+                                                     style={{height: '300px',width:'80%'}}/>
                                               </a>
                                             </div>
                                         )

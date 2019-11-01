@@ -47,7 +47,7 @@ class Videodetail extends React.Component {
 
     componentWillMount() {
         //redirect if not authenciate
-        redirecttologinifnotauth();
+        // redirecttologinifnotauth();
         this.getvideodetail();
 
         this.getvideocomments();
@@ -420,7 +420,7 @@ class Videodetail extends React.Component {
                     {/*About Us Section*/}
                     <div className="col-sm-12 col-md-6 col-lg-8">
                         <div class="col-12" style={{paddingTop: '23p'}}>
-                            <video id="to_reload" style={{width: '100%', height: '481px'}} controls>
+                            <video id="to_reload" style={{width: '100%', height: 'auto'}} controls>
                                 <source id="to_reload_src"
                                         src={apiurl + '/backend/admin/videos/' + localStorage.getItem('video_link')}
                                         type='video/mp4'/>

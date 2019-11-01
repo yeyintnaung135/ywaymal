@@ -20,23 +20,23 @@ class Header_menu_cat extends React.Component {
 
         this.state = {
             cities: [],
-            ssts:[],
-            connumbers:[],
-            cons:[],
-            names:[],
+            ssts: [],
+            connumbers: [],
+            cons: [],
+            names: [],
         };
-        this.handlesearch=this.handlesearch.bind(this);
-        this.getwhencitychange=this.getwhencitychange.bind(this);
-        this.getwhenconchange=this.getwhenconchange.bind(this);
-        this.getnames=this.getnames.bind(this);
-        this.getwhenstatechange=this.getwhenstatechange.bind(this);
-        this.getwhenconnumberschange=this.getwhenconnumberschange.bind(this);
+        this.handlesearch = this.handlesearch.bind(this);
+        this.getwhencitychange = this.getwhencitychange.bind(this);
+        this.getwhenconchange = this.getwhenconchange.bind(this);
+        this.getnames = this.getnames.bind(this);
+        this.getwhenstatechange = this.getwhenstatechange.bind(this);
+        this.getwhenconnumberschange = this.getwhenconnumberschange.bind(this);
 
 
     }
 
     componentWillMount() {
-        var id='';
+        var id = '';
         this.getcities(id);
         this.getnames(id);
         this.getconnumbers(id);
@@ -44,33 +44,35 @@ class Header_menu_cat extends React.Component {
         this.getstates(id);
 
     }
+
     //tem hidden
-    handletownships(){
+    handletownships() {
         console.log('handle ts fire');
         console.log(this.refs.ts.value);
         return axios({
             method: 'post',
             url: apiurl + '/api/getwhilecityselected',
             data: {
-                cid:this.refs.ts.value,
-                sid:'empty',
+                cid: this.refs.ts.value,
+                sid: 'empty',
                 token: localStorage.getItem('logintoken')
             }, headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
             }
         })
             .then(res => {
-             console.log(res.data);
+                console.log(res.data);
                 // localStorage.setItem('logintoken',res.data)
             });
     }
+
     //temp hidden this
 
     //get cities
     getcities(id) {
         return axios({
             method: 'post',
-            url: apiurl + '/api/getcities'+id,
+            url: apiurl + '/api/getcities' + id,
             data: {
                 token: localStorage.getItem('logintoken')
             }, headers: {
@@ -85,12 +87,13 @@ class Header_menu_cat extends React.Component {
             })
         console.log(this.state.runvideos);
     }
+
     //get cities
     //get staes
     getstates(id) {
         return axios({
             method: 'post',
-            url: apiurl + '/api/getstates'+id,
+            url: apiurl + '/api/getstates' + id,
             data: {
                 token: localStorage.getItem('logintoken')
             }, headers: {
@@ -105,13 +108,14 @@ class Header_menu_cat extends React.Component {
             })
         console.log(this.state.runvideos);
     }
+
     //get cities
 
     //get names
     getnames(id) {
         return axios({
             method: 'post',
-            url: apiurl + '/api/getnames'+id,
+            url: apiurl + '/api/getnames' + id,
             data: {
                 token: localStorage.getItem('logintoken')
             }, headers: {
@@ -126,13 +130,14 @@ class Header_menu_cat extends React.Component {
             })
         console.log(this.state.runvideos);
     }
+
     //get cities
     //get cities
     getconnumbers(id) {
         console.log('get connumberr fire');
         return axios({
             method: 'post',
-            url: apiurl + '/api/getconnumbers'+id,
+            url: apiurl + '/api/getconnumbers' + id,
             data: {
                 token: localStorage.getItem('logintoken')
             }, headers: {
@@ -147,11 +152,12 @@ class Header_menu_cat extends React.Component {
             })
         console.log(this.state.runvideos);
     }
+
     getcons(id) {
         console.log('get cons fire');
         return axios({
             method: 'post',
-            url: apiurl + '/api/getcons'+id,
+            url: apiurl + '/api/getcons' + id,
             data: {
                 token: localStorage.getItem('logintoken')
             }, headers: {
@@ -166,47 +172,28 @@ class Header_menu_cat extends React.Component {
             })
         console.log(this.state.runvideos);
     }
-    getwhencitychange(){
-        console.log("while cities is selected");
-        if(this.refs.cities.value !== 'none'){
-            return axios({
-                method: 'post',
-                url: apiurl + '/api/getwhilecityselected',
-                data: {
-                    cid: this.refs.cities.value,
-                    sid:'empty',
-                }, headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
-                }
-            })
-                .then(res => {
-                    console.log(res.data);
-                    this.setState({'cons':res.data.cons});
-                    this.refs.states.value='none';
-                    this.setState({'connumbers':res.data.con_numbers});
-                    this.setState({'names':res.data.nn});
-                    // localStorage.setItem('logintoken',res.data)
-                })
-        }else{
-            var id='';
-            this.getcities(id);
-            this.getconnumbers(id);
-            this.getcons(id);
-            this.getnames(id);
-            this.getstates(id);
 
-        }
+    getwhencitychange() {
+        console.log("while cities is selectaaed");
+
+      console.dir(this.refs.cities.dt)
+
+
+
+
+
 
     }
-    getwhenstatechange(){
+
+    getwhenstatechange() {
         console.log("while State is selected");
-        if(this.refs.states.value !== 'none'){
+        if (this.refs.states.value !== 'none') {
             return axios({
                 method: 'post',
                 url: apiurl + '/api/getwhilecityselected',
                 data: {
                     cid: 'empty',
-                    sid:this.refs.states.value,
+                    sid: this.refs.states.value,
                 }, headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
                 }
@@ -214,17 +201,17 @@ class Header_menu_cat extends React.Component {
                 .then(res => {
                     console.log(res.data);
                     console.log('responses from server for states');
-                    this.refs.cities.value='none';
+                    this.refs.cities.value = 'none';
 
-                    this.setState({'cons':res.data.cons});
-                    var id='';
+                    this.setState({'cons': res.data.cons});
+                    var id = '';
                     this.getcities(id);
-                    this.setState({'connumbers':res.data.con_numbers});
-                    this.setState({'names':res.data.nn});
+                    this.setState({'connumbers': res.data.con_numbers});
+                    this.setState({'names': res.data.nn});
                     // localStorage.setItem('logintoken',res.data)
                 })
-        }else{
-            let id='';
+        } else {
+            let id = '';
             this.getcities(id);
             this.getconnumbers(id);
             this.getcons(id);
@@ -234,9 +221,10 @@ class Header_menu_cat extends React.Component {
         }
 
     }
-    getwhenconnumberschange(){
+
+    getwhenconnumberschange() {
         console.log("while connumber is selected");
-        if(this.refs.connumbers.value !== 'none'){
+        if (this.refs.connumbers.value !== 'none') {
             return axios({
                 method: 'post',
                 url: apiurl + '/api/getwhenconnumberschange',
@@ -248,13 +236,13 @@ class Header_menu_cat extends React.Component {
             })
                 .then(res => {
                     console.log(res.data);
-                    this.setState({'cons':res.data.cons});
-                    this.setState({'names':res.data.nn});
+                    this.setState({'cons': res.data.cons});
+                    this.setState({'names': res.data.nn});
 
                     // localStorage.setItem('logintoken',res.data)
                 })
-        }else{
-            let id='';
+        } else {
+            let id = '';
             this.getcities(id);
             this.getcons(id);
             this.getnames(id);
@@ -264,9 +252,10 @@ class Header_menu_cat extends React.Component {
         }
 
     }
-    getwhenconchange(){
+
+    getwhenconchange() {
         console.log("while con is selected");
-        if(this.refs.cons.value !== 'none'){
+        if (this.refs.cons.value !== 'none') {
             return axios({
                 method: 'post',
                 url: apiurl + '/api/getwhenconchange',
@@ -278,12 +267,12 @@ class Header_menu_cat extends React.Component {
             })
                 .then(res => {
                     console.log(res.data);
-                    this.setState({'names':res.data.nn});
+                    this.setState({'names': res.data.nn});
 
                     // localStorage.setItem('logintoken',res.data)
                 })
-        }else{
-            let id='';
+        } else {
+            let id = '';
             this.getcities(id);
             this.getcons(id);
             this.getnames(id);
@@ -291,13 +280,14 @@ class Header_menu_cat extends React.Component {
 
 
         }
-      console.log(this.refs.cons.value)
+        console.log(this.refs.cons.value)
     }
-    handlesearch(){
-    console.log(this.refs.cities.value)
-    console.log(this.refs.cons.value)
-    console.log(this.refs.connumbers.value)
-        return window.location.assign('https://www.ywaymal.com/search_result/'+this.refs.cities.value+'/'+this.refs.states.value+'/'+this.refs.cons.value+'/'+this.refs.connumbers.value+'/'+this.refs.names.value+'/')
+
+    handlesearch() {
+        console.log(this.refs.cities.value)
+        console.log(this.refs.cons.value)
+        console.log(this.refs.connumbers.value)
+        return window.location.assign('https://www.ywaymal.com/search_result/' + this.refs.cities.value + '/' + this.refs.states.value + '/' + this.refs.cons.value + '/' + this.refs.connumbers.value + '/' + this.refs.names.value + '/')
     }
 
     //get cities
@@ -308,10 +298,10 @@ class Header_menu_cat extends React.Component {
             <div class="row pb-4 pb-sm-4 pb-md-4 pb-lg-4" style={{borderBottom: '3px solid #a6263912'}}>
 
 
-                <div class="col-sm-12 col-md-3" style={{display: 'inline'}}>
+                <div class="col-sm-12 col-md-2 mt-sm-4" style={{display: 'inline'}}>
                     <img src={process.env.PUBLIC_URL + '/images/logo/faef.png'}
 
-                         style={{width: '80%', marginLeft: '5%', marginTop: '4%'}}/>
+                         style={{width: '100%'}}/>
                     {/*<h1 style={{marginTop:'33px'}}>*/}
                     {/*<span style={{color:'#7f7f7f'}}>Yway</span><span*/}
                     {/*style={{color:'#dc3545'}}> Mal</span>*/}
@@ -319,7 +309,7 @@ class Header_menu_cat extends React.Component {
                     {/*</h1>*/}
                 </div>
                 <br></br>
-                <div class="col-sm-12 col-md-9">
+                <div class="col-sm-12 col-md-10">
                     {/*menu*/}
 
                     <div class="col-sm-12 ">
@@ -345,14 +335,16 @@ class Header_menu_cat extends React.Component {
                             <div
                                 class="pt-sm-2 col-md-6 d-flex justify-content-center justify-content-xs-end  justify-content-md-end">
                                 <div class=" ">
-                                    <a href="https://www.ywaymal.com/home" class={"btn btn-sm btn-danger float-sm-none yk-background"}
+                                    <a href="https://www.ywaymal.com/home"
+                                       class={"btn btn-sm btn-danger float-sm-none yk-background"}
                                        style={{color: 'white'}}
                                     >
                                         <span class="fa fa-home"></span>&nbsp;&nbsp;
 
                                         Home</a>
                                     &nbsp;
-                                    <a href="https://www.ywaymal.com/about_us" class={"btn  btn-sm  btn-danger yk-background"}
+                                    <a href="https://www.ywaymal.com/about_us"
+                                       class={"btn  btn-sm  btn-danger yk-background"}
                                        style={{color: 'white'}}
                                     >
                                         <span class="fa fa-info-circle"></span>&nbsp;&nbsp;
@@ -360,7 +352,8 @@ class Header_menu_cat extends React.Component {
                                         About &nbsp;</a>
                                     &nbsp;
 
-                                    <a href="https://www.ywaymal.com/contact_us" class={"btn  btn-sm  btn-danger yk-background"}
+                                    <a href="https://www.ywaymal.com/contact_us"
+                                       class={"btn  btn-sm  btn-danger yk-background"}
                                        style={{color: 'white'}}
                                     >
                                         <span class="fa fa-phone"></span>&nbsp;&nbsp;
@@ -374,87 +367,86 @@ class Header_menu_cat extends React.Component {
 
                     {/*menu*/}
                     <div class="row">&nbsp;</div>
-                    <div class="row ml-2 mr-2">
+                    <div class="row ml-2 mr-2  ml-md-3 mr-md-3">
 
                         <div style={{width: '100%'}}>
                             <div class="form-row">
-                                <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
-                                    <select ref='states' onChange={this.getwhenstatechange} class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
+                                {/*<div class="col-sm-4 col-lg-2 mt-3 mt-md-0">*/}
+                                {/*<select ref='states' onChange={this.getwhenstatechange} class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{*/}
+                                {/*width: '100%', fontSize: '13px',*/}
+                                {/*fontWeight: 'bolder'*/}
+                                {/*}} required={'required'}>*/}
+                                {/*<option value="none">States&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>*/}
+                                {/*{this.state.ssts.map((value) => {*/}
+                                {/*// zawgyi error*/}
+
+                                {/*return (*/}
+                                {/*<option className="changeMe" value={value.id} >{value.name}</option>*/}
+                                {/*)*/}
+                                {/*})}*/}
+                                {/*</select>*/}
+                                {/*</div>*/}
+                                <div class="col-6 col-sm-4 col-lg-2 mt-3 mt-md-0">
+                                    <select ref='cities' onChange={this.getwhencitychange}
+                                            class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
                                         width: '100%', fontSize: '13px',
                                         fontWeight: 'bolder'
                                     }} required={'required'}>
-                                        <option value="none">States&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>
-                                        {this.state.ssts.map((value) => {
-                                            // zawgyi error
-
-                                            return (
-                                                <option className="changeMe" value={value.id} >{value.name}</option>
-                                            )
-
-
-
-
-
-                                        })}
-                                    </select>
-                                </div>
-                                <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
-                                    <select ref='cities' onChange={this.getwhencitychange} class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
-                                        width: '100%', fontSize: '13px',
-                                        fontWeight: 'bolder'
-                                    }} required={'required'}>
-                                        <option value="none">Townships&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>
+                                        <option value="none">
+                                            Regions/States/Townships&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>
                                         {this.state.cities.map((value) => {
+
                                             // zawgyi error
-
-                                                return (
-                                                    <option className="changeMe" value={value.id} >{value.name}</option>
-                                                )
-
-
-
-
-
+                                            return (
+                                                <option className="changeMe" value={value.id} data-id={value.cors}>{value.name}</option>
+                                            )
                                         })}
                                     </select>
                                 </div>
-                                <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
+                                <div class="col-6 col-sm-4 col-lg-2 mt-3 mt-md-0">
 
-                                    <select ref="connumbers" onChange={this.getwhenconnumberschange} class="btn btn-lg btn-danger input-lg yk-background" id="sel1"  style={{
+                                    <select ref="connumbers" onChange={this.getwhenconnumberschange}
+                                            class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
                                         width: '100%', fontSize: '13px',
                                         fontWeight: 'bolder'
                                     }} required={'required'}>
-                                        <option value="none">Constituencies no. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>
+                                        <option value="none">Constituencies
+                                            no. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </option>
 
                                         {this.state.connumbers.map((value) => {
                                             return (
-                                                <option value={value.id}>{value.number}   {value.cities}</option>
+                                                <option value={value.id}>{value.number} {value.cities}</option>
                                             )
 
                                         })}
                                     </select>
                                 </div>
-                                <div class="col-sm-4 col-lg-2 mt-3 mt-md-0">
+                                <div class="col-6 col-sm-4 col-lg-2 mt-3 mt-md-0">
 
-                                    <select class="btn btn-lg btn-danger input-lg yk-background"  ref="cons" id="sel1" onChange={this.getwhenconchange} style={{
+                                    <select class="btn btn-lg btn-danger input-lg yk-background" ref="cons" id="sel1"
+                                            onChange={this.getwhenconchange} style={{
                                         width: '100%', fontSize: '13px',
                                         fontWeight: 'bolder'
                                     }} required={'required'}>
-                                        <option value="none">Constituencies  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                                        <option value="none">
+                                            Constituencies  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                         {this.state.cons.map((value) => {
                                             return (
-                                                <option value={value.id}>{value.name} {value.number}   {value.cities} </option>
+                                                <option
+                                                    value={value.id}>{value.name} {value.number} {value.cities} </option>
                                             )
 
                                         })}
                                     </select>
                                 </div>
-                                <div class="col-sm-4 col-lg-2 mt-3 mt-lg-0">
-                                    <select class="btn btn-lg btn-danger input-lg yk-background"  ref="names" id="sel1" style={{
-                                        width: '100%', fontSize: '13px',
-                                        fontWeight: 'bolder'
-                                    }} required={'required'}>
-                                        <option value="none">Names/Parties &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                                <div class="col-6 col-sm-4 col-lg-2 mt-3 mt-lg-0">
+                                    <select class="btn btn-lg btn-danger input-lg yk-background" ref="names" id="sel1"
+                                            style={{
+                                                width: '100%', fontSize: '13px',
+                                                fontWeight: 'bolder'
+                                            }} required={'required'}>
+                                        <option value="none">
+                                            Names/Parties &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                         {this.state.names.map((value) => {
                                             return (
                                                 <option value={value.id}>{value.name}</option>
@@ -463,9 +455,14 @@ class Header_menu_cat extends React.Component {
                                         })}
                                     </select>
                                 </div>
-                                <div class="col-sm-2 col-lg-2 mt-3 mt-lg-0">
+                                <div class="col-6 col-sm-2 col-lg-2 mt-3 mt-lg-0">
                                     <button class="btn btn-danger " onClick={this.handlesearch}
-                                            style={{color: '#dca83f', background: 'white', width: '100%',height: '87%'}}><span
+                                            style={{
+                                                color: '#dca83f',
+                                                background: 'white',
+                                                width: '100%',
+                                                height: '87%'
+                                            }}><span
                                         class="fa fa-search"></span> Search
                                     </button>
                                 </div>

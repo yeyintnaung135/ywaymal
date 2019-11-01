@@ -92,7 +92,7 @@ class Homepage extends React.Component {
     componentWillMount() {
         //start page this method will firstly fire
         //if not authenciate rediret to login from
-        redirecttologinifnotauth();
+        // redirecttologinifnotauth();
 
         var loader = function () {
             setTimeout(function () {
@@ -240,7 +240,7 @@ class Homepage extends React.Component {
 
     onclickplay(id) {
         console.log(id)
-        return window.location.assign('https://www.ywaymal.com/video_detail?id=' + id);
+        return window.location.assign('http://localhost:3000/video_detail?id=' + id);
     }
 
     getVideos() {
@@ -450,11 +450,11 @@ class Homepage extends React.Component {
                 </div>
 
 
-                <div className="yk-row col-sm-12">
+                <div className="row no-gutters pb-4 pb-sm-4 pb-md-4 pb-lg-4 ml-2 mr-2 md-2 ml-md-4 mr-md-4">
                     {/*categories section*/}
                     <Categories/>
                     {/*end categories section*/}
-                    <div className="col-sm-12 col-md-6 col-lg-8 pl-md-n2 pr-md-n2" >
+                    <div className="col-sm-12 col-md-6 col-lg-8" >
                         {/*Selider section*/}
                         <MainSlider/>
                         {/*end slider section*/}
@@ -500,7 +500,7 @@ class Homepage extends React.Component {
                     {/*top new section*/}
 
                     {/*//ads*/}
-                    <div className="col-12 col-sm-12 col-md-2 col-lg-2">
+                    <div className="col-12 col-sm-12 col-md-3 col-lg-2">
                         <Ads/>
                         <Topnews/>
 
