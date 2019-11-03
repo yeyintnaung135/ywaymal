@@ -71,17 +71,12 @@
             if ((screen.width < 900)) {
 // if screen size is 1025px wide or larger
                 $(".collapse").removeClass('show'); // you can also use $(".yourClass").hide();
-            }
-            $(".uni").click(function(){
-                $('.changeMe').css("font-family","Masterpiece Uni Sans,Myanmar3");
-                console.log('font change');
-            });
-            $(".zaw").click(function(){
-                $('.changeMe').css("font-family","Zawgyi-One");
-                console.log('font change');
+                $(".to_hide_ads").css('display','none');
 
-            });
+            }
+
         });
+
 
 
 

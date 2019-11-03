@@ -90,6 +90,19 @@ class Homepage extends React.Component {
         }
     }
     componentWillMount() {
+        window.$(document).ready(function () {
+
+
+            window.$(".uni").click(function(){
+                window.$('.changeMe').css("font-family","Masterpiece Uni Sans,Myanmar3");
+                console.log('font change');
+            });
+            window.$(".zaw").click(function(){
+                window.$('.changeMe').css("font-family","Zawgyi-One");
+                console.log('font change');
+
+            });
+        });
         //start page this method will firstly fire
         //if not authenciate rediret to login from
         // redirecttologinifnotauth();
@@ -292,7 +305,7 @@ class Homepage extends React.Component {
         const currentTodos = videos.slice(indexOfFirstTodo, indexOfLastTodo)
         const renderTodos = currentTodos.map((todo, index) => {
             return (
-                <div className="row mb-5" id="toscroll">
+                <div className="row mb-5 " id="toscroll">
                     <div className="col-sm-12 col-md-12 col-xl-5 video-thumbnail"
                          onClick={() => this.onclickplay(todo.id)}>
                         <img className="" src={apiurl + '/backend/admin/videos/images/' + todo.image}
@@ -303,7 +316,7 @@ class Homepage extends React.Component {
                     </div>
                     <div className="text mt-3  col-sm-12 col-xl-7" style={{padding: '0px'}}>
                         <div className="text-center" style={{
-                            fontSize: '18px',
+                            fontSize: '16px',
                             color: 'rgb(102, 102, 102)',
                             fontWeight: 'bold'
                         }}> {todo.title}</div>

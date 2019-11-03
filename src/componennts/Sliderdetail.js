@@ -36,7 +36,7 @@ class Sliderdetail extends React.Component {
     }
     componentWillMount() {
         //redirect if not authenciate
-        // redirecttologinifnotauth();
+        redirecttologinifnotauth();
         window.scrollTo(0, 0)
 
         this.getnewsdetail();
@@ -49,27 +49,27 @@ class Sliderdetail extends React.Component {
 
     getnewsdetail() {
 
-            return axios({
-                method: 'post',
-                url: apiurl+'/api/getsliderdetail/'+this.slider_id,
-                data: {
-                    token: 'feef'
-                }, headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
-                }
-            })
-                .then(res => {
-                    console.log('responses from server for sliders');
-                    this.setState({slider: res.data})
-                    console.log(this.state.slider);
-                    localStorage.setItem('slide_video',this.state.slider.videos)
-                    console.log('slide_video');
-                    //this is because we need to html5 player unless this player restore from cache it is not good for new videos
-                    document.getElementById('to_reload_slide_src').src=apiurl+'/backend/admin/news/'+ this.state.slider.videos;
-                    document.getElementById('to_reload_slide').load();
-                    // localStorage.setItem('logintoken',res.data)
+        return axios({
+            method: 'post',
+            url: apiurl+'/api/getsliderdetail/'+this.slider_id,
+            data: {
+                token: 'feef'
+            }, headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('logintoken')
+            }
+        })
+            .then(res => {
+                console.log('responses from server for sliders');
+                this.setState({slider: res.data})
+                console.log(this.state.slider);
+                localStorage.setItem('slide_video',this.state.slider.videos)
+                console.log('slide_video');
+                //this is because we need to html5 player unless this player restore from cache it is not good for new videos
+                document.getElementById('to_reload_slide_src').src=apiurl+'/backend/admin/news/'+ this.state.slider.videos;
+                document.getElementById('to_reload_slide').load();
+                // localStorage.setItem('logintoken',res.data)
 
-                })
+            })
 
     }
 
@@ -183,7 +183,7 @@ class Sliderdetail extends React.Component {
                 {/*end header section*/}
 
                 {/*body section*/}
-                <div className="row col-sm-12">
+                <div className="row no-gutters pb-4 pb-sm-4 pb-md-4 pb-lg-4 ml-2 mr-2 md-2 ml-md-4 mr-md-4">
                     {/*categories section*/}
 
                     <Categories/>
@@ -192,31 +192,25 @@ class Sliderdetail extends React.Component {
 
                     {/*About Us Section*/}
                     <div className="col-sm-12 col-md-6 col-lg-8">
-                        <div class="col-sm-12">
 
-                            <div class="row col-sm-12 d-flex ">
-                                <div class="col-sm-12" style={{paddingTop: '23p'}}>
-                                    <div class="pb-md-5">
-                                        <video id="to_reload_slide" style={{width: '100%', height: '481px'}} controls>
-                                             <source id="to_reload_slide_src"
-                                                    src={apiurl+'/backend/admin/news/' +localStorage.getItem('slide_video')}
-                                                    type='video/mp4'/>
-                                            Your browser does not support the video tag.
-                                        </video>
-                                        <p >{this.state.slider.description} </p>
-                                        <p>Date:{this.state.slider.created_at} </p>
-                                        <br></br>
-                                    </div>
-                                </div>
-                            </div>
-                         </div>
+                        <div style={{paddingTop: '23p'}} class="mr-md-3 mr-md-3">
+                            <video id="to_reload_slide" style={{width: '100%', height: '100%'}} controls>
+                                <source id="to_reload_slide_src"
+                                        src={apiurl+'/backend/admin/news/' +localStorage.getItem('slide_video')}
+                                        type='video/mp4'/>
+                                Your browser does not support the video tag.
+                            </video>
+                            <p >{this.state.slider.description} </p>
+                            <p>Date:{this.state.slider.created_at} </p>
+                            <br></br>
+                        </div>
                         <div className="col-sm-12" style={{borderBottom: '2px solid #f1e6be'}}>&nbsp;</div>
                     </div>
                     {/*End About Us Section*/}
 
 
                     {/*top new and ads section*/}
-                    <div className="col-12 col-sm-12 col-md-2 col-lg-2">
+                    <div className="col-12 col-sm-12 col-md-3 col-lg-2">
                         <Ads/>
                         <Topnews/>
 

@@ -10,7 +10,6 @@ import "../css/flaticon.css";
 import "../css/icomoon.css";
 import "../css/style.css";
 import "../css/custom.css";
-
 import apiurl from '../helpers/apiurl';
 
 import Categories from "./Categories";
@@ -49,6 +48,19 @@ class Videodetail extends React.Component {
         //redirect if not authenciate
         // redirecttologinifnotauth();
         this.getvideodetail();
+        window.$(document).ready(function () {
+
+
+            window.$(".uni").click(function(){
+                window.$('.changeMe').css("font-family","Masterpiece Uni Sans,Myanmar3");
+                console.log('font change');
+            });
+            window.$(".zaw").click(function(){
+                window.$('.changeMe').css("font-family","Zawgyi-One");
+                console.log('font change');
+
+            });
+        });
 
         this.getvideocomments();
     }
@@ -413,21 +425,21 @@ class Videodetail extends React.Component {
                 </div>
                 {/*end header section*/}
                 {/*body section*/}
-                <div className="row col-sm-12">
+                <div className="row no-gutters pb-4 pb-sm-4 pb-md-4 pb-lg-4 ml-2 mr-2 md-2 ml-md-4 mr-md-4">
                     {/*categories section*/}
                     <Categories/>
                     {/*end categories section*/}
                     {/*About Us Section*/}
                     <div className="col-sm-12 col-md-6 col-lg-8">
-                        <div class="col-12" style={{paddingTop: '23p'}}>
-                            <video id="to_reload" style={{width: '100%', height: 'auto'}} controls>
+                        <div style={{paddingTop: '23p'}} class="mr-md-3 mr-md-3">
+                            <video id="to_reload" style={{width: '100%', height: '100%'}} controls>
                                 <source id="to_reload_src"
                                         src={apiurl + '/backend/admin/videos/' + localStorage.getItem('video_link')}
                                         type='video/mp4'/>
                                 Your browser does not support the video tag.
                             </video>
 
-                            <div class="d-flex justify-content-center">
+                            <div class="d-flex justify-content-center ">
 
                                 {(() => {
                                     if (this.state.video.voted == 'yes') {
@@ -525,7 +537,7 @@ class Videodetail extends React.Component {
 
 
                         {/*comments box*/}
-                        <div class="row">
+                        <div class="row no-gutters mr-md-3 mr-md-3">
                             <div class="panel panel-default widget col-sm-12">
                                 <div class="panel-heading">
                                     <span class="glyphicon glyphicon-comment"></span>
@@ -651,7 +663,7 @@ class Videodetail extends React.Component {
 
                     {/*top new and ads section*/
                     }
-                    <div className="col-12 col-sm-12 col-md-2 col-lg-2">
+                    <div className="col-12 col-sm-12 col-md-3 col-lg-2">
                         <Ads/>
                         <Topnews/>
 

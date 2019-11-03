@@ -62,13 +62,9 @@ class MainSlider extends React.Component {
 
 
     }
-
-
     render() {
-
-
         return (
-           <div>
+
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner yk-car" style={{'borderRadius': '5px'}}>
                     {/*// need to creat child component for this section */}
@@ -123,7 +119,7 @@ class MainSlider extends React.Component {
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-</div>
+
 
         )
     }

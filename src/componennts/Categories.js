@@ -30,8 +30,8 @@ const Categories = () => {
                                     <h5 class="mb-1 text-center text-md-left  yk-title-text">Services</h5>
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="yk-list-group text-center text-md-left">3 mins Video Uploaded</li>
-                                    <li class="yk-list-group text-center text-md-left">1 min Video Uploaded</li>
+                                    <li class="yk-list-group text-center text-md-left"><a href="https://www.ywaymal.com/threeminsvideos" style={{'color':'#666666'}}>3 mins Video Uploaded</a></li>
+                                    <li class="yk-list-group text-center text-md-left"><a href="https://www.ywaymal.com/oneminvideo" style={{'color':'#666666'}}>1 min Video Uploaded</a></li>
                                     <li class="yk-list-group text-center text-md-left">Civic Education</li>
                                     <li class="yk-list-group text-center text-md-left"><a
                                         href="https://play.google.com/store/apps/details?id=com.urchance&hl=en_US"

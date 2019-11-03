@@ -41,7 +41,7 @@ class Threeminsvideos extends React.Component {
             voteds: [],
             runvideos: true,
             currentPage: 1,//current page
-            todosPerPage: 5,//contents per page
+            todosPerPage: 12,//contents per page
 
         }
         this.handleVideoshow = this.handleVideoshow.bind(this);
@@ -92,7 +92,7 @@ class Threeminsvideos extends React.Component {
     componentWillMount() {
         //start page this method will firstly fire
         //if not authenciate rediret to login from
-        // redirecttologinifnotauth();
+        redirecttologinifnotauth();
 
         var loader = function () {
             setTimeout(function () {
@@ -240,7 +240,7 @@ class Threeminsvideos extends React.Component {
 
     onclickplay(id) {
         console.log(id)
-        return window.location.assign('https://www.ywaymal.com/video_detail?id=' + id);
+        return window.location.assign('http://localhost:3000/video_detail?id=' + id);
     }
 
     getVideos() {
@@ -248,7 +248,7 @@ class Threeminsvideos extends React.Component {
         if (this.state.runvideos) {
             axios({
                 method: 'post',
-                url: apiurl + '/api/getvideos',
+                url: apiurl + '/api/Getthreeminutesvideos',
                 data: {
                     token: localStorage.getItem('logintoken')
                 }, headers: {
@@ -292,8 +292,8 @@ class Threeminsvideos extends React.Component {
         const currentTodos = videos.slice(indexOfFirstTodo, indexOfLastTodo)
         const renderTodos = currentTodos.map((todo, index) => {
             return (
-                <div className="row mb-5" id="toscroll">
-                    <div className="col-sm-12 col-md-12 col-xl-5 video-thumbnail"
+                <div className="mb-5 col-12 col-sm-6 col-lg-4 pl-2" id="toscroll">
+                    <div className="row video-thumbnail no-gutters"
                          onClick={() => this.onclickplay(todo.id)}>
                         <img className="" src={apiurl + '/backend/admin/videos/images/' + todo.image}
                              style={{width: '100%', height: 'auto'}}/>
@@ -301,38 +301,32 @@ class Threeminsvideos extends React.Component {
                             <a href="#">{todo.created_at}</a>
                         </div>
                     </div>
-                    <div className="text mt-3  col-sm-12 col-xl-7" style={{padding: '0px'}}>
+                    <div className="text mt-3 row  no-gutters" style={{padding: '0px',display:'block'}}>
                         <div className="text-center" style={{
-                            fontSize: '18px',
+                            fontSize: '16px',
                             color: 'rgb(102, 102, 102)',
                             fontWeight: 'bold'
-                        }}> {todo.title}</div>
-                        <br></br>
-                        <div className="meta mb-2 sm-12">
-                            <div className="pr-sm-5">
+                        }}> <EllipsisText text={todo.title} length={"40"}/></div>
 
-                                <p>
-                                    {(() => {
-                                        if (todo.description !== '') {
-                                            return (
-                                                <EllipsisText text={todo.description} length={"85"}/>
+                        <div className="text-center" style={{
+                            clear:'both',
+                            fontSize: '14px',
+                            color: 'rgb(148, 143, 143)',
+                            fontWeight: 'bold'
+                        }}>   {(() => {
+                            if (todo.person !== '') {
+                                return (
+                                    <EllipsisText text={todo.person} length={"85"}/>
 
-                                            )
-                                        } else {
-                                            return (
-                                                <div>{todo.description}</div>
-                                            )
-                                        }
-                                    })()}
-                                </p>
-
-                                <br></br>
-
-
-                            </div>
-
-
+                                )
+                            } else {
+                                return (
+                                    <div>{todo.person}</div>
+                                )
+                            }
+                        })()}
                         </div>
+
 
                         <div className="meta mb-2 sm-12 d-flex justify-content-center ">
 
@@ -456,21 +450,19 @@ class Threeminsvideos extends React.Component {
                     {/*end categories section*/}
                     <div className="col-sm-12 col-md-6 col-lg-8" >
 
-                        <div className="col-sm-12" style={{borderBottom: '2px solid #f1e6be'}}>&nbsp;</div>
                         <div className="col-sm-12">
-                            <div className="col-sm-12">&nbsp;</div>
-                            <div className="col-md-12" style={{textAlign: 'center'}}>
-                                <h5 className="mb-1 yk-title-text" style={{textAlign: 'center'}}>
-                                    Videos </h5>
+                            <div className="col-md-12 pt-0 " style={{textAlign: 'center'}}>
+                                <h5 className="yk-title-text" style={{textAlign: 'center'}}>
+                                    Three Minutes Videos </h5>
                             </div>
-                            <div className="col-sm-12">&nbsp;</div>
 
 
                             {/*// need to creat child component for this section */}
 
                             {/*// need to creat child component for this section */}
-
+                             <div className="row no-gutters">
                             {renderTodos}
+                             </div>
 
 
                             <div className="row col-sm-12 mt-5">

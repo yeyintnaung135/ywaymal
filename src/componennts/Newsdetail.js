@@ -75,7 +75,19 @@ class Newsdetail extends React.Component {
             duration: 800,
             easing: 'slide'
         });
+        window.$(document).ready(function () {
 
+
+            window.$(".uni").click(function(){
+                window.$('.changeMe').css("font-family","Masterpiece Uni Sans,Myanmar3");
+                console.log('font change');
+            });
+            window.$(".zaw").click(function(){
+                window.$('.changeMe').css("font-family","Zawgyi-One");
+                console.log('font change');
+
+            });
+        });
         var loader = function () {
             setTimeout(function () {
                 window.$('#ftco-loader').removeClass('show');
@@ -181,26 +193,32 @@ class Newsdetail extends React.Component {
                 {/*end header section*/}
 
                 {/*body section*/}
-                <div className="row col-sm-12">
+                <div className="row no-gutters pb-4 pb-sm-4 pb-md-4 pb-lg-4 ml-2 mr-2 md-2 ml-md-4 mr-md-4">
                     {/*categories section*/}
 
                     <Categories/>
                     {/*end categories section*/}
 
                     {/*About Us Section*/}
-                    <div className="col-12 col-md-6">
+                    <div className="col-sm-12 col-md-6 col-lg-8">
                         <div class="col-sm-12">
 
-                            <div class="row col-sm-12 d-flex ">
+                            <div class="row no-guitters d-flex ">
                                 <div class="col-sm-12" style={{paddingTop: '23p'}}>
                                     <div class="pb-md-5">
                                         <img class="d-block w-100"
                                              src={apiurl + '/backend/admin/news/' + this.state.news_detail.file}
                                              alt="First slide"
                                              style={{height: '300px'}}/>
-
+                                        <div class="col-12">
+                                            <p class="yk-title-text-two mt-4">
+                                                {this.state.news_detail.title}
+                                            </p>
+                                        </div>
                                         <p>{this.state.news_detail.description} </p>
-                                        <p>Date:{this.state.news_detail.created_at} </p>
+                                        <div class="mic-info">
+                                            Date:{this.state.news_detail.created_at} </div>
+
                                         <br></br>
                                     </div>
                                 </div>

@@ -97,7 +97,7 @@ class Searchresult extends React.Component {
     componentWillMount() {
         //start page this method will firstly fire
         //if not authenciate rediret to login from
-        // redirecttologinifnotauth();
+        redirecttologinifnotauth();
         console.log('data from link');
         console.log('cities');
         console.log(this.props.match.params.cities_id);

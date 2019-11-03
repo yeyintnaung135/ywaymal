@@ -1,7 +1,6 @@
 import React from 'react';
 import "../css/open-iconic-bootstrap.min.css";
 import "../css/animate.css";
-
 import "../css/owl.carousel.min.css";
 import "../css/owl.theme.default.min.css";
 import "../css/magnific-popup.css";
@@ -12,7 +11,6 @@ import "../css/jquery.timepicker.css";
 import "../css/flaticon.css";
 import "../css/icomoon.css";
 import "../css/style.css";
-
 import {Link} from "react-router-dom";
 import apiurl from '../helpers/apiurl'
 

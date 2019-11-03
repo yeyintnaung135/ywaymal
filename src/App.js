@@ -5,6 +5,8 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
+import Threeminsvideos from "./componennts/threeminsvideos";
+import Oneminvideo from "./componennts/oneminvideos";
 
 import Login from './componennts/login';
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
@@ -56,7 +58,19 @@ class Root extends React.Component {
             duration: 800,
             easing: 'slide'
         });
+        window.$(document).ready(function () {
 
+
+            window.$(".uni").click(function(){
+                window.$('.changeMe').css("font-family","Masterpiece Uni Sans,Myanmar3");
+                console.log('font change');
+            });
+            window.$(".zaw").click(function(){
+                window.$('.changeMe').css("font-family","Zawgyi-One");
+                console.log('font change');
+
+            });
+        });
         var loader = function () {
             setTimeout(function () {
                 window.$('#ftco-loader').removeClass('show');
@@ -156,6 +170,8 @@ class Root extends React.Component {
                     <Route exact path="/" component={Login}/>
                     {/*<Route path="/header" component={Header_menu_cat}/>*/}
                     <Route exact path="/categories" component={Categories}/>
+                    <Route exact path="/threeminsvideos" component={Threeminsvideos}/>
+                    <Route exact path="/oneminvideo" component={Oneminvideo}/>
                     <Route exact path="/About_us" component={Aboutus}/>
                     <Route exact path="/slider_detail" component={Sliderdetail}/>
                     <Route exact path="/news_detail" component={Newsdetail}/>

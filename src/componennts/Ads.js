@@ -58,7 +58,7 @@ class Ads extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div className="to_hide_ads">
                 <div>
                     <div id="ads1" class="carousel slide " data-ride="carousel" style={{height: '300px'}}>
                         <div class="carousel-inner">
