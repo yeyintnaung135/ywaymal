@@ -37,7 +37,7 @@ class Newsdetail extends React.Component {
 
     componentWillMount() {
         //redirect if not authenciate
-        // redirecttologinifnotauth();
+        redirecttologinifnotauth();
 
         this.getnewsdetail();
 

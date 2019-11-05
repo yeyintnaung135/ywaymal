@@ -60,6 +60,7 @@ class Root extends React.Component {
         });
         window.$(document).ready(function () {
 
+            window.$('.first').selectpicker();
 
             window.$(".uni").click(function(){
                 window.$('.changeMe').css("font-family","Masterpiece Uni Sans,Myanmar3");

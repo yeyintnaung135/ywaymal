@@ -90,19 +90,7 @@ class Homepage extends React.Component {
         }
     }
     componentWillMount() {
-        window.$(document).ready(function () {
 
-
-            window.$(".uni").click(function(){
-                window.$('.changeMe').css("font-family","Masterpiece Uni Sans,Myanmar3");
-                console.log('font change');
-            });
-            window.$(".zaw").click(function(){
-                window.$('.changeMe').css("font-family","Zawgyi-One");
-                console.log('font change');
-
-            });
-        });
         //start page this method will firstly fire
         //if not authenciate rediret to login from
         // redirecttologinifnotauth();
@@ -114,6 +102,7 @@ class Homepage extends React.Component {
             }, 3000);
         };
         loader();
+
 
         if (document.referrer.includes('video_detail') || document.referrer.includes('news_detail')) {
             {
@@ -128,6 +117,11 @@ class Homepage extends React.Component {
                     localStorage.removeItem('firstLoad');
             }
         }
+    }
+    componentDidMount(){
+
+
+
     }
 
     handleAddVote(curarrayid, videoid) {
@@ -253,7 +247,7 @@ class Homepage extends React.Component {
 
     onclickplay(id) {
         console.log(id)
-        return window.location.assign('http://localhost:3000/video_detail?id=' + id);
+        return window.location.assign('https://www.ywaymal.com/video_detail?id=' + id);
     }
 
     getVideos() {

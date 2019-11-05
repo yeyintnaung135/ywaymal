@@ -43,7 +43,24 @@ class Header_menu_cat extends React.Component {
         this.getcons(id);
         this.getstates(id);
 
+        window.$(document).ready(function () {
+            window.$(".uni").click(function () {
+                window.$('.changeMe').css("font-family", "Masterpiece Uni Sans,Myanmar3");
+
+
+                console.log('font change');
+            });
+            window.$(".zaw").click(function () {
+                window.$('.changeMe').css("font-family", "Zawgyi-One");
+
+                console.log('font change');
+
+            });
+        })
+
+
     }
+
 
     //tem hidden
     handletownships() {
@@ -428,10 +445,10 @@ class Header_menu_cat extends React.Component {
                                 {/*</select>*/}
                                 {/*</div>*/}
                                 <div class="col-6 col-sm-4 col-lg-2 mt-3 mt-md-0">
-                                    <select ref='cities' onChange={this.getwhencitychange}
-                                            class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
+                                    <select ref='cities'  data-live-search="true" onChange={this.getwhencitychange}
+                                            class="selectpicker first btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
                                         width: '100%', fontSize: '13px',
-                                        fontWeight: 'bolder'
+                                        fontWeight: 'bolder',fontFamily: "Zawgyi-One"
                                     }} required={'required'}>
                                         <option value="none">
                                             Regions/States/Townships&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
@@ -447,7 +464,7 @@ class Header_menu_cat extends React.Component {
                                 <div class="col-6 col-sm-4 col-lg-2 mt-3 mt-md-0">
 
                                     <select ref="connumbers" onChange={this.getwhenconnumberschange}
-                                            class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
+                                            class="select3 btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
                                         width: '100%', fontSize: '13px',
                                         fontWeight: 'bolder'
                                     }} required={'required'}>

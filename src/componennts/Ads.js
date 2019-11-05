@@ -60,7 +60,7 @@ class Ads extends React.Component {
         return (
             <div className="to_hide_ads">
                 <div>
-                    <div id="ads1" class="carousel slide " data-ride="carousel" style={{height: '300px'}}>
+                    <div id="ads1" class="carousel carousel-fade slide " data-ride="carousel" style={{height: '300px'}}>
                         <div class="carousel-inner">
                             {this.state.ads.map(
                                 (item, key) => {
@@ -107,7 +107,7 @@ class Ads extends React.Component {
                     </div>
                 </div>
                 <div>
-                    <div id="ads2" class="carousel slide" data-ride="carousel" style={{height: '300px'}}>
+                    <div id="ads2" class="carousel carousel-fade slide" data-ride="carousel" style={{height: '300px'}}>
 
                         <div class="carousel-inner">
                             {this.state.secads.map(

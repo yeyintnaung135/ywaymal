@@ -46,7 +46,7 @@ class Videodetail extends React.Component {
 
     componentWillMount() {
         //redirect if not authenciate
-        // redirecttologinifnotauth();
+        redirecttologinifnotauth();
         this.getvideodetail();
         window.$(document).ready(function () {
 

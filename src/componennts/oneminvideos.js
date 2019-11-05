@@ -240,7 +240,7 @@ class Oneminvideos extends React.Component {
 
     onclickplay(id) {
         console.log(id)
-        return window.location.assign('http://localhost:3000/video_detail?id=' + id);
+        return window.location.assign('https://www.ywaymal.com/video_detail?id=' + id);
     }
 
     getVideos() {

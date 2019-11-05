@@ -22,7 +22,7 @@ import Ads from "./Ads";
 //this is create component with reactcomponent that is called stateful components
 class Aboutus extends React.Component {
     componentWillMount() {
-        // redirecttologinifnotauth();
+        redirecttologinifnotauth();
 
     }
 
