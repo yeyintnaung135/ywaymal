@@ -345,7 +345,8 @@ class Header_menu_cat extends React.Component {
         console.log(this.refs.cities.value)
         console.log(this.refs.cons.value)
         console.log(this.refs.connumbers.value)
-        return window.location.assign('https://www.ywaymal.com/search_result/' + this.refs.cities.value + '/' + this.refs.states.value + '/' + this.refs.cons.value + '/' + this.refs.connumbers.value + '/' + this.refs.names.value + '/')
+        console.log(this.refs.names.value)
+        return window.location.assign('https://www.ywaymal.com/search_result/' + this.refs.cities.value + '/' + this.refs.cons.value + '/' + this.refs.connumbers.value + '/' + this.refs.names.value + '/')
     }
 
     //get cities
@@ -445,15 +446,14 @@ class Header_menu_cat extends React.Component {
                                 {/*</select>*/}
                                 {/*</div>*/}
                                 <div class="col-6 col-sm-4 col-lg-2 mt-3 mt-md-0">
-                                    <select ref='cities'  data-live-search="true" onChange={this.getwhencitychange}
-                                            class="selectpicker first btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
+                                    <select ref='cities' onChange={this.getwhencitychange}
+                                            class="btn btn-lg btn-danger input-lg yk-background" id="sel1" style={{
                                         width: '100%', fontSize: '13px',
-                                        fontWeight: 'bolder',fontFamily: "Zawgyi-One"
+                                        fontWeight: 'bolder'
                                     }} required={'required'}>
                                         <option value="none">
                                             Regions/States/Townships&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                         {this.state.cities.map((value) => {
-
                                             // zawgyi error
                                             return (
                                                 <option className="changeMe" value={value.cors+value.id}>{value.name}</option>

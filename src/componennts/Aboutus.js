@@ -55,7 +55,7 @@ class Aboutus extends React.Component {
                         <div class="row col-sm-12 pr-0">
                             <div style={{paddingTop: '23p'}}>
 
-                                    <p>We build a website, ACVC (Anonymous Comments & Vote for Candidates), for the
+                                    <p>We develope a website, ACVC (Anonymous Comments & Vote for Candidates), for the
                                         2020 candidates in Myanmar, CSOs, NGOs and communities in order to create a
                                         better society. </p>
                                     <p>

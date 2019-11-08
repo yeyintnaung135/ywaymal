@@ -71,7 +71,7 @@ class Topnews extends React.Component {
                     // check our news or other news
                     if(item.description != null) {
                         return (
-                            <Link to={{ pathname: "/news_detail", search: "?news_id="+item.id }}>
+                            <a href={'https://www.ywaymal.com/news_detail?news_id='+item.id}>
                                                    <div className="row mt-4 mt-sm-4 mt-md-0">
                                     <div class="col-6 col-md-12 ">
                                         <img src={apiurl+'/backend/admin/news/' + item.file}
@@ -85,7 +85,7 @@ class Topnews extends React.Component {
                                             <p style={{fontSize: '14px',color:"#ffbc42"}}>Date:{item.created_at}</p>
                                     </div>
                                 </div>
-                            </Link>
+                            </a>
                         )
                     }
                     else{

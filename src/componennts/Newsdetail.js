@@ -209,7 +209,7 @@ class Newsdetail extends React.Component {
                                         <img class="d-block w-100"
                                              src={apiurl + '/backend/admin/news/' + this.state.news_detail.file}
                                              alt="First slide"
-                                             style={{height: '300px'}}/>
+                                             style={{height: 'auto'}}/>
                                         <div class="col-12">
                                             <p class="yk-title-text-two mt-4">
                                                 {this.state.news_detail.title}

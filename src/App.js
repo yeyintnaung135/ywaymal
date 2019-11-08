@@ -183,7 +183,7 @@ class Root extends React.Component {
                     <Route exact path="/home" component={Homepage}/>
                     <Route exact path="/footer" component={Footerpage}/>
                     {/*<Route exact path="/ms" component={MainSlider}/>*/}
-                    <Route path="/search_result/:cities_id/:state_id/:cons_id/:con_numbers_id/:name/" component={Searchresult} />
+                    <Route path="/search_result/:cities_id/:cons_id/:con_numbers_id/:name/" component={Searchresult} />
 
                     {/*this videotail route is for a route with query parameter*/}
                     <Route exact component={Videodetail}/>

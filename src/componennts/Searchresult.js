@@ -97,13 +97,12 @@ class Searchresult extends React.Component {
     componentWillMount() {
         //start page this method will firstly fire
         //if not authenciate rediret to login from
-        redirecttologinifnotauth();
+        // redirecttologinifnotauth();
         console.log('data from link');
         console.log('cities');
         console.log(this.props.match.params.cities_id);
         console.log('state');
 
-        console.log(this.props.match.params.state_id);
         console.log('con');
 
         console.log(this.props.match.params.cons_id);
@@ -268,7 +267,6 @@ class Searchresult extends React.Component {
                 data: {
                     cities_id: this.props.match.params.cities_id,
                     cons_id: this.props.match.params.cons_id,
-                    state_id:this.props.match.params.state_id,
                     name:this.props.match.params.name,
                     con_numbers_id: this.props.match.params.con_numbers_id,
                 }, headers: {

@@ -43,7 +43,7 @@ const Categories = () => {
 
                             <li class="yk-list-group text-center text-md-left">
                                 <div class=" w-100 justify-content-between">
-                                   <h5 class="mb-1 text-center text-md-left  yk-title-text"  data-toggle="collapse" href="#collapseTwo">News &nbsp;<span class="fa fa-chevron-circle-down" aria-hidden="true"></span></h5>
+                                   <h5 class="mb-1 text-center text-md-left  yk-title-text"  data-toggle="collapse" href="#collapseTwo">News &nbsp; &nbsp; &nbsp; &nbsp;<span class="fa fa-chevron-circle-down" aria-hidden="true"></span></h5>
                                 </div>
                                     
                                 <ul class="list-group list-group-flush  collapse" id="collapseTwo" data-parent="#accordion">
@@ -53,12 +53,12 @@ const Categories = () => {
                             </li>
                             <li class="yk-list-group text-center text-md-left">
                                 <div class=" w-100 justify-content-between">
-                                   <h5 class="mb-1 text-center text-md-left  yk-title-text"  data-toggle="collapse" href="#collapseThree">Taxes &nbsp;<span class="fa fa-chevron-circle-down" aria-hidden="true"></span></h5>
+                                   <h5 class="mb-1 text-center text-md-left  yk-title-text"  data-toggle="collapse" href="#collapseThree">Taxes  &nbsp; &nbsp; &nbsp;&nbsp;<span class="fa fa-chevron-circle-down" aria-hidden="true"></span></h5>
                                 </div>
                               
                                 <ul class="list-group list-group-flush collapse" id="collapseThree" data-parent="#accordion">
-                                    <li class="yk-list-group text-center text-md-left"><a  href="http://taxsummaries.pwc.com/ID/Myanmar-Individual-Taxes-on-personal-income"
-                                        style={{color:'black'}}>Commercial Tax</a></li>
+                                    <li class="yk-list-group text-center text-md-left"><a  href="http://taxsummaries.pwc.com/ID/Myanmar-Individual-Taxes-on-personal-income"  style={{'color':'#666666'}}
+                                   >Commercial Tax</a></li>
                                     <li class="yk-list-group text-center text-md-left">Income Tax</li>
 
                                 </ul>
