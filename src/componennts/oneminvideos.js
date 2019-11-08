@@ -453,7 +453,7 @@ class Oneminvideos extends React.Component {
                         <div className="col-sm-12">
                             <div className="col-md-12 pt-0 " style={{textAlign: 'center'}}>
                                 <h5 className="yk-title-text" style={{textAlign: 'center'}}>
-                                    Three Minutes Videos </h5>
+                                    One Minute Videos </h5>
                             </div>
 
 

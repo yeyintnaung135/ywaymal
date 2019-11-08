@@ -20,6 +20,8 @@ import Newsdetail from "./componennts/Newsdetail";
 
 import Videodetail from "./componennts/videodetail";
 import ScrollToTop from 'react-router-scroll-top';
+import Localnews from './componennts/localnews'
+import Globalnews from './componennts/globalnews'
 import MainSlider from './componennts/MainSlider';
 
 
@@ -173,6 +175,8 @@ class Root extends React.Component {
                     <Route exact path="/categories" component={Categories}/>
                     <Route exact path="/threeminsvideos" component={Threeminsvideos}/>
                     <Route exact path="/oneminvideo" component={Oneminvideo}/>
+                    <Route exact path="/localnews" component={Localnews}/>
+                    <Route exact path="/globalnews" component={Globalnews}/>
                     <Route exact path="/About_us" component={Aboutus}/>
                     <Route exact path="/slider_detail" component={Sliderdetail}/>
                     <Route exact path="/news_detail" component={Newsdetail}/>

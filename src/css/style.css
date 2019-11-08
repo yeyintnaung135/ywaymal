@@ -139,6 +139,9 @@ a {
 a:hover {
   color: #0056b3;
   text-decoration: underline; }
+.yk-list-group-hover:hover{
+  color:rgb(132, 125, 125) !important;
+}
 
 a:not([href]):not([tabindex]) {
   color: inherit;

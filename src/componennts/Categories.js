@@ -30,16 +30,14 @@ const Categories = () => {
                                     <h5 class="mb-1 text-center text-md-left  yk-title-text" data-toggle="collapse" href="#collapseOne">Services&nbsp; <span class="fa fa-chevron-circle-down" aria-hidden="true"></span>
                                         </h5>
                                 </div>
+                               
+                                 
                                 <ul class="list-group list-group-flush collapse"  id="collapseOne" data-parent="#accordion" >
                                     <li class="yk-list-group text-center text-md-left"><a href="https://www.ywaymal.com/threeminsvideos" style={{'color':'#666666'}}>3 mins Video Uploaded</a></li>
                                     <li class="yk-list-group text-center text-md-left"><a href="https://www.ywaymal.com/oneminvideo" style={{'color':'#666666'}}>1 min Video Uploaded</a></li>
                                     <li class="yk-list-group text-center text-md-left">Civic Education</li>
-                                    <li class="yk-list-group text-center text-md-left"><a
-                                        href="https://play.google.com/store/apps/details?id=com.urchance&hl=en_US"
-                                        style={{color:'#666666'}}>Voting Guide</a></li>
+                                     
 
-                                    <li class="yk-list-group text-center text-md-left">Social Campaign</li>
-                                    <li class="yk-list-group text-center text-md-left">Media</li>
                                 </ul>
                             </li>
 
@@ -47,20 +45,19 @@ const Categories = () => {
                                 <div class=" w-100 justify-content-between">
                                    <h5 class="mb-1 text-center text-md-left  yk-title-text"  data-toggle="collapse" href="#collapseTwo">News &nbsp;<span class="fa fa-chevron-circle-down" aria-hidden="true"></span></h5>
                                 </div>
+                                    
                                 <ul class="list-group list-group-flush  collapse" id="collapseTwo" data-parent="#accordion">
-                                    <li class="yk-list-group text-center text-md-left">Local News</li>
-                                    <li class="yk-list-group text-center text-md-left">International News</li>
-
-
-                                </ul>
+                                    <li class="yk-list-group  text-center text-md-left"><a class="yk-list-group-hover" href="https://www.ywaymal.com/localnews" style={{'color':'#666666'}}>Local News</a></li>
+                                    <li class="yk-list-group yk-list-group_hover text-center text-md-left"><a class="yk-list-group-hover" href="https://www.ywaymal.com/globalnews" style={{'color':'#666666'}}>International News</a></li>
+                                 </ul>
                             </li>
                             <li class="yk-list-group text-center text-md-left">
                                 <div class=" w-100 justify-content-between">
                                    <h5 class="mb-1 text-center text-md-left  yk-title-text"  data-toggle="collapse" href="#collapseThree">Taxes &nbsp;<span class="fa fa-chevron-circle-down" aria-hidden="true"></span></h5>
                                 </div>
+                              
                                 <ul class="list-group list-group-flush collapse" id="collapseThree" data-parent="#accordion">
-                                    <li class="yk-list-group text-center text-md-left"><a
-                                        href="http://taxsummaries.pwc.com/ID/Myanmar-Individual-Taxes-on-personal-income"
+                                    <li class="yk-list-group text-center text-md-left"><a  href="http://taxsummaries.pwc.com/ID/Myanmar-Individual-Taxes-on-personal-income"
                                         style={{color:'black'}}>Commercial Tax</a></li>
                                     <li class="yk-list-group text-center text-md-left">Income Tax</li>
 
