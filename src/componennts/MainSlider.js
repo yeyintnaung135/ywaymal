@@ -72,11 +72,14 @@ class MainSlider extends React.Component {
                             if (key === 0) {
                                 return (
                                     <div class="carousel-item active">
+                                        <Link to={{pathname: "/slider_detail", search: "?slider_id=" + item.id}}>
 
                                         <img class="d-block w-100 yk-cc"
                                              src={apiurl + '/backend/admin/news/' + item.images}
                                              alt="First slide"
                                             />
+                                        </Link>
+
                                         <Link class='btn btn-danger' style={{width: '100%',color:'white'}}
                                               to={{pathname: "/slider_detail", search: "?slider_id=" + item.id}}>
                                             <EllipsisText text={item.description} length={"85"}/> </Link>
@@ -88,19 +91,22 @@ class MainSlider extends React.Component {
                             }
                             else {
                                 return (
+
                                     <div class="carousel-item">
+                                        <Link to={{pathname: "/slider_detail", search: "?slider_id=" + item.id}}>
 
                                         <img class="d-block w-100 yk-cc"
                                              src={apiurl + '/backend/admin/news/' + item.images}
                                              alt="First slide"
                                              />
+                                        </Link>
+
                                         <Link class='btn btn-danger' style={{width: '100%',color:'white'}}
                                               to={{pathname: "/slider_detail", search: "?slider_id=" + item.id}}>
                                             <EllipsisText text={item.description} length={"85"}/> </Link>
 
 
                                     </div>
-
                                 )
 
                             }
