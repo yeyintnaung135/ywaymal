@@ -171,6 +171,7 @@ class Root extends React.Component {
 
                 <Switch>
                     <Route exact path="/" component={Homepage}/>
+                    <Route exact path="/login" component={Login}/>
                     {/*<Route path="/header" component={Header_menu_cat}/>*/}
                     <Route exact path="/categories" component={Categories}/>
                     <Route exact path="/threeminsvideos" component={Threeminsvideos}/>

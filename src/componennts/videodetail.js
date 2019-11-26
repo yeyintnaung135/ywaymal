@@ -189,6 +189,7 @@ class Videodetail extends React.Component {
 
 
                 } else {
+                    this.state.video.voted='yes';
                     console.log("%cResponses from server for addvote '/already voted/'", "color:blue;font-size:15px")
                 }
 
@@ -278,15 +279,7 @@ class Videodetail extends React.Component {
     //to hide facebook share model popup
 
     modeltohide(id,link,image,name,desc) {
-        window.FB.ui({
-            method: 'feed',
-            link: link,
-            name:name,
-            caption:name,
-            description:desc,
-            picture:image
-        }, function(response){
-        });
+
         console.log('to model hide');
         document.getElementById('myModal' + id).classList.remove("show");
         console.log('remove show');
@@ -466,14 +459,13 @@ class Videodetail extends React.Component {
                                 })()}
                                 &nbsp;
                                 &nbsp;
-
                                 <a href="contact_us" data-toggle="modal" data-target={"#myModal" + this.state.video.id}
                                    class={"btn  btn-sm  btn-danger yk-background"}
                                    style={{color: 'white'}}>
                                     <span class="fa fa-share-alt"></span>&nbsp;&nbsp;Share&nbsp;
                                 </a>
                                 &nbsp;&nbsp;
-                                <a href="contact_us" class={"btn  btn-sm  btn-danger"}
+                                <a href="contact_us" class={"btn  btn-sm  btn-danger yk-background"}
                                    style={{color: 'white'}}>
                                     <span class="fa fa-comments-o"></span>&nbsp;&nbsp;
                                     Comment&nbsp;{this.state.video.comments}
@@ -512,7 +504,8 @@ class Videodetail extends React.Component {
                                                  style={{color: 'white !important', background: '#3b5998'}}
                                                  data-href={"https://"+window.location.host+'/video_detail?id='+this.state.video.id}
                                                  data-layout="button_count" data-size="large">
-                                                <a target="_blank" style={{
+                                                <a target="_blank" onClick={() => this.modeltohide(this.state.video.id,window.location.href,apiurl+'/backend/admin/videos/images/'+this.state.video.image,this.state.video.title,this.state.video.description)}
+                                                   style={{
                                                     color: 'white',
                                                     background: '#3b5998'
                                                 }}

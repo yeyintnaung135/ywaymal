@@ -5,7 +5,7 @@ export function redirecttologinifnotauth()
        if(window.location.href != 'https://www.ywaymal.com/') {
            localStorage.setItem('request_link', window.location.href);
        }
-       return window.location.assign('/')
+       return window.location.assign('/login')
    }
 
 }
