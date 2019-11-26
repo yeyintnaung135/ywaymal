@@ -56,7 +56,7 @@ class Globalnews extends React.Component {
     componentWillMount() {
         //start page this method will firstly fire
         //if not authenciate rediret to login from
-        redirecttologinifnotauth();
+        // redirecttologinifnotauth();
 
         var loader = function () {
             setTimeout(function () {

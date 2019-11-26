@@ -46,11 +46,9 @@ class Videodetail extends React.Component {
 
     componentWillMount() {
         //redirect if not authenciate
-        redirecttologinifnotauth();
+        // redirecttologinifnotauth();
         this.getvideodetail();
         window.$(document).ready(function () {
-
-
             window.$(".uni").click(function(){
                 window.$('.changeMe').css("font-family","Masterpiece Uni Sans,Myanmar3");
                 console.log('font change');
@@ -100,6 +98,8 @@ class Videodetail extends React.Component {
     }
 
     handleAddComment(video_id) {
+        redirecttologinifnotauth();
+
         console.log('//fire handle add comment to server')
         if (this.refs.comment_textarea.value != '') {
             return axios({
@@ -166,6 +166,7 @@ class Videodetail extends React.Component {
     //for voting
     handleAddVote(videoid) {
 
+        redirecttologinifnotauth();
 
         return axios({
             method: 'post',
