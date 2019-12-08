@@ -330,7 +330,7 @@ class Searchresult extends React.Component {
                     <div className="text mt-3  col-sm-12 col-xl-7" style={{padding: '0px'}}>
                         <div className="text-center" style={{
                             fontSize: '18px',
-                            color: 'rgb(102, 102, 102)',
+                            color: 'black',
                             fontWeight: 'bold'
                         }}> {todo.title}</div>
                         <br></br>

@@ -310,15 +310,15 @@ class Homepage extends React.Component {
                     </div>
                     <div className="text mt-3  col-sm-12 col-xl-7" style={{padding: '0px'}}>
                         <div className="text-center" style={{
-                            fontSize: '16px',
-                            color: 'rgb(102, 102, 102)',
+                            fontSize: '18px',
+                            color: 'black',
                             fontWeight: 'bold'
                         }}> {todo.title}</div>
                         <br></br>
                         <div className="meta mb-2 sm-12">
                             <div className="pr-sm-5">
 
-                                <p>
+                                <p style={{color:'black'}}>
                                     {(() => {
                                         if (todo.description !== '') {
                                             return (

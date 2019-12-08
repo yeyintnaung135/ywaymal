@@ -304,7 +304,7 @@ class Oneminvideos extends React.Component {
                     <div className="text mt-3 row  no-gutters" style={{padding: '0px',display:'block'}}>
                         <div className="text-center" style={{
                             fontSize: '16px',
-                            color: 'rgb(102, 102, 102)',
+                            color: 'black',
                             fontWeight: 'bold'
                         }}> <EllipsisText text={todo.title} length={"40"}/></div>
 

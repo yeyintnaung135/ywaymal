@@ -69,8 +69,6 @@ class Newsdetail extends React.Component {
     }
 
     componentDidMount() {
-
-
         window.AOS.init({
             duration: 800,
             easing: 'slide'

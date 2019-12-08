@@ -56,7 +56,7 @@
 .yk_text {
     line-height: 1.8;
     font-weight: 400;
-    color: #666666;
+    color: black;
     font-size: 17px !important;
     margin-bottom: 12px;
 }
@@ -100,7 +100,7 @@
 }
 .yk-title-text-two{
     text-align: center;
-    color: #666666;
+    color: black;
     font-size: 21px;
     font-weight: bold;
 }

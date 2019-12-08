@@ -96,19 +96,11 @@ class Login extends React.Component {
         //and then i call many function to store data to server and get token
         console.log(response);
         this.Singup(response, 'facebook');
-
-
     }
-
-
-
     render() {
         return (
-
             <div className="flex-center position-ref full-height">
-
-
-                <div className="content">
+               <div className="content">
                     <div>
                         <div className="m-b-md">
                             <img src={process.env.PUBLIC_URL + "/images/logo/faef.png"} style={{width: "50%"}}/>
@@ -122,7 +114,6 @@ class Login extends React.Component {
                     callback={this.responseFacebook}/>
                     {/*<button type="button" className="btn btn-info" onClick={()=>responseFacebook('fe')}>test</button>*/}
                     <br/><br/>
-
                     {/*for facebook button*/}
                     {/*<FacebookLogin*/}
                     {/*appId="391014331559972"*/}

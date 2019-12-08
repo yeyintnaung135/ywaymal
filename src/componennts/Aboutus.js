@@ -40,20 +40,17 @@ class Aboutus extends React.Component {
                 {/*body section*/}
                 <div className="row col-sm-12">
                     {/*categories section*/}
-
                     <Categories/>
                     {/*end categories section*/}
-
-
                     {/*About Us Section*/}
 
-                    <div className="col-12 col-md-6 pr-0 ml-3 ml-sm-0">
+                    <div className="col-12 col-md-8 pr-0 ml-3 ml-sm-0">
                         <div class="col-md-12" style={{textAlign: 'center'}}>
                             <h5 class="mb-1 yk-title-text" style={{textAling: 'center'}}>About Us</h5>
                         </div>
                         <br></br>
                         <div class="row col-sm-12 pr-0">
-                            <div style={{paddingTop: '23p'}}>
+                            <div style={{paddingTop: '23p',color:'black'}}>
 
                                     <p>We develope a website, ACVC (Anonymous Comments & Vote for Candidates), for the
                                         2020 candidates in Myanmar, CSOs, NGOs and communities in order to create a
